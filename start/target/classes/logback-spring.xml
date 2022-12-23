@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <springProperty scope="context" name="logging.path" source="logging.path"/>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>[trace:%X{__trace_id__}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="infoFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.path}/logs/info.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${logging.path}/logs/info-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                [trace:%X{__trace_id__}] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%level] %logger:%L x:\(%X\) - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="warnFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.path}/logs/warn.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${logging.path}/logs/warn-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                [trace:%X{__trace_id__}] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%level] %logger:%L x:\(%X\) - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="errorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.path}/logs/error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/logs/error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                [trace:%X{__trace_id__}] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%level] %logger:%L x:\(%X\) - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="infoMonitorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.path}/logs/infoMonitor.log</file>
+        <encoder>
+            <pattern>%m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/logs/infoMonitor.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="infoAuditFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.path}/logs/infoAudit.log</file>
+        <encoder>
+            <pattern>[trace:%X{__trace_id__}] %d{yyyy-MM-dd HH:mm:ss}^^%m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/logs/infoAudit.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="infoRequestFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.path}/logs/infoRequest.log</file>
+        <encoder>
+            <pattern>[trace:%X{__trace_id__}] %d{yyyy-MM-dd HH:mm:ss}^^%m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/logs/infoRequest.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="thirdInfoFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.path}/logs/infoThird.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/logs/infoThird-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                [trace:%X{__trace_id__}] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%level] %logger:%L x:\(%X\) - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="thirdErrorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.path}/logs/errorThird.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/logs/errorThird-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                [trace:%X{__trace_id__}] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%level] %logger:%L x:\(%X\) - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="errorFile"/>
+        <appender-ref ref="infoFile"/>
+        <appender-ref ref="warnFile"/>
+    </root>
+
+    <logger name="monitor" level="INFO" additivity="false">
+        <appender-ref ref="infoMonitorFile"/>
+    </logger>
+
+    <logger name="audit" level="INFO" additivity="false">
+        <appender-ref ref="infoAuditFile"/>
+    </logger>
+
+    <logger name="request" level="INFO" additivity="false">
+        <appender-ref ref="infoRequestFile"/>
+    </logger>
+
+    <logger name="third" level="INFO" additivity="false">
+        <appender-ref ref="thirdInfoFile"/>
+        <appender-ref ref="thirdErrorFile"/>
+    </logger>
+</configuration>

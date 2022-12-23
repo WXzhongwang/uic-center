@@ -1,0 +1,10 @@
+/Users/tutu/workspace/uic/uic-domain/src/main/java/com/rany/uic/domain/convertor/AccountDataConvertor.java
+/Users/tutu/workspace/uic/uic-domain/src/main/java/com/rany/uic/domain/Account.java
+/Users/tutu/workspace/uic/uic-domain/src/main/java/com/rany/uic/domain/base/MybatisPlusConfig.java
+/Users/tutu/workspace/uic/uic-domain/src/main/java/com/rany/uic/domain/service/AccountDomainService.java
+/Users/tutu/workspace/uic/uic-domain/src/main/java/com/rany/uic/domain/pk/AccountId.java
+/Users/tutu/workspace/uic/uic-domain/src/main/java/com/rany/uic/domain/event/AccountCreatedEvent.java
+/Users/tutu/workspace/uic/uic-domain/src/main/java/com/rany/uic/domain/base/AccountDao.java
+/Users/tutu/workspace/uic/uic-domain/src/main/java/com/rany/uic/domain/repository/AccountRepository.java
+/Users/tutu/workspace/uic/uic-domain/src/main/java/com/rany/uic/domain/repository/impl/AccountRepositoryImpl.java
+/Users/tutu/workspace/uic/uic-domain/src/main/java/com/rany/uic/domain/dp/AccountName.java

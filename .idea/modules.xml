@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/start/start.iml" filepath="$PROJECT_DIR$/start/start.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uic-api/uic-api.iml" filepath="$PROJECT_DIR$/uic-api/uic-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uic-center.iml" filepath="$PROJECT_DIR$/uic-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uic-common/uic-common.iml" filepath="$PROJECT_DIR$/uic-common/uic-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uic-dao/uic-dao.iml" filepath="$PROJECT_DIR$/uic-dao/uic-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uic-domain/uic-domain.iml" filepath="$PROJECT_DIR$/uic-domain/uic-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uic-service/uic-service.iml" filepath="$PROJECT_DIR$/uic-service/uic-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uic-web/uic-web.iml" filepath="$PROJECT_DIR$/uic-web/uic-web.iml" />
+    </modules>
+  </component>
+</project>
