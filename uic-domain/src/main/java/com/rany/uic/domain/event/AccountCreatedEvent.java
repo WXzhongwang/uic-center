@@ -1,7 +1,7 @@
 package com.rany.uic.domain.event;
 
 import com.cake.framework.common.event.DomainEvent;
-import com.rany.uic.domain.Account;
+import com.rany.uic.domain.aggregate.Account;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

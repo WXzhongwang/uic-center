@@ -1,7 +1,7 @@
 package com.rany.uic.domain.convertor;
 
 import com.rany.uic.dao.po.AccountPO;
-import com.rany.uic.domain.Account;
+import com.rany.uic.domain.aggregate.Account;
 import com.rany.uic.domain.dp.AccountName;
 import com.rany.uic.domain.pk.AccountId;
 import javax.annotation.Generated;

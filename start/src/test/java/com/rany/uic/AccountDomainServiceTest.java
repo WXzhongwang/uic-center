@@ -1,6 +1,6 @@
 package com.rany.uic;
 
-import com.rany.uic.domain.Account;
+import com.rany.uic.domain.aggregate.Account;
 import com.rany.uic.domain.dp.AccountName;
 import com.rany.uic.domain.pk.AccountId;
 import com.rany.uic.domain.service.AccountDomainService;

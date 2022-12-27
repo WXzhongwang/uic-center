@@ -1,6 +1,6 @@
 package com.rany.uic.domain.repository.impl;
 
-import com.rany.uic.dao.mapper.AccountPOMapper;
+import com.rany.uic.dao.mapper.TenantPOMapper;
 import com.rany.uic.domain.aggregate.Account;
 import com.rany.uic.domain.convertor.AccountDataConvertor;
 import com.rany.uic.domain.dao.AccountDao;
@@ -25,9 +25,9 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Slf4j
 @Service
-public class AccountRepositoryImpl implements AccountRepository {
+public class TenantRepositoryImpl implements AccountRepository {
 
-    private final AccountPOMapper accountMapper;
+    private final TenantPOMapper tenantPOMapper;
     private final AccountDao accountDao;
     private final AccountDataConvertor accountDataConvertor;
 

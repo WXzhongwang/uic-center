@@ -1,4 +1,4 @@
-package com.rany.uic.domain;
+package com.rany.uic.domain.aggregate;
 
 import com.cake.framework.common.base.BaseAggregateRoot;
 import com.cake.framework.common.base.IAggregate;

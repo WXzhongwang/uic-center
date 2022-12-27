@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.rany.uic.domain.base.AccountDao">
+<mapper namespace="com.rany.uic.domain.dao.AccountDao">
     <resultMap id="BaseResultMap" type="com.rany.uic.dao.po.AccountPO">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
@@ -25,7 +25,7 @@
         is_admin, status, deleted, last_login_ip, last_login_time, feature, gmt_create, gmt_modified
     </sql>
 
-    <insert id="save" parameterType="com.rany.uic.domain.Account">
+    <insert id="save" parameterType="com.rany.uic.domain.aggregate.Account">
         insert into account (id,
         account_name)
         values (#{id.id,jdbcType=BIGINT}, #{accountName.name,jdbcType=VARCHAR})

@@ -1,8 +1,8 @@
-package com.rany.uic.domain.base;
+package com.rany.uic.domain.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.rany.uic.dao.po.AccountPO;
-import com.rany.uic.domain.Account;
+import com.rany.uic.domain.aggregate.Account;
 
 /**
  * TODO
