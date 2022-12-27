@@ -13,9 +13,10 @@ import lombok.Data;
  */
 @Data
 public class CreateTenantCommand extends DTO {
-
+    private Long isvId;
     private String name;
     private String shortName;
     private String email;
     private String phone;
+    private Boolean initialAccount;
 }

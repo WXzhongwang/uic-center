@@ -49,5 +49,14 @@
                enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false">
         </table>
+        <table schema="rany_uic" tableName="tenant" domainObjectName="TenantPO" enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false">
+        </table>
+        <table schema="rany_uic" tableName="safe_strategy" domainObjectName="SafeStrategyPO"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false">
+        </table>
     </context>
 </generatorConfiguration>
