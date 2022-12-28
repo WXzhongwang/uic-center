@@ -1,7 +1,0 @@
-/Users/tutu/workspace/uic/uic-api/src/main/java/com/rany/uic/api/command/isv/DeleteIsvCommand.java
-/Users/tutu/workspace/uic/uic-api/src/main/java/com/rany/uic/api/command/isv/CreateIsvCommand.java
-/Users/tutu/workspace/uic/uic-api/src/main/java/com/rany/uic/api/dto/DTO.java
-/Users/tutu/workspace/uic/uic-api/src/main/java/com/rany/uic/api/dto/Result.java
-/Users/tutu/workspace/uic/uic-api/src/main/java/com/rany/uic/api/facade/isv/IsvFacade.java
-/Users/tutu/workspace/uic/uic-api/src/main/java/com/rany/uic/api/facade/tenant/TenantFacade.java
-/Users/tutu/workspace/uic/uic-api/src/main/java/com/rany/uic/api/command/tenant/CreateTenantCommand.java

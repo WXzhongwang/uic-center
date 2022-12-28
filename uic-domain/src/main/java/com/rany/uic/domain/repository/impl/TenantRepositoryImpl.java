@@ -1,11 +1,11 @@
 package com.rany.uic.domain.repository.impl;
 
 import com.rany.uic.dao.mapper.TenantPOMapper;
-import com.rany.uic.domain.aggregate.Account;
-import com.rany.uic.domain.convertor.AccountDataConvertor;
-import com.rany.uic.domain.dao.AccountDao;
-import com.rany.uic.domain.pk.AccountId;
-import com.rany.uic.domain.repository.AccountRepository;
+import com.rany.uic.domain.aggregate.Tenant;
+import com.rany.uic.domain.convertor.TenantDataConvertor;
+import com.rany.uic.domain.dao.TenantDao;
+import com.rany.uic.domain.pk.TenantId;
+import com.rany.uic.domain.repository.TenantRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -25,26 +25,26 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Slf4j
 @Service
-public class TenantRepositoryImpl implements AccountRepository {
+public class TenantRepositoryImpl implements TenantRepository {
 
     private final TenantPOMapper tenantPOMapper;
-    private final AccountDao accountDao;
-    private final AccountDataConvertor accountDataConvertor;
+    private final TenantDao tenantDao;
+    private final TenantDataConvertor tenantDataConvertor;
 
     @Override
-    public Account find(@NotNull AccountId accountId) {
+    public Tenant find(@NotNull TenantId accountId) {
 
         return null;
     }
 
     @Override
-    public void remove(@NotNull Account account) {
+    public void remove(@NotNull Tenant tenant) {
     }
 
     @SneakyThrows
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void save(@NotNull Account account) {
-        accountDao.save(account);
+    public void save(@NotNull Tenant tenant) {
+        tenantDao.save(tenant);
     }
 }

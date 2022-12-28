@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rany.uic.domain.dao.TenantDao">
+    <resultMap id="BaseResultMap" type="com.rany.uic.dao.po.TenantPO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="isv_id" property="isvId" jdbcType="VARCHAR"/>
+        <result column="short_name" property="shortName" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="deleted" property="deleted" jdbcType="CHAR"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, isv_id, name, short_name, email, source, phone, deleted, create_by, update_by, gmt_create,
+        gmt_modified
+    </sql>
+
+    <insert id="save" parameterType="com.rany.uic.domain.aggregate.Tenant">
+        insert into account (id, isv_id, name, short_name, email, source, phone, deleted, gmt_create, gmt_modified)
+        values (#{id.id,jdbcType=BIGINT},
+        #{isvId.id,jdbcType=BIGINT},
+        #{tenantName.name,jdbcType=BIGINT},
+        #{tenantName.shortName,jdbcType=BIGINT},
+        #{emailAddress.email,jdbcType=VARCHAR},
+        #{source.source,jdbcType=VARCHAR},
+        #{phone.phone,jdbcType=VARCHAR},
+        '0'，
+        now(),
+        now())
+    </insert>
+</mapper>

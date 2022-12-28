@@ -1,7 +1,0 @@
-com/rany/uic/api/facade/isv/IsvFacade.class
-com/rany/uic/api/dto/DTO.class
-com/rany/uic/api/dto/Result.class
-com/rany/uic/api/facade/tenant/TenantFacade.class
-com/rany/uic/api/command/isv/DeleteIsvCommand.class
-com/rany/uic/api/command/isv/CreateIsvCommand.class
-com/rany/uic/api/command/tenant/CreateTenantCommand.class

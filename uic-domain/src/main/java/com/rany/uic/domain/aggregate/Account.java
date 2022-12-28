@@ -37,9 +37,7 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
     }
 
     public Boolean save() {
-        for (int i = 0; i < 100; i++) {
-            this.registerEvent(new AccountCreatedEvent(this, new Date()));
-        }
+        this.registerEvent(new AccountCreatedEvent(this, new Date()));
         return accountDomainService.save(this);
     }
 

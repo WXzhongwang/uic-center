@@ -1,6 +1,7 @@
 package com.rany.uic.domain.service;
 
 import com.rany.uic.common.util.SnowflakeIdWorker;
+import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.repository.AccountRepository;
 import com.rany.uic.domain.repository.TenantRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,8 @@ public class TenantDomainService {
     @Resource
     private SnowflakeIdWorker snowflakeIdWorker;
 
-    public Boolean save() {
-        return true;
+    public Boolean save(Tenant tenant) {
+        tenantRepository.save(tenant);
+        return Boolean.TRUE;
     }
 }

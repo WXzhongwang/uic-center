@@ -22,7 +22,7 @@ public class AccountDomainServiceTest extends BaseTests {
     private AccountDomainService accountDomainService;
 
     @Test
-    public void testSave() throws InterruptedException {
+    public void testSave() {
         long base = 144;
         for (int i = 0; i < 200; i++) {
             base += i;

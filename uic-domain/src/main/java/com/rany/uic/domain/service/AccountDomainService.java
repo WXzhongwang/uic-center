@@ -27,6 +27,6 @@ public class AccountDomainService {
 
     public Boolean save(Account account) {
         accountRepository.save(account);
-        return true;
+        return Boolean.TRUE;
     }
 }

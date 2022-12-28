@@ -6,10 +6,8 @@
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="account_type" property="accountType" jdbcType="VARCHAR"/>
         <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
-        <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="login_pwd" property="loginPwd" jdbcType="VARCHAR"/>
         <result column="tenant_id" property="tenantId" jdbcType="BIGINT"/>
         <result column="is_admin" property="isAdmin" jdbcType="CHAR"/>
         <result column="status" property="status" jdbcType="CHAR"/>
