@@ -2,6 +2,7 @@ package com.rany.uic.api.facade.isv;
 
 import com.rany.uic.api.command.isv.CreateIsvCommand;
 import com.rany.uic.api.command.isv.DeleteIsvCommand;
+import com.rany.uic.api.command.isv.DisableIsvCommand;
 import com.rany.uic.api.dto.Result;
 
 /**
@@ -30,4 +31,13 @@ public interface IsvFacade {
      * @return
      */
     Result<Boolean> deleteIsv(DeleteIsvCommand deleteIsvCommand);
+
+
+    /**
+     * 创建ISV
+     *
+     * @param disableIsvCommand
+     * @return
+     */
+    Result<Boolean> disableIsv(DisableIsvCommand disableIsvCommand);
 }

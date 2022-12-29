@@ -34,6 +34,10 @@ public class IsvDomainService {
         return Boolean.TRUE;
     }
 
+    public Boolean disableIsv(Isv isv) {
+        return isvRepository.disableIsv(isv);
+    }
+
     public Isv find(IsvId isvId) {
         return isvRepository.find(isvId);
     }

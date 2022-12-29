@@ -14,4 +14,12 @@ import com.rany.uic.domain.pk.IsvId;
  */
 
 public interface IsvRepository extends Repository<Isv, IsvId> {
+
+    /**
+     * isv 禁用
+     *
+     * @param isv
+     * @return
+     */
+    Boolean disableIsv(Isv isv);
 }

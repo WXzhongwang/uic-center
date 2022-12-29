@@ -3,6 +3,7 @@ package com.rany.uic.service.remote.isv;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.rany.uic.api.command.isv.CreateIsvCommand;
 import com.rany.uic.api.command.isv.DeleteIsvCommand;
+import com.rany.uic.api.command.isv.DisableIsvCommand;
 import com.rany.uic.api.dto.Result;
 import com.rany.uic.api.facade.isv.IsvFacade;
 import com.rany.uic.common.enums.CommonStatusEnum;
@@ -69,5 +70,18 @@ public class IsvRemoteServiceProvider implements IsvFacade {
         }
         isvDomainService.remove(isv);
         return Result.succeed(true);
+    }
+
+    @Override
+    public Result<Boolean> disableIsv(DisableIsvCommand disableIsvCommand) {
+        Isv isv = isvDomainService.find(new IsvId(disableIsvCommand.getId()));
+        if (Objects.isNull(isv)) {
+            throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
+        }
+        if (isv.getDeleted().equals(DeleteStatusEnum.YES.getValue())) {
+            throw new BusinessException(BusinessErrorMessage.ISV_DELETED);
+        }
+        isvDomainService.disableIsv(isv);
+        return Result.succeed();
     }
 }
