@@ -14,5 +14,7 @@ public enum LoginSafeStrategyEnum {
 
     MOBILE_PHONE,
 
-    LDAP
+    LDAP,
+
+    DINGDING
 }

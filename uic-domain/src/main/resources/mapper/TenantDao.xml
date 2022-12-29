@@ -21,7 +21,7 @@
     </sql>
 
     <insert id="save" parameterType="com.rany.uic.domain.aggregate.Tenant">
-        insert into account (id, isv_id, name, short_name, email, source, phone, is_deleted, gmt_create, gmt_modified)
+        insert into tenant (id, isv_id, name, short_name, email, source, phone, is_deleted, gmt_create, gmt_modified)
         values (
         #{id.id,jdbcType=BIGINT},
         #{isvId.id,jdbcType=BIGINT},

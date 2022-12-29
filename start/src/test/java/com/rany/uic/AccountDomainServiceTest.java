@@ -4,6 +4,7 @@ import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Account;
 import com.rany.uic.domain.dp.AccountName;
 import com.rany.uic.domain.pk.AccountId;
+import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.service.AccountDomainService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,7 +28,10 @@ public class AccountDomainServiceTest extends BaseTests {
 
     @Test
     public void testSave() {
-        Account account = new Account(new AccountId(snowflakeIdWorker.nextId()), new AccountName("zhongshengwang.zsw"), null);
+        Account account = new Account(new AccountId(snowflakeIdWorker.nextId()),
+                new TenantId(768452909531803648L),
+                new AccountName("zhongshengwang.zsw"),
+                null);
         account.save();
         Boolean saveRes = accountDomainService.save(account);
         Assert.assertTrue(saveRes);

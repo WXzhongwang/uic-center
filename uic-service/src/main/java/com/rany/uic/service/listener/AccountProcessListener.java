@@ -1,7 +1,9 @@
 package com.rany.uic.service.listener;
 
 import com.google.common.collect.Lists;
+import com.rany.uic.api.enums.AccountTypeEnum;
 import com.rany.uic.api.enums.LoginSafeStrategyEnum;
+import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.util.AccountUtil;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Account;
@@ -11,6 +13,7 @@ import com.rany.uic.domain.dp.TenantName;
 import com.rany.uic.domain.event.AccountCreatedEvent;
 import com.rany.uic.domain.event.CreateTenantAdminAccountEvent;
 import com.rany.uic.domain.pk.AccountId;
+import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.service.AccountDomainService;
 import com.rany.uic.domain.value.SafeStrategy;
 import lombok.extern.slf4j.Slf4j;
@@ -59,14 +62,19 @@ public class AccountProcessListener {
     public void handleCreateTenantAdminAccountEvent(CreateTenantAdminAccountEvent event) {
         Tenant tenant = event.getTenant();
         TenantName tenantName = tenant.getTenantName();
+        Long tenantId = tenant.getId().getId();
         SafeStrategy safeStrategy = new SafeStrategy();
         safeStrategy.setLoginStrategy(LoginSafeStrategyEnum.BASIC_AUTH.name());
         safeStrategy.setAuthCode(AccountUtil.buildDefaultAccountLoginName(tenantName.getShortName()));
         String pwd = AccountUtil.buildRandomAccountLoginPwd();
         safeStrategy.setAuthValue(AccountUtil.md5(pwd));
         Account account = new Account(new AccountId(snowflakeIdWorker.nextId()),
+                new TenantId(tenantId),
                 new AccountName(AccountUtil.buildDefaultAccountChineseName(tenantName.getShortName())),
                 Lists.newArrayList(safeStrategy));
+        account.setIsAdmin(true);
+        account.setStatus(CommonStatusEnum.ENABLE.getValue());
+        account.setAccountType(AccountTypeEnum.BASIC.name());
         accountDomainService.save(account);
     }
 }
