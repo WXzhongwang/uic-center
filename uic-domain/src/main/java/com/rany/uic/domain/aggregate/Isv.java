@@ -61,11 +61,6 @@ public class Isv extends BaseAggregateRoot implements IAggregate<IsvId> {
     private String status;
 
     /**
-     * 删除
-     */
-    private String deleted;
-
-    /**
      * ip地址
      */
     private String registerIp;
@@ -84,6 +79,6 @@ public class Isv extends BaseAggregateRoot implements IAggregate<IsvId> {
     }
 
     public void delete() {
-        this.deleted = DeleteStatusEnum.YES.getValue();
+        this.isDeleted = DeleteStatusEnum.YES.getValue();
     }
 }

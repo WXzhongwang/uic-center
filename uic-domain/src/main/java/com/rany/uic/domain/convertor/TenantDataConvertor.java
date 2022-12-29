@@ -30,7 +30,6 @@ public interface TenantDataConvertor extends BaseConvertor<Tenant, TenantPO> {
     @Mapping(source = "emailAddress.email", target = "email")
     @Mapping(source = "source.source", target = "source")
     @Mapping(source = "phone.phone", target = "phone")
-    @Mapping(source = "deleted", target = "deleted")
     @Override
     TenantPO sourceToTarget(Tenant tenant);
 }

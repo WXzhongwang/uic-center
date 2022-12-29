@@ -32,4 +32,5 @@ public final class Constants {
     public static final String APPLICATION_NAME = "knowledge-universal";
     public static final String ACL_PROJECT = "knowledge-universal";
     public static final Integer DEFAULT_MAX_TENANTS = 100;
+    public static final String INITIAL_TENANT_ADMIN_NAME = "租户管理员-%s";
 }

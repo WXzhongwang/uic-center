@@ -11,7 +11,7 @@
         <result column="tenant_id" property="tenantId" jdbcType="BIGINT"/>
         <result column="is_admin" property="isAdmin" jdbcType="CHAR"/>
         <result column="status" property="status" jdbcType="CHAR"/>
-        <result column="deleted" property="deleted" jdbcType="CHAR"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="CHAR"/>
         <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
         <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
         <result column="feature" property="feature" jdbcType="VARCHAR"/>
@@ -20,7 +20,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         id, user_id, account_type, account_name, login_name, mobile, email, login_pwd, tenant_id,
-        is_admin, status, deleted, last_login_ip, last_login_time, feature, gmt_create, gmt_modified
+        is_admin, status, is_deleted, last_login_ip, last_login_time, feature, gmt_create, gmt_modified
     </sql>
 
     <insert id="save" parameterType="com.rany.uic.domain.aggregate.Account">

@@ -24,6 +24,8 @@ public class TenantName {
     String name;
     /**
      * 租户英文简称
+     * 8-20个英文字符小写组成的串
+     * eg. hzrany
      */
     String shortName;
 

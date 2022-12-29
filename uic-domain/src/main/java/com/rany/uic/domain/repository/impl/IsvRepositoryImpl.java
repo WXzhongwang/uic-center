@@ -45,7 +45,7 @@ public class IsvRepositoryImpl implements IsvRepository {
     public void remove(@NotNull Isv isv) {
         IsvId id = isv.getId();
         IsvPO isvPo = isvPOMapper.selectByPrimaryKey(id.getId());
-        isvPo.setDeleted(DeleteStatusEnum.YES.getValue());
+        isvPo.setIsDeleted(DeleteStatusEnum.YES.getValue());
         isvPo.setGmtModified(DateUtil.date());
         isvPOMapper.updateByPrimaryKey(isvPo);
     }

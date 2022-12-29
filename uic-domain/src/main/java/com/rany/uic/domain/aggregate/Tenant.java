@@ -1,11 +1,14 @@
 package com.rany.uic.domain.aggregate;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.BooleanUtil;
 import com.cake.framework.common.base.BaseAggregateRoot;
 import com.cake.framework.common.base.IAggregate;
 import com.rany.uic.domain.dp.EmailAddress;
 import com.rany.uic.domain.dp.Phone;
 import com.rany.uic.domain.dp.TenantName;
 import com.rany.uic.domain.dp.TenantSource;
+import com.rany.uic.domain.event.CreateTenantAdminAccountEvent;
 import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.pk.TenantId;
 import lombok.*;
@@ -53,9 +56,10 @@ public class Tenant extends BaseAggregateRoot implements IAggregate<TenantId> {
      */
     private Phone phone;
 
-    private String deleted;
-
-    public Boolean save() {
+    public Boolean save(Boolean initialFirstAccount) {
+        if (BooleanUtil.isTrue(initialFirstAccount)) {
+            registerEvent(new CreateTenantAdminAccountEvent(this, DateUtil.date()));
+        }
         return Boolean.TRUE;
     }
 

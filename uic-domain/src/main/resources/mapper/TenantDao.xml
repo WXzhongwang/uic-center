@@ -9,19 +9,19 @@
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="source" property="source" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
-        <result column="deleted" property="deleted" jdbcType="CHAR"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="CHAR"/>
         <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
         <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, isv_id, name, short_name, email, source, phone, deleted, create_by, update_by, gmt_create,
+        id, isv_id, name, short_name, email, source, phone, is_deleted, create_by, update_by, gmt_create,
         gmt_modified
     </sql>
 
     <insert id="save" parameterType="com.rany.uic.domain.aggregate.Tenant">
-        insert into account (id, isv_id, name, short_name, email, source, phone, deleted, gmt_create, gmt_modified)
+        insert into account (id, isv_id, name, short_name, email, source, phone, is_deleted, gmt_create, gmt_modified)
         values (
         #{id.id,jdbcType=BIGINT},
         #{isvId.id,jdbcType=BIGINT},
@@ -30,7 +30,7 @@
         #{emailAddress.email,jdbcType=VARCHAR},
         #{source.source,jdbcType=VARCHAR},
         #{phone.phone,jdbcType=VARCHAR},
-        '0',
+        #{isDeleted,jdbcType=VARCHAR},
         now(),
         now())
     </insert>

@@ -1,13 +1,12 @@
 package com.rany.uic.domain.aggregate;
 
+import cn.hutool.core.date.DateUtil;
 import com.cake.framework.common.base.BaseAggregateRoot;
 import com.cake.framework.common.base.IAggregate;
 import com.rany.uic.domain.dp.AccountName;
 import com.rany.uic.domain.event.AccountCreatedEvent;
 import com.rany.uic.domain.pk.AccountId;
 import lombok.*;
-
-import java.util.Date;
 
 /**
  * Account 聚合根
@@ -23,14 +22,23 @@ import java.util.Date;
 @Builder
 @EqualsAndHashCode(callSuper = false)
 public class Account extends BaseAggregateRoot implements IAggregate<AccountId> {
+
+    /**
+     * 主键
+     */
     private AccountId id;
     /**
      * 用户名称
      */
     private AccountName accountName;
 
+    /**
+     * 账号信息保存
+     *
+     * @return
+     */
     public Boolean save() {
-        this.registerEvent(new AccountCreatedEvent(this, new Date()));
+        this.registerEvent(new AccountCreatedEvent(this, DateUtil.date()));
         return Boolean.TRUE;
     }
 }

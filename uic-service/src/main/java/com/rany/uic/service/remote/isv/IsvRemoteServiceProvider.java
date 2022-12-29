@@ -18,6 +18,8 @@ import com.rany.uic.domain.dp.Phone;
 import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.service.IsvDomainService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
@@ -31,6 +33,7 @@ import static com.rany.uic.common.Constants.DEFAULT_MAX_TENANTS;
  * @date 2022/11/15 22:29
  * @email 18668485565163.com
  */
+@Slf4j
 @Service
 @AllArgsConstructor
 public class IsvRemoteServiceProvider implements IsvFacade {
@@ -49,7 +52,7 @@ public class IsvRemoteServiceProvider implements IsvFacade {
         isv.setCountry(createIsvCommand.getCountry());
         isv.setUrl(createIsvCommand.getUrl());
         isv.setRegisterIp(createIsvCommand.getRegisterIp());
-        isv.setDeleted(DeleteStatusEnum.NO.getValue());
+        isv.setIsDeleted(DeleteStatusEnum.NO.getValue());
         isv.setStatus(CommonStatusEnum.ENABLE.getValue());
         isv.setMaxTenants(DEFAULT_MAX_TENANTS);
         isvDomainService.save(isv);
@@ -62,10 +65,10 @@ public class IsvRemoteServiceProvider implements IsvFacade {
         if (Objects.isNull(isv)) {
             throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
         }
-        if (isv.getDeleted().equals(DeleteStatusEnum.YES.getValue())) {
+        if (StringUtils.equals(isv.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
             throw new BusinessException(BusinessErrorMessage.ISV_DELETED);
         }
-        if (isv.getStatus().equals(CommonStatusEnum.DISABLED.getValue())) {
+        if (StringUtils.equals(isv.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
             throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
         }
         isvDomainService.remove(isv);
@@ -78,7 +81,7 @@ public class IsvRemoteServiceProvider implements IsvFacade {
         if (Objects.isNull(isv)) {
             throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
         }
-        if (isv.getDeleted().equals(DeleteStatusEnum.YES.getValue())) {
+        if (StringUtils.equals(isv.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
             throw new BusinessException(BusinessErrorMessage.ISV_DELETED);
         }
         isvDomainService.disableIsv(isv);

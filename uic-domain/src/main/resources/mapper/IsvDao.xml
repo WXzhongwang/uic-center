@@ -8,7 +8,7 @@
         <result column="short_name" jdbcType="VARCHAR" property="shortName"/>
         <result column="country" jdbcType="VARCHAR" property="country"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
-        <result column="deleted" jdbcType="CHAR" property="deleted"/>
+        <result column="is_deleted" jdbcType="CHAR" property="isDeleted"/>
         <result column="register_ip" jdbcType="VARCHAR" property="registerIp"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
@@ -19,12 +19,12 @@
         <result column="max_tenants" jdbcType="INTEGER" property="maxTenants"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, name, url, short_name, country, status, deleted, register_ip, phone, email, create_by,
+        id, name, url, short_name, country, status, is_deleted, register_ip, phone, email, create_by,
         update_by, gmt_create, gmt_modified, max_tenants
     </sql>
 
     <insert id="save" parameterType="com.rany.uic.domain.aggregate.Isv">
-        insert into isv (id, name, url, short_name, country, status, deleted, register_ip, phone, email, max_tenants,
+        insert into isv (id, name, url, short_name, country, status, is_deleted, register_ip, phone, email, max_tenants,
         gmt_create, gmt_modified)
         values (
         #{id.id,jdbcType=BIGINT},
@@ -33,7 +33,7 @@
         #{name.shortName,jdbcType=VARCHAR},
         #{country,jdbcType=VARCHAR},
         #{status,jdbcType=VARCHAR},
-        #{deleted,jdbcType=VARCHAR},
+        #{isDeleted,jdbcType=VARCHAR},
         #{registerIp,jdbcType=VARCHAR},
         #{phone.phone,jdbcType=VARCHAR},
         #{emailAddress.email,jdbcType=VARCHAR},
