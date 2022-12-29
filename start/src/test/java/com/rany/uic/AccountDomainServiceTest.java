@@ -27,7 +27,7 @@ public class AccountDomainServiceTest extends BaseTests {
 
     @Test
     public void testSave() {
-        Account account = new Account(new AccountId(snowflakeIdWorker.nextId()), new AccountName("zhongshengwang.zsw"));
+        Account account = new Account(new AccountId(snowflakeIdWorker.nextId()), new AccountName("zhongshengwang.zsw"), null);
         account.save();
         Boolean saveRes = accountDomainService.save(account);
         Assert.assertTrue(saveRes);

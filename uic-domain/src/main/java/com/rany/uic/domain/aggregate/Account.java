@@ -6,7 +6,10 @@ import com.cake.framework.common.base.IAggregate;
 import com.rany.uic.domain.dp.AccountName;
 import com.rany.uic.domain.event.AccountCreatedEvent;
 import com.rany.uic.domain.pk.AccountId;
+import com.rany.uic.domain.value.SafeStrategy;
 import lombok.*;
+
+import java.util.List;
 
 /**
  * Account 聚合根
@@ -31,6 +34,12 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
      * 用户名称
      */
     private AccountName accountName;
+
+
+    /**
+     * 安全策略
+     */
+    private List<SafeStrategy> safeStrategies;
 
     /**
      * 账号信息保存

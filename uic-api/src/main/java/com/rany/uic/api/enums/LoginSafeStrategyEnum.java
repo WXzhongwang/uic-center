@@ -9,8 +9,10 @@ package com.rany.uic.api.enums;
  * @email 18668485565163.com
  */
 public enum LoginSafeStrategyEnum {
-    
+
     BASIC_AUTH,
 
-    MOBILE_PHONE
+    MOBILE_PHONE,
+
+    LDAP
 }
