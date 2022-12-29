@@ -22,14 +22,15 @@
 
     <insert id="save" parameterType="com.rany.uic.domain.aggregate.Tenant">
         insert into account (id, isv_id, name, short_name, email, source, phone, deleted, gmt_create, gmt_modified)
-        values (#{id.id,jdbcType=BIGINT},
+        values (
+        #{id.id,jdbcType=BIGINT},
         #{isvId.id,jdbcType=BIGINT},
         #{tenantName.name,jdbcType=BIGINT},
         #{tenantName.shortName,jdbcType=BIGINT},
         #{emailAddress.email,jdbcType=VARCHAR},
         #{source.source,jdbcType=VARCHAR},
         #{phone.phone,jdbcType=VARCHAR},
-        '0'，
+        '0',
         now(),
         now())
     </insert>

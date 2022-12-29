@@ -1,9 +1,11 @@
 package com.rany.uic;
 
+import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Account;
 import com.rany.uic.domain.dp.AccountName;
 import com.rany.uic.domain.pk.AccountId;
 import com.rany.uic.domain.service.AccountDomainService;
+import org.junit.Assert;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -20,15 +22,14 @@ public class AccountDomainServiceTest extends BaseTests {
 
     @Resource
     private AccountDomainService accountDomainService;
+    @Resource
+    private SnowflakeIdWorker snowflakeIdWorker;
 
     @Test
     public void testSave() {
-        long base = 144;
-        for (int i = 0; i < 200; i++) {
-            base += i;
-            Account account = new Account(accountDomainService, new AccountId(base), new AccountName("zhongshengwang.zsw"));
-            Boolean save = account.save();
-            // Assert.assertTrue(save);
-        }
+        Account account = new Account(new AccountId(snowflakeIdWorker.nextId()), new AccountName("zhongshengwang.zsw"));
+        account.save();
+        Boolean saveRes = accountDomainService.save(account);
+        Assert.assertTrue(saveRes);
     }
 }

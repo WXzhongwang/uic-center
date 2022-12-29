@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rany.uic.domain.dao.IsvDao">
+    <resultMap id="BaseResultMap" type="com.rany.uic.dao.po.IsvPO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="short_name" jdbcType="VARCHAR" property="shortName"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="deleted" jdbcType="CHAR" property="deleted"/>
+        <result column="register_ip" jdbcType="VARCHAR" property="registerIp"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="max_tenants" jdbcType="INTEGER" property="maxTenants"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, url, short_name, country, status, deleted, register_ip, phone, email, create_by,
+        update_by, gmt_create, gmt_modified, max_tenants
+    </sql>
+
+    <insert id="save" parameterType="com.rany.uic.domain.aggregate.Isv">
+        insert into isv (id, name, url, short_name, country, status, deleted, register_ip, phone, email, max_tenants,
+        gmt_create, gmt_modified)
+        values (
+        #{id.id,jdbcType=BIGINT},
+        #{name.name,jdbcType=VARCHAR},
+        #{url,jdbcType=VARCHAR},
+        #{name.shortName,jdbcType=VARCHAR},
+        #{country,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR},
+        #{deleted,jdbcType=VARCHAR},
+        #{registerIp,jdbcType=VARCHAR},
+        #{phone.phone,jdbcType=VARCHAR},
+        #{emailAddress.email,jdbcType=VARCHAR},
+        #{maxTenants},
+        now(),
+        now())
+    </insert>
+</mapper>

@@ -1,7 +1,8 @@
 package com.rany.uic.domain.pk;
 
 import com.cake.framework.common.base.Identifier;
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * TODO
@@ -11,7 +12,11 @@ import lombok.Value;
  * @date 2022/11/26 00:12
  * @email 18668485565163.com
  */
-@Value
+@Data
+@NoArgsConstructor
+//@Value
+//@Builder
+//@Setter(AccessLevel.PRIVATE)
 public class AccountId implements Identifier {
 
     Long id;

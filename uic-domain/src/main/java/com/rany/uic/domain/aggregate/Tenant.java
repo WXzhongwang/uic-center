@@ -8,9 +8,7 @@ import com.rany.uic.domain.dp.TenantName;
 import com.rany.uic.domain.dp.TenantSource;
 import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.pk.TenantId;
-import com.rany.uic.domain.service.TenantDomainService;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 /**
  * Account 聚合根
@@ -21,10 +19,11 @@ import lombok.EqualsAndHashCode;
  * @email 18668485565163.com
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class Tenant extends BaseAggregateRoot implements IAggregate<TenantId> {
-
-    private TenantDomainService tenantDomainService;
     /**
      * PK
      */
@@ -56,15 +55,8 @@ public class Tenant extends BaseAggregateRoot implements IAggregate<TenantId> {
 
     private String deleted;
 
-    public Tenant(TenantDomainService tenantDomainService, TenantId id, TenantName tenantName, IsvId isvId) {
-        this.tenantDomainService = tenantDomainService;
-        this.id = id;
-        this.tenantName = tenantName;
-        this.isvId = isvId;
-    }
-
     public Boolean save() {
-        return tenantDomainService.save(this);
+        return Boolean.TRUE;
     }
 
     public Boolean freeze() {

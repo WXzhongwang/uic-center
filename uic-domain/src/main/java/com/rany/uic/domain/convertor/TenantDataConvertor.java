@@ -14,7 +14,7 @@ import org.mapstruct.Mapping;
  * @email 18668485565163.com
  */
 @Mapper(componentModel = "spring")
-public interface TenantDataConvertor {
+public interface TenantDataConvertor extends BaseConvertor<Tenant, TenantPO> {
 
 
     /**
@@ -31,5 +31,6 @@ public interface TenantDataConvertor {
     @Mapping(source = "source.source", target = "source")
     @Mapping(source = "phone.phone", target = "phone")
     @Mapping(source = "deleted", target = "deleted")
-    TenantPO toTenantPO(Tenant tenant);
+    @Override
+    TenantPO sourceToTarget(Tenant tenant);
 }

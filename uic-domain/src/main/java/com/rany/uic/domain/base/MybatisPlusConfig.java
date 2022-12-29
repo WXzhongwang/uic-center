@@ -12,6 +12,6 @@ import org.springframework.context.annotation.Configuration;
  * @email 18668485565163.com
  */
 @Configuration
-@MapperScan("com.rany.uic.domain.base")
+@MapperScan("com.rany.uic.domain.dao")
 public class MybatisPlusConfig {
 }

@@ -2,7 +2,6 @@ package com.rany.uic.domain.repository.impl;
 
 import com.rany.uic.dao.mapper.AccountPOMapper;
 import com.rany.uic.domain.aggregate.Account;
-import com.rany.uic.domain.convertor.AccountDataConvertor;
 import com.rany.uic.domain.dao.AccountDao;
 import com.rany.uic.domain.pk.AccountId;
 import com.rany.uic.domain.repository.AccountRepository;
@@ -29,7 +28,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     private final AccountPOMapper accountMapper;
     private final AccountDao accountDao;
-    private final AccountDataConvertor accountDataConvertor;
+    //private final AccountDataConvertor accountDataConvertor;
 
     @Override
     public Account find(@NotNull AccountId accountId) {

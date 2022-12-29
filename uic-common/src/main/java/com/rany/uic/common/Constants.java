@@ -31,4 +31,5 @@ public final class Constants {
     public static final String TRACE_ID = "__trace_id__";
     public static final String APPLICATION_NAME = "knowledge-universal";
     public static final String ACL_PROJECT = "knowledge-universal";
+    public static final Integer DEFAULT_MAX_TENANTS = 100;
 }

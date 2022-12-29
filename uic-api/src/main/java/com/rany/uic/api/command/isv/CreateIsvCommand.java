@@ -18,4 +18,7 @@ public class CreateIsvCommand extends DTO {
     private String shortName;
     private String email;
     private String url;
+    private String phone;
+    private String country;
+    private String registerIp;
 }

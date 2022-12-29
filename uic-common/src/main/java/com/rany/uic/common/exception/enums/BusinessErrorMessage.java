@@ -12,6 +12,8 @@ import lombok.Getter;
 public enum BusinessErrorMessage {
 
     ISV_NOT_FOUND("2500", "isv未找到"),
+    ISV_DELETED("2501", "isv已删除"),
+    ISV_DISABLED("2502", "isv已禁用"),
     ;
 
     private final String code;

@@ -1,6 +1,7 @@
 package com.rany.uic.domain.dp;
 
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * TODO
@@ -10,7 +11,11 @@ import lombok.Value;
  * @date 2022/12/27 21:59
  * @email 18668485565163.com
  */
-@Value
+@Data
+@NoArgsConstructor
+//@Value
+//@Builder
+//@Setter(AccessLevel.PRIVATE)
 public class Phone {
     String phone;
 

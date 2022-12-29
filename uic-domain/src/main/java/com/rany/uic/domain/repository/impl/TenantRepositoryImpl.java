@@ -2,7 +2,6 @@ package com.rany.uic.domain.repository.impl;
 
 import com.rany.uic.dao.mapper.TenantPOMapper;
 import com.rany.uic.domain.aggregate.Tenant;
-import com.rany.uic.domain.convertor.TenantDataConvertor;
 import com.rany.uic.domain.dao.TenantDao;
 import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.repository.TenantRepository;
@@ -29,7 +28,7 @@ public class TenantRepositoryImpl implements TenantRepository {
 
     private final TenantPOMapper tenantPOMapper;
     private final TenantDao tenantDao;
-    private final TenantDataConvertor tenantDataConvertor;
+    // private final TenantDataConvertor tenantDataConvertor;
 
     @Override
     public Tenant find(@NotNull TenantId accountId) {

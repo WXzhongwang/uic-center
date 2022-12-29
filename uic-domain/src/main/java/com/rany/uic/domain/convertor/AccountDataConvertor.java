@@ -14,7 +14,7 @@ import org.mapstruct.Mapping;
  * @email 18668485565163.com
  */
 @Mapper(componentModel = "spring")
-public interface AccountDataConvertor {
+public interface AccountDataConvertor extends BaseConvertor<Account, AccountPO> {
 
 
     /**
@@ -25,5 +25,6 @@ public interface AccountDataConvertor {
      */
     @Mapping(source = "id.id", target = "id")
     @Mapping(source = "accountName.name", target = "accountName")
-    AccountPO toAccountPO(Account account);
+    @Override
+    AccountPO sourceToTarget(Account account);
 }
