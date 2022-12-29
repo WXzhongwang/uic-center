@@ -1,9 +1,11 @@
 package com.rany.uic.service.listener;
 
+import cn.hutool.core.date.DateUtil;
 import com.google.common.collect.Lists;
 import com.rany.uic.api.enums.AccountTypeEnum;
 import com.rany.uic.api.enums.LoginSafeStrategyEnum;
 import com.rany.uic.common.enums.CommonStatusEnum;
+import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.util.AccountUtil;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Account;
@@ -72,9 +74,14 @@ public class AccountProcessListener {
                 new TenantId(tenantId),
                 new AccountName(AccountUtil.buildDefaultAccountChineseName(tenantName.getShortName())),
                 Lists.newArrayList(safeStrategy));
+        account.setPhone(tenant.getPhone());
+        account.setEmailAddress(tenant.getEmailAddress());
         account.setIsAdmin(true);
         account.setStatus(CommonStatusEnum.ENABLE.getValue());
+        account.setIsDeleted(DeleteStatusEnum.NO.getValue());
         account.setAccountType(AccountTypeEnum.BASIC.name());
+        account.setGmtCreate(DateUtil.date());
+        account.setGmtModified(DateUtil.date());
         accountDomainService.save(account);
     }
 }

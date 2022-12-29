@@ -34,4 +34,15 @@
         now(),
         now())
     </insert>
+
+    <select id="selectByShortName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tenant where is_deleted = '0' and short_name = #{name} limit 1
+    </select>
+
+
+    <select id="selectTenantCountByIsvId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(1) from tenant where isv_id = #{isvId}
+    </select>
 </mapper>

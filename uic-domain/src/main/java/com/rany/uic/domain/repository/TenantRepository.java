@@ -1,7 +1,9 @@
 package com.rany.uic.domain.repository;
 
 import com.cake.framework.ddd.repository.Repository;
+import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Tenant;
+import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.pk.TenantId;
 
 /**
@@ -14,4 +16,8 @@ import com.rany.uic.domain.pk.TenantId;
  */
 
 public interface TenantRepository extends Repository<Tenant, TenantId> {
+
+    TenantPO selectByShortName(String shortName);
+
+    Integer selectTenantCountByIsvId(IsvId isvId);
 }

@@ -1,8 +1,11 @@
 package com.rany.uic.domain.repository.impl;
 
 import com.rany.uic.dao.mapper.TenantPOMapper;
+import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Tenant;
+import com.rany.uic.domain.convertor.TenantDataConvertor;
 import com.rany.uic.domain.dao.TenantDao;
+import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.repository.TenantRepository;
 import lombok.AllArgsConstructor;
@@ -28,7 +31,7 @@ public class TenantRepositoryImpl implements TenantRepository {
 
     private final TenantPOMapper tenantPOMapper;
     private final TenantDao tenantDao;
-    // private final TenantDataConvertor tenantDataConvertor;
+    private final TenantDataConvertor tenantDataConvertor;
 
     @Override
     public Tenant find(@NotNull TenantId accountId) {
@@ -45,5 +48,15 @@ public class TenantRepositoryImpl implements TenantRepository {
     @Transactional(rollbackFor = Exception.class)
     public void save(@NotNull Tenant tenant) {
         tenantDao.save(tenant);
+    }
+
+    @Override
+    public TenantPO selectByShortName(String shortName) {
+        return tenantDao.selectByShortName(shortName);
+    }
+
+    @Override
+    public Integer selectTenantCountByIsvId(IsvId isvId) {
+        return tenantDao.selectTenantCountByIsvId(isvId.getId());
     }
 }

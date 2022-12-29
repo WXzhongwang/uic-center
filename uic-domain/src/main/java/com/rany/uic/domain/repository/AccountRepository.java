@@ -14,4 +14,5 @@ import com.rany.uic.domain.pk.AccountId;
  */
 
 public interface AccountRepository extends Repository<Account, AccountId> {
+
 }

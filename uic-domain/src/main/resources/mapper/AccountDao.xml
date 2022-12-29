@@ -3,10 +3,9 @@
 <mapper namespace="com.rany.uic.domain.dao.AccountDao">
     <resultMap id="BaseResultMap" type="com.rany.uic.dao.po.AccountPO">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="account_type" property="accountType" jdbcType="VARCHAR"/>
         <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
-        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="tenant_id" property="tenantId" jdbcType="BIGINT"/>
         <result column="is_admin" property="isAdmin" jdbcType="CHAR"/>
@@ -19,13 +18,99 @@
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, user_id, account_type, account_name, login_name, mobile, email, login_pwd, tenant_id,
-        is_admin, status, is_deleted, last_login_ip, last_login_time, feature, gmt_create, gmt_modified
+        id, account_name, phone, email, tenant_id, is_admin, account_type, status, is_deleted,
+        last_login_ip, last_login_time, feature, gmt_create, gmt_modified
     </sql>
 
     <insert id="save" parameterType="com.rany.uic.domain.aggregate.Account">
-        insert into account (id,
-        account_name)
-        values (#{id.id,jdbcType=BIGINT}, #{accountName.name,jdbcType=VARCHAR})
+        insert into account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="accountName != null">
+                account_name,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="emailAddress != null">
+                email,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+            <if test="isAdmin != null">
+                is_admin,
+            </if>
+            <if test="accountType != null">
+                account_type,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="lastLoginIp != null">
+                last_login_ip,
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time,
+            </if>
+            <if test="feature != null">
+                feature,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id.id,jdbcType=BIGINT},
+            </if>
+            <if test="accountName != null">
+                #{accountName.name,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="emailAddress != null">
+                #{emailAddress.email,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId.id,jdbcType=BIGINT},
+            </if>
+            <if test="isAdmin != null">
+                #{isAdmin,jdbcType=CHAR},
+            </if>
+            <if test="accountType != null">
+                #{accountType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=CHAR},
+            </if>
+            <if test="lastLoginIp != null">
+                #{lastLoginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="feature != null">
+                #{feature,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
     </insert>
 </mapper>
