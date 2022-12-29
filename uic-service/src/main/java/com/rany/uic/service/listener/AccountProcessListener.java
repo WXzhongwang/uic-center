@@ -32,6 +32,7 @@ public class AccountProcessListener {
 
     @Resource
     private SnowflakeIdWorker snowflakeIdWorker;
+    @Resource
     private AccountDomainService accountDomainService;
 
 
