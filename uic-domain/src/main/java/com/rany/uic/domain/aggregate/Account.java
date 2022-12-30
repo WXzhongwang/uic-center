@@ -82,6 +82,7 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
     private String lastLoginIp;
     private Date lastLoginTime;
     private String feature;
+    private String headImage;
 
 
     public Account(AccountId id, TenantId tenantId, AccountName accountName, List<SafeStrategy> safeStrategies) {

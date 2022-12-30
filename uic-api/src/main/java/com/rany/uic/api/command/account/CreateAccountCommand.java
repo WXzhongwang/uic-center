@@ -12,7 +12,7 @@ import lombok.Data;
  * @email 18668485565163.com
  */
 @Data
-public class CreateTenantAccountCommand extends DTO {
+public class CreateAccountCommand extends DTO {
 
     /**
      * 租户Id
@@ -43,6 +43,11 @@ public class CreateTenantAccountCommand extends DTO {
      * 邮箱
      */
     private String email;
+
+    /**
+     * 头像
+     */
+    private String headImage;
 
     /**
      * 是否是租户管理员
