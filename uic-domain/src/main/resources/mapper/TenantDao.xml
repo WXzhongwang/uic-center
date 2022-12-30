@@ -14,14 +14,17 @@
         <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, isv_id, name, short_name, email, source, phone, is_deleted, create_by, update_by, gmt_create,
-        gmt_modified
+        gmt_modified, status, address
     </sql>
 
     <insert id="save" parameterType="com.rany.uic.domain.aggregate.Tenant">
-        insert into tenant (id, isv_id, name, short_name, email, source, phone, is_deleted, gmt_create, gmt_modified)
+        insert into tenant (id, isv_id, name, short_name, email, source, phone, is_deleted, gmt_create, gmt_modified,
+        status, address)
         values (
         #{id.id,jdbcType=BIGINT},
         #{isvId.id,jdbcType=BIGINT},
@@ -32,7 +35,10 @@
         #{phone.phone,jdbcType=VARCHAR},
         #{isDeleted,jdbcType=VARCHAR},
         now(),
-        now())
+        now(),
+        #{status},
+        #{address}
+        )
     </insert>
 
     <select id="selectByShortName" parameterType="java.lang.String" resultMap="BaseResultMap">

@@ -8,6 +8,7 @@ import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Isv;
 import com.rany.uic.domain.aggregate.Tenant;
+import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.repository.AccountRepository;
 import com.rany.uic.domain.repository.IsvRepository;
 import com.rany.uic.domain.repository.TenantRepository;
@@ -57,5 +58,13 @@ public class TenantDomainService {
         }
         tenantRepository.save(tenant);
         return Boolean.TRUE;
+    }
+
+    public Tenant findById(TenantId tenantId) {
+        return tenantRepository.find(tenantId);
+    }
+
+    public Boolean update(Tenant tenant) {
+        return tenantRepository.updateTenant(tenant);
     }
 }

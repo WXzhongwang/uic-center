@@ -56,6 +56,16 @@ public class Tenant extends BaseAggregateRoot implements IAggregate<TenantId> {
      */
     private Phone phone;
 
+    /**
+     * 地址
+     */
+    private String address;
+
+    /**
+     * 状态
+     */
+    private String status;
+
     public Boolean save(Boolean initialFirstAccount) {
         if (BooleanUtil.isTrue(initialFirstAccount)) {
             registerEvent(new CreateTenantAdminAccountEvent(this, DateUtil.date()));

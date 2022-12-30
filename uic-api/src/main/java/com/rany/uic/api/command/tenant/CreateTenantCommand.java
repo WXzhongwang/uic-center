@@ -19,5 +19,6 @@ public class CreateTenantCommand extends DTO {
     private String email;
     private String phone;
     private String source;
+    private String address;
     private Boolean initialAccount;
 }

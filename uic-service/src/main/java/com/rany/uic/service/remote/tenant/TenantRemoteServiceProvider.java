@@ -2,8 +2,12 @@ package com.rany.uic.service.remote.tenant;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.rany.uic.api.command.tenant.CreateTenantCommand;
+import com.rany.uic.api.command.tenant.DisableTenantCommand;
+import com.rany.uic.api.command.tenant.EnableTenantCommand;
+import com.rany.uic.api.command.tenant.ModifyTenantCommand;
 import com.rany.uic.api.dto.Result;
 import com.rany.uic.api.facade.tenant.TenantFacade;
+import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Tenant;
@@ -40,11 +44,40 @@ public class TenantRemoteServiceProvider implements TenantFacade {
                 new TenantName(createTenantCommand.getName(), createTenantCommand.getShortName()),
                 new EmailAddress(createTenantCommand.getEmail()),
                 new TenantSource(createTenantCommand.getSource()),
-                new Phone(createTenantCommand.getPhone())
+                new Phone(createTenantCommand.getPhone()),
+                createTenantCommand.getAddress(),
+                CommonStatusEnum.ENABLE.getValue()
         );
         tenant.setIsDeleted(DeleteStatusEnum.NO.getValue());
         tenant.save(createTenantCommand.getInitialAccount());
         tenantDomainService.save(tenant);
+        return Result.succeed();
+    }
+
+    @Override
+    public Result<Boolean> modifyTenant(ModifyTenantCommand modifyTenantCommand) {
+        Tenant tenant = tenantDomainService.findById(new TenantId(modifyTenantCommand.getTenantId()));
+        tenant.setTenantName(new TenantName(modifyTenantCommand.getName(), tenant.getTenantName().getShortName()));
+        tenant.setEmailAddress(new EmailAddress(modifyTenantCommand.getEmail()));
+        tenant.setPhone(new Phone(modifyTenantCommand.getPhone()));
+        tenant.setAddress(modifyTenantCommand.getAddress());
+        tenantDomainService.update(tenant);
+        return Result.succeed();
+    }
+
+    @Override
+    public Result<Boolean> disableTenant(DisableTenantCommand disableTenantCommand) {
+        Tenant tenant = tenantDomainService.findById(new TenantId(disableTenantCommand.getTenantId()));
+        tenant.setStatus(CommonStatusEnum.DISABLED.getValue());
+        tenantDomainService.update(tenant);
+        return Result.succeed();
+    }
+
+    @Override
+    public Result<Boolean> enableTenant(EnableTenantCommand enableTenantCommand) {
+        Tenant tenant = tenantDomainService.findById(new TenantId(enableTenantCommand.getTenantId()));
+        tenant.setStatus(CommonStatusEnum.ENABLE.getValue());
+        tenantDomainService.update(tenant);
         return Result.succeed();
     }
 }

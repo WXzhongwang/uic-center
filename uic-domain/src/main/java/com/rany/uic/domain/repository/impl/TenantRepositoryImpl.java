@@ -1,5 +1,7 @@
 package com.rany.uic.domain.repository.impl;
 
+import cn.hutool.core.date.DateUtil;
+import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.dao.mapper.TenantPOMapper;
 import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Tenant;
@@ -35,12 +37,17 @@ public class TenantRepositoryImpl implements TenantRepository {
 
     @Override
     public Tenant find(@NotNull TenantId accountId) {
-
-        return null;
+        TenantPO tenantPO = tenantPOMapper.selectByPrimaryKey(accountId.getId());
+        return tenantDataConvertor.targetToSource(tenantPO);
     }
 
     @Override
     public void remove(@NotNull Tenant tenant) {
+        TenantId tenantId = tenant.getId();
+        TenantPO tenantPO = tenantPOMapper.selectByPrimaryKey(tenantId.getId());
+        tenantPO.setIsDeleted(DeleteStatusEnum.YES.getValue());
+        tenantPO.setGmtModified(DateUtil.date());
+        tenantPOMapper.updateByPrimaryKeySelective(tenantPO);
     }
 
     @SneakyThrows
@@ -58,5 +65,13 @@ public class TenantRepositoryImpl implements TenantRepository {
     @Override
     public Integer selectTenantCountByIsvId(IsvId isvId) {
         return tenantDao.selectTenantCountByIsvId(isvId.getId());
+    }
+
+    @Override
+    public Boolean updateTenant(Tenant tenant) {
+        TenantPO tenantPO = tenantDataConvertor.sourceToTarget(tenant);
+        tenantPO.setGmtModified(DateUtil.date());
+        tenantPOMapper.updateByPrimaryKeySelective(tenantPO);
+        return Boolean.TRUE;
     }
 }

@@ -32,4 +32,21 @@ public interface TenantDataConvertor extends BaseConvertor<Tenant, TenantPO> {
     @Mapping(source = "phone.phone", target = "phone")
     @Override
     TenantPO sourceToTarget(Tenant tenant);
+
+
+    /**
+     * 聚合根转PO
+     *
+     * @param tenantPO
+     * @return
+     */
+    @Mapping(target = "id.id", source = "id")
+    @Mapping(target = "isvId.id", source = "isvId")
+    @Mapping(target = "tenantName.name", source = "name")
+    @Mapping(target = "tenantName.shortName", source = "shortName")
+    @Mapping(target = "emailAddress.email", source = "email")
+    @Mapping(target = "source.source", source = "source")
+    @Mapping(target = "phone.phone", source = "phone")
+    @Override
+    Tenant targetToSource(TenantPO tenantPO);
 }

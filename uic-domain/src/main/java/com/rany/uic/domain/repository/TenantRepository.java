@@ -17,7 +17,28 @@ import com.rany.uic.domain.pk.TenantId;
 
 public interface TenantRepository extends Repository<Tenant, TenantId> {
 
+    /**
+     * 获取租户简称
+     *
+     * @param shortName
+     * @return
+     */
     TenantPO selectByShortName(String shortName);
 
+    /**
+     * 获取租户数量
+     *
+     * @param isvId
+     * @return
+     */
     Integer selectTenantCountByIsvId(IsvId isvId);
+
+
+    /**
+     * 更新租户信息
+     *
+     * @param tenant
+     * @return
+     */
+    Boolean updateTenant(Tenant tenant);
 }
