@@ -13,6 +13,7 @@ import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.exception.BusinessException;
 import com.rany.uic.common.exception.enums.BusinessErrorMessage;
 import com.rany.uic.common.util.SnowflakeIdWorker;
+import com.rany.uic.domain.aggregate.Isv;
 import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.convertor.TenantDataConvertor;
 import com.rany.uic.domain.dp.EmailAddress;
@@ -21,6 +22,7 @@ import com.rany.uic.domain.dp.TenantName;
 import com.rany.uic.domain.dp.TenantSource;
 import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.pk.TenantId;
+import com.rany.uic.domain.service.IsvDomainService;
 import com.rany.uic.domain.service.TenantDomainService;
 import com.rany.uic.service.aop.annotation.IsvValidCheck;
 import com.rany.uic.service.aop.annotation.TenantValidCheck;
@@ -44,6 +46,7 @@ import java.util.Objects;
 public class TenantRemoteServiceProvider implements TenantFacade {
 
     private final TenantDomainService tenantDomainService;
+    private final IsvDomainService isvDomainService;
     private final TenantDataConvertor tenantDataConvertor;
     private final SnowflakeIdWorker snowflakeIdWorker;
 
@@ -137,6 +140,18 @@ public class TenantRemoteServiceProvider implements TenantFacade {
 
     @Override
     public Result<PageResult<TenantDTO>> pageTenants(TenantPageQuery tenantPageQuery) {
+        if (Objects.nonNull(tenantPageQuery.getIsvId())) {
+            Isv isv = isvDomainService.findById(new IsvId(tenantPageQuery.getIsvId()));
+            if (Objects.isNull(isv)) {
+                throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
+            }
+            if (StringUtils.equals(isv.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
+                throw new BusinessException(BusinessErrorMessage.ISV_DELETED);
+            }
+            if (StringUtils.equals(isv.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
+                throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
+            }
+        }
         return null;
     }
 }
