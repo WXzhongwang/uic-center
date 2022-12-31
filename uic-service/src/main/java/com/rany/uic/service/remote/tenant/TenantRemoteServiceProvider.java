@@ -18,6 +18,7 @@ import com.rany.uic.domain.dp.TenantSource;
 import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.service.TenantDomainService;
+import com.rany.uic.service.aop.annotation.IsvValidCheck;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,6 +39,7 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     private final SnowflakeIdWorker snowflakeIdWorker;
 
     @Override
+    @IsvValidCheck(expression = "#createTenantCommand.isvId")
     public Result<Boolean> createTenant(CreateTenantCommand createTenantCommand) {
         Tenant tenant = new Tenant(new TenantId(snowflakeIdWorker.nextId()),
                 new IsvId(createTenantCommand.getIsvId()),

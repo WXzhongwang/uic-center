@@ -16,6 +16,8 @@ public enum BusinessErrorMessage {
     ISV_DISABLED("2502", "isv已禁用"),
     ISV_INVALID("2502", "isv不可用"),
 
+    ISV_CHECK_NOT_PASS("2503", "isv校验不通过"),
+
     TENANT_NOT_FOUND("3501", "租户未找到"),
     TENANT_DELETED("3502", "租户已删除"),
     TENANT_DISABLED("3503", "租户已禁用"),

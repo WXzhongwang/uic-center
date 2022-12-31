@@ -25,6 +25,24 @@ public interface AccountDataConvertor extends BaseConvertor<Account, AccountPO> 
      */
     @Mapping(source = "id.id", target = "id")
     @Mapping(source = "accountName.name", target = "accountName")
+    @Mapping(source = "tenantId.id", target = "tenantId")
+    @Mapping(source = "emailAddress.email", target = "email")
+    @Mapping(source = "phone.phone", target = "phone")
     @Override
     AccountPO sourceToTarget(Account account);
+
+
+    /**
+     * 聚合根转PO
+     *
+     * @param accountPO
+     * @return
+     */
+    @Mapping(target = "id.id", source = "id")
+    @Mapping(target = "accountName.name", source = "accountName")
+    @Mapping(target = "tenantId.id", source = "tenantId")
+    @Mapping(target = "emailAddress.email", source = "email")
+    @Mapping(target = "phone.phone", source = "phone")
+    @Override
+    Account targetToSource(AccountPO accountPO);
 }
