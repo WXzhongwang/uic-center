@@ -1,7 +1,9 @@
 package com.rany.uic;
 
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
+import com.cake.framework.mybatis.ParamLimitInterceptor;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableDubbo
 @EnableTransactionManagement
 @SpringBootApplication
+@EnableAutoConfiguration(exclude = {ParamLimitInterceptor.class})
 public class UicApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

@@ -1,9 +1,11 @@
 package com.rany.uic.service.remote.tenant;
 
+import cn.hutool.db.PageResult;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.rany.uic.api.command.tenant.*;
 import com.rany.uic.api.facade.tenant.TenantFacade;
 import com.rany.uic.api.query.tenant.TenantBasicQuery;
+import com.rany.uic.api.query.tenant.TenantPageQuery;
 import com.rany.uic.common.base.Result;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
@@ -131,5 +133,10 @@ public class TenantRemoteServiceProvider implements TenantFacade {
         }
         TenantDTO isvDTO = tenantDataConvertor.sourceToDTO(tenant);
         return Result.succeed(isvDTO);
+    }
+
+    @Override
+    public Result<PageResult<TenantDTO>> pageTenants(TenantPageQuery tenantPageQuery) {
+        return null;
     }
 }

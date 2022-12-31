@@ -1,7 +1,9 @@
 package com.rany.uic.api.facade.tenant;
 
+import cn.hutool.db.PageResult;
 import com.rany.uic.api.command.tenant.*;
 import com.rany.uic.api.query.tenant.TenantBasicQuery;
+import com.rany.uic.api.query.tenant.TenantPageQuery;
 import com.rany.uic.common.base.Result;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 
@@ -64,4 +66,12 @@ public interface TenantFacade {
      * @return
      */
     Result<TenantDTO> findTenant(TenantBasicQuery tenantBasicQuery);
+
+    /**
+     * 分页查询租户信息
+     *
+     * @param tenantPageQuery
+     * @return
+     */
+    Result<PageResult<TenantDTO>> pageTenants(TenantPageQuery tenantPageQuery);
 }

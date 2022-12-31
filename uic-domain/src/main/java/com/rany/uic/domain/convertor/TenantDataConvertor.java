@@ -3,8 +3,11 @@ package com.rany.uic.domain.convertor;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Tenant;
+import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
+import java.util.List;
 
 /**
  * TODO
@@ -53,7 +56,7 @@ public interface TenantDataConvertor extends BaseConvertor<Tenant, TenantPO> {
 
 
     /**
-     * 绝活根转DTO
+     * 聚合根转DTO
      *
      * @param tenant
      * @return
@@ -66,4 +69,14 @@ public interface TenantDataConvertor extends BaseConvertor<Tenant, TenantPO> {
     @Mapping(source = "source.source", target = "source")
     @Mapping(source = "phone.phone", target = "phone")
     TenantDTO sourceToDTO(Tenant tenant);
+
+
+    /**
+     * 多对象聚合根转DTO
+     *
+     * @param sources
+     * @return
+     */
+    @InheritConfiguration(name = "sourceToDTO")
+    List<TenantDTO> sourceToDTO(List<Tenant> sources);
 }
