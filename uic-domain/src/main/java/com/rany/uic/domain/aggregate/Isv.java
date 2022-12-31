@@ -74,10 +74,24 @@ public class Isv extends BaseAggregateRoot implements IAggregate<IsvId> {
         this.phone = phone;
     }
 
-    public void freeze() {
+    /**
+     * 启用
+     * TODO 后续这些行为上可以补充事件的领域处理的注册
+     */
+    public void enable() {
         this.status = CommonStatusEnum.DISABLED.getValue();
     }
 
+    /**
+     * 禁用
+     */
+    public void disable() {
+        this.status = CommonStatusEnum.DISABLED.getValue();
+    }
+
+    /**
+     * 删除
+     */
     public void delete() {
         this.isDeleted = DeleteStatusEnum.YES.getValue();
     }

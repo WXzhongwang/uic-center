@@ -2,8 +2,8 @@ package com.rany.uic.service.remote.account;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.rany.uic.api.command.account.*;
-import com.rany.uic.api.dto.Result;
 import com.rany.uic.api.facade.account.AccountFacade;
+import com.rany.uic.common.base.Result;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.service.AccountDomainService;
 import lombok.AllArgsConstructor;

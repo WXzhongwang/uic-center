@@ -1,14 +1,13 @@
 package com.rany.uic.service.remote.tenant;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.rany.uic.api.command.tenant.CreateTenantCommand;
-import com.rany.uic.api.command.tenant.DisableTenantCommand;
-import com.rany.uic.api.command.tenant.EnableTenantCommand;
-import com.rany.uic.api.command.tenant.ModifyTenantCommand;
-import com.rany.uic.api.dto.Result;
+import com.rany.uic.api.command.tenant.*;
 import com.rany.uic.api.facade.tenant.TenantFacade;
+import com.rany.uic.common.base.Result;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
+import com.rany.uic.common.exception.BusinessException;
+import com.rany.uic.common.exception.enums.BusinessErrorMessage;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.dp.EmailAddress;
@@ -22,6 +21,9 @@ import com.rany.uic.service.aop.annotation.IsvValidCheck;
 import com.rany.uic.service.aop.annotation.TenantValidCheck;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
 
 /**
  * TODO
@@ -61,6 +63,12 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     @TenantValidCheck(expression = "#modifyTenantCommand.tenantId")
     public Result<Boolean> modifyTenant(ModifyTenantCommand modifyTenantCommand) {
         Tenant tenant = tenantDomainService.findById(new TenantId(modifyTenantCommand.getTenantId()));
+        if (Objects.isNull(tenant)) {
+            throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);
+        }
+        if (StringUtils.equals(tenant.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
+            throw new BusinessException(BusinessErrorMessage.TENANT_DELETED);
+        }
         tenant.setTenantName(new TenantName(modifyTenantCommand.getName(), tenant.getTenantName().getShortName()));
         tenant.setEmailAddress(new EmailAddress(modifyTenantCommand.getEmail()));
         tenant.setPhone(new Phone(modifyTenantCommand.getPhone()));
@@ -72,7 +80,13 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     @Override
     public Result<Boolean> disableTenant(DisableTenantCommand disableTenantCommand) {
         Tenant tenant = tenantDomainService.findById(new TenantId(disableTenantCommand.getTenantId()));
-        tenant.setStatus(CommonStatusEnum.DISABLED.getValue());
+        if (Objects.isNull(tenant)) {
+            throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);
+        }
+        if (StringUtils.equals(tenant.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
+            throw new BusinessException(BusinessErrorMessage.TENANT_DELETED);
+        }
+        tenant.disabled();
         tenantDomainService.update(tenant);
         return Result.succeed();
     }
@@ -80,7 +94,24 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     @Override
     public Result<Boolean> enableTenant(EnableTenantCommand enableTenantCommand) {
         Tenant tenant = tenantDomainService.findById(new TenantId(enableTenantCommand.getTenantId()));
-        tenant.setStatus(CommonStatusEnum.ENABLE.getValue());
+        if (Objects.isNull(tenant)) {
+            throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);
+        }
+        if (StringUtils.equals(tenant.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
+            throw new BusinessException(BusinessErrorMessage.TENANT_DELETED);
+        }
+        tenant.enable();
+        tenantDomainService.update(tenant);
+        return Result.succeed();
+    }
+
+    @Override
+    public Result<Boolean> deleteTenant(DeleteTenantCommand deleteTenantCommand) {
+        Tenant tenant = tenantDomainService.findById(new TenantId(deleteTenantCommand.getTenantId()));
+        if (Objects.isNull(tenant)) {
+            throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);
+        }
+        tenant.delete();
         tenantDomainService.update(tenant);
         return Result.succeed();
     }

@@ -1,7 +1,7 @@
 package com.rany.uic.api.facade.account;
 
 import com.rany.uic.api.command.account.*;
-import com.rany.uic.api.dto.Result;
+import com.rany.uic.common.base.Result;
 
 /**
  * TODO

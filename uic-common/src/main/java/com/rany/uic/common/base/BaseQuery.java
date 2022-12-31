@@ -1,6 +1,4 @@
-package com.rany.uic.api.dto;
-
-import lombok.Data;
+package com.rany.uic.common.base;
 
 import java.io.Serializable;
 
@@ -9,9 +7,8 @@ import java.io.Serializable;
  *
  * @author zhongshengwang
  * @description TODO
- * @date 2022/11/15 22:24
+ * @date 2022/12/31 16:29
  * @email 18668485565163.com
  */
-@Data
-public class DTO implements Serializable {
+public abstract class BaseQuery implements Serializable {
 }

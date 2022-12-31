@@ -1,10 +1,7 @@
 package com.rany.uic.api.facade.tenant;
 
-import com.rany.uic.api.command.tenant.CreateTenantCommand;
-import com.rany.uic.api.command.tenant.DisableTenantCommand;
-import com.rany.uic.api.command.tenant.EnableTenantCommand;
-import com.rany.uic.api.command.tenant.ModifyTenantCommand;
-import com.rany.uic.api.dto.Result;
+import com.rany.uic.api.command.tenant.*;
+import com.rany.uic.common.base.Result;
 
 /**
  * TODO
@@ -48,4 +45,12 @@ public interface TenantFacade {
      * @return
      */
     Result<Boolean> enableTenant(EnableTenantCommand enableTenantCommand);
+
+    /**
+     * 启用租户
+     *
+     * @param deleteTenantCommand
+     * @return
+     */
+    Result<Boolean> deleteTenant(DeleteTenantCommand deleteTenantCommand);
 }

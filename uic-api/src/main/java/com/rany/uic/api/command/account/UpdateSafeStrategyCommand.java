@@ -1,6 +1,6 @@
 package com.rany.uic.api.command.account;
 
-import com.rany.uic.api.dto.DTO;
+import com.rany.uic.common.base.DTO;
 import lombok.Data;
 
 import java.util.Date;

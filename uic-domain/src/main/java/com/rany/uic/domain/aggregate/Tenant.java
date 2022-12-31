@@ -4,6 +4,8 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.BooleanUtil;
 import com.cake.framework.common.base.BaseAggregateRoot;
 import com.cake.framework.common.base.IAggregate;
+import com.rany.uic.common.enums.CommonStatusEnum;
+import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.domain.dp.EmailAddress;
 import com.rany.uic.domain.dp.Phone;
 import com.rany.uic.domain.dp.TenantName;
@@ -73,11 +75,15 @@ public class Tenant extends BaseAggregateRoot implements IAggregate<TenantId> {
         return Boolean.TRUE;
     }
 
-    public Boolean freeze() {
-        return true;
+    public void disabled() {
+        this.status = CommonStatusEnum.DISABLED.getValue();
     }
 
-    public Boolean delete() {
-        return true;
+    public void enable() {
+        this.status = CommonStatusEnum.ENABLE.getValue();
+    }
+
+    public void delete() {
+        this.isDeleted = DeleteStatusEnum.YES.getValue()
     }
 }

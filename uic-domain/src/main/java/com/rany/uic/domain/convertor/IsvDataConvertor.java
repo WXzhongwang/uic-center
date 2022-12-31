@@ -1,5 +1,6 @@
 package com.rany.uic.domain.convertor;
 
+import com.rany.uic.common.dto.isv.IsvDTO;
 import com.rany.uic.dao.po.IsvPO;
 import com.rany.uic.domain.aggregate.Isv;
 import org.mapstruct.Mapper;
@@ -48,4 +49,20 @@ public interface IsvDataConvertor extends BaseConvertor<Isv, IsvPO> {
             @Mapping(source = "phone", target = "phone.phone")
     })
     Isv targetToSource(IsvPO isvPO);
+
+
+    /**
+     * 聚合根转DTO
+     *
+     * @param isv
+     * @return
+     */
+    @Mappings({
+            @Mapping(target = "id", source = "id.id"),
+            @Mapping(target = "name", source = "name.name"),
+            @Mapping(target = "shortName", source = "name.shortName"),
+            @Mapping(target = "email", source = "emailAddress.email"),
+            @Mapping(target = "phone", source = "phone.phone")
+    })
+    IsvDTO sourceToDTO(Isv isv);
 }

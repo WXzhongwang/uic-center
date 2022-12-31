@@ -2,7 +2,6 @@ package com.rany.uic.domain.repository.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.BooleanUtil;
-import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.dao.mapper.IsvPOMapper;
 import com.rany.uic.dao.po.IsvPO;
@@ -57,12 +56,9 @@ public class IsvRepositoryImpl implements IsvRepository {
     }
 
     @Override
-    public Boolean disableIsv(Isv isv) {
-        IsvId id = isv.getId();
-        IsvPO isvPo = isvPOMapper.selectByPrimaryKey(id.getId());
-        isvPo.setStatus(CommonStatusEnum.DISABLED.getValue());
-        isvPo.setGmtModified(DateUtil.date());
-        int update = isvPOMapper.updateByPrimaryKey(isvPo);
+    public Boolean updateIsv(Isv isv) {
+        IsvPO isvPO = isvDataConvertor.sourceToTarget(isv);
+        int update = isvPOMapper.updateByPrimaryKey(isvPO);
         return BooleanUtil.isTrue(update > 0);
     }
 }

@@ -1,4 +1,4 @@
-package com.rany.uic.api.dto;
+package com.rany.uic.common.base;
 
 /**
  * TODO

@@ -4,7 +4,7 @@ import com.rany.uic.common.base.DTO;
 import lombok.Data;
 
 /**
- * CreateIsvCommand
+ * DisableIsvCommand
  *
  * @author zhongshengwang
  * @description TODO
@@ -12,7 +12,7 @@ import lombok.Data;
  * @email 18668485565163.com
  */
 @Data
-public class DeleteIsvCommand extends DTO {
+public class EnableIsvCommand extends DTO {
 
     private Long id;
 }

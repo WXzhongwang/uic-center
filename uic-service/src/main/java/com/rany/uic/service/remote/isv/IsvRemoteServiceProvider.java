@@ -4,14 +4,18 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.rany.uic.api.command.isv.CreateIsvCommand;
 import com.rany.uic.api.command.isv.DeleteIsvCommand;
 import com.rany.uic.api.command.isv.DisableIsvCommand;
-import com.rany.uic.api.dto.Result;
+import com.rany.uic.api.command.isv.EnableIsvCommand;
 import com.rany.uic.api.facade.isv.IsvFacade;
+import com.rany.uic.api.query.isv.IsvBasicQuery;
+import com.rany.uic.common.base.Result;
+import com.rany.uic.common.dto.isv.IsvDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.exception.BusinessException;
 import com.rany.uic.common.exception.enums.BusinessErrorMessage;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Isv;
+import com.rany.uic.domain.convertor.IsvDataConvertor;
 import com.rany.uic.domain.dp.EmailAddress;
 import com.rany.uic.domain.dp.IsvName;
 import com.rany.uic.domain.dp.Phone;
@@ -39,6 +43,7 @@ import static com.rany.uic.common.Constants.DEFAULT_MAX_TENANTS;
 public class IsvRemoteServiceProvider implements IsvFacade {
 
     private final IsvDomainService isvDomainService;
+    private final IsvDataConvertor isvDataConvertor;
     private final SnowflakeIdWorker snowflakeIdWorker;
 
     @Override
@@ -84,7 +89,32 @@ public class IsvRemoteServiceProvider implements IsvFacade {
         if (StringUtils.equals(isv.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
             throw new BusinessException(BusinessErrorMessage.ISV_DELETED);
         }
-        isvDomainService.disableIsv(isv);
+        isv.disable();
+        isvDomainService.update(isv);
         return Result.succeed();
+    }
+
+    @Override
+    public Result<Boolean> enableIsv(EnableIsvCommand enableIsvCommand) {
+        Isv isv = isvDomainService.findById(new IsvId(enableIsvCommand.getId()));
+        if (Objects.isNull(isv)) {
+            throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
+        }
+        if (StringUtils.equals(isv.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
+            throw new BusinessException(BusinessErrorMessage.ISV_DELETED);
+        }
+        isv.enable();
+        isvDomainService.update(isv);
+        return Result.succeed();
+    }
+
+    @Override
+    public Result<IsvDTO> findIsv(IsvBasicQuery isvBaseQuery) {
+        Isv isv = isvDomainService.findById(new IsvId(isvBaseQuery.getIsvId()));
+        if (Objects.isNull(isv)) {
+            throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
+        }
+        IsvDTO isvDTO = isvDataConvertor.sourceToDTO(isv);
+        return Result.succeed(isvDTO);
     }
 }
