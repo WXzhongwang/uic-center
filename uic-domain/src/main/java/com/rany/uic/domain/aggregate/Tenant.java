@@ -84,6 +84,6 @@ public class Tenant extends BaseAggregateRoot implements IAggregate<TenantId> {
     }
 
     public void delete() {
-        this.isDeleted = DeleteStatusEnum.YES.getValue()
+        this.isDeleted = DeleteStatusEnum.YES.getValue();
     }
 }
