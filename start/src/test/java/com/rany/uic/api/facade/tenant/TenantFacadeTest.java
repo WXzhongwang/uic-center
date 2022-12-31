@@ -2,10 +2,7 @@ package com.rany.uic.api.facade.tenant;
 
 import cn.hutool.core.util.RandomUtil;
 import com.rany.uic.BaseTests;
-import com.rany.uic.api.command.tenant.CreateTenantCommand;
-import com.rany.uic.api.command.tenant.DisableTenantCommand;
-import com.rany.uic.api.command.tenant.EnableTenantCommand;
-import com.rany.uic.api.command.tenant.ModifyTenantCommand;
+import com.rany.uic.api.command.tenant.*;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -60,5 +57,13 @@ public class TenantFacadeTest extends BaseTests {
         EnableTenantCommand enableTenantCommand = new EnableTenantCommand();
         enableTenantCommand.setTenantId(768460649511661568L);
         tenantFacade.enableTenant(enableTenantCommand);
+    }
+
+
+    @Test
+    public void deleteTenant() {
+        DeleteTenantCommand deleteTenantCommand = new DeleteTenantCommand();
+        deleteTenantCommand.setTenantId(768460649511661568L);
+        tenantFacade.deleteTenant(deleteTenantCommand);
     }
 }
