@@ -76,7 +76,8 @@ public class IsvRemoteServiceProvider implements IsvFacade {
         if (StringUtils.equals(isv.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
             throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
         }
-        isvDomainService.remove(isv);
+        isv.delete();
+        isvDomainService.update(isv);
         return Result.succeed(true);
     }
 

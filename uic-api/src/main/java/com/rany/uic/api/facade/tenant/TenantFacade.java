@@ -1,7 +1,9 @@
 package com.rany.uic.api.facade.tenant;
 
 import com.rany.uic.api.command.tenant.*;
+import com.rany.uic.api.query.tenant.TenantBasicQuery;
 import com.rany.uic.common.base.Result;
+import com.rany.uic.common.dto.tenant.TenantDTO;
 
 /**
  * TODO
@@ -53,4 +55,13 @@ public interface TenantFacade {
      * @return
      */
     Result<Boolean> deleteTenant(DeleteTenantCommand deleteTenantCommand);
+
+
+    /**
+     * 查询租户信息
+     *
+     * @param tenantBasicQuery
+     * @return
+     */
+    Result<TenantDTO> findTenant(TenantBasicQuery tenantBasicQuery);
 }

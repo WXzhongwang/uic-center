@@ -29,11 +29,6 @@ public class IsvDomainService {
         return Boolean.TRUE;
     }
 
-    public Boolean remove(Isv isv) {
-        isvRepository.remove(isv);
-        return Boolean.TRUE;
-    }
-
     public Boolean update(Isv isv) {
         return isvRepository.updateIsv(isv);
     }

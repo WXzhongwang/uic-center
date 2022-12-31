@@ -3,6 +3,10 @@ package com.rany.uic.api.facade.tenant;
 import cn.hutool.core.util.RandomUtil;
 import com.rany.uic.BaseTests;
 import com.rany.uic.api.command.tenant.*;
+import com.rany.uic.api.query.tenant.TenantBasicQuery;
+import com.rany.uic.common.base.Result;
+import com.rany.uic.common.dto.tenant.TenantDTO;
+import org.junit.Assert;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -65,5 +69,14 @@ public class TenantFacadeTest extends BaseTests {
         DeleteTenantCommand deleteTenantCommand = new DeleteTenantCommand();
         deleteTenantCommand.setTenantId(768460649511661568L);
         tenantFacade.deleteTenant(deleteTenantCommand);
+    }
+
+
+    @Test
+    public void findTenant() {
+        TenantBasicQuery tenantBasicQuery = new TenantBasicQuery();
+        tenantBasicQuery.setTenantId(768821269968859136L);
+        Result<TenantDTO> tenant = tenantFacade.findTenant(tenantBasicQuery);
+        Assert.assertTrue(tenant.isSuccess());
     }
 }

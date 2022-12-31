@@ -3,13 +3,16 @@ package com.rany.uic.service.remote.tenant;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.rany.uic.api.command.tenant.*;
 import com.rany.uic.api.facade.tenant.TenantFacade;
+import com.rany.uic.api.query.tenant.TenantBasicQuery;
 import com.rany.uic.common.base.Result;
+import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.exception.BusinessException;
 import com.rany.uic.common.exception.enums.BusinessErrorMessage;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Tenant;
+import com.rany.uic.domain.convertor.TenantDataConvertor;
 import com.rany.uic.domain.dp.EmailAddress;
 import com.rany.uic.domain.dp.Phone;
 import com.rany.uic.domain.dp.TenantName;
@@ -39,6 +42,7 @@ import java.util.Objects;
 public class TenantRemoteServiceProvider implements TenantFacade {
 
     private final TenantDomainService tenantDomainService;
+    private final TenantDataConvertor tenantDataConvertor;
     private final SnowflakeIdWorker snowflakeIdWorker;
 
     @Override
@@ -114,5 +118,18 @@ public class TenantRemoteServiceProvider implements TenantFacade {
         tenant.delete();
         tenantDomainService.update(tenant);
         return Result.succeed();
+    }
+
+    @Override
+    public Result<TenantDTO> findTenant(TenantBasicQuery tenantBasicQuery) {
+        Tenant tenant = tenantDomainService.findById(new TenantId(tenantBasicQuery.getTenantId()));
+        if (Objects.isNull(tenant)) {
+            throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);
+        }
+        if (StringUtils.equals(tenant.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
+            throw new BusinessException(BusinessErrorMessage.TENANT_DELETED);
+        }
+        TenantDTO isvDTO = tenantDataConvertor.sourceToDTO(tenant);
+        return Result.succeed(isvDTO);
     }
 }

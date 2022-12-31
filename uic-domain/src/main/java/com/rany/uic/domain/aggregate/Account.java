@@ -10,7 +10,10 @@ import com.rany.uic.domain.event.AccountCreatedEvent;
 import com.rany.uic.domain.pk.AccountId;
 import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.value.SafeStrategy;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
@@ -26,7 +29,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @EqualsAndHashCode(callSuper = false)
 public class Account extends BaseAggregateRoot implements IAggregate<AccountId> {
 

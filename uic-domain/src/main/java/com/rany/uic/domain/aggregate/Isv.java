@@ -19,6 +19,7 @@ import lombok.*;
  * @email 18668485565163.com
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
