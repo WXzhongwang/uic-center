@@ -61,7 +61,7 @@ public class IsvRemoteServiceProvider implements IsvFacade {
 
     @Override
     public Result<Boolean> deleteIsv(DeleteIsvCommand deleteIsvCommand) {
-        Isv isv = isvDomainService.find(new IsvId(deleteIsvCommand.getId()));
+        Isv isv = isvDomainService.findById(new IsvId(deleteIsvCommand.getId()));
         if (Objects.isNull(isv)) {
             throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
         }
@@ -77,7 +77,7 @@ public class IsvRemoteServiceProvider implements IsvFacade {
 
     @Override
     public Result<Boolean> disableIsv(DisableIsvCommand disableIsvCommand) {
-        Isv isv = isvDomainService.find(new IsvId(disableIsvCommand.getId()));
+        Isv isv = isvDomainService.findById(new IsvId(disableIsvCommand.getId()));
         if (Objects.isNull(isv)) {
             throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
         }

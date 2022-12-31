@@ -19,6 +19,7 @@ import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.service.TenantDomainService;
 import com.rany.uic.service.aop.annotation.IsvValidCheck;
+import com.rany.uic.service.aop.annotation.TenantValidCheck;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,6 +58,7 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     }
 
     @Override
+    @TenantValidCheck(expression = "#modifyTenantCommand.tenantId")
     public Result<Boolean> modifyTenant(ModifyTenantCommand modifyTenantCommand) {
         Tenant tenant = tenantDomainService.findById(new TenantId(modifyTenantCommand.getTenantId()));
         tenant.setTenantName(new TenantName(modifyTenantCommand.getName(), tenant.getTenantName().getShortName()));

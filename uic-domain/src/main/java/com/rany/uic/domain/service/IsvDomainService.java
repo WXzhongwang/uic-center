@@ -38,7 +38,7 @@ public class IsvDomainService {
         return isvRepository.disableIsv(isv);
     }
 
-    public Isv find(IsvId isvId) {
+    public Isv findById(IsvId isvId) {
         return isvRepository.find(isvId);
     }
 }

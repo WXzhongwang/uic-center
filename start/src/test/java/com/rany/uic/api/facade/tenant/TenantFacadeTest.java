@@ -39,8 +39,8 @@ public class TenantFacadeTest extends BaseTests {
     @Test
     public void modifyTenant() {
         ModifyTenantCommand modifyTenantCommand = new ModifyTenantCommand();
-        modifyTenantCommand.setTenantId(768460649511661568L);
-        modifyTenantCommand.setName("杭州锐尼科技有限公司01");
+        modifyTenantCommand.setTenantId(769008916825780224L);
+        modifyTenantCommand.setName(RandomUtil.randomString(15));
         modifyTenantCommand.setEmail("lovepet24@163.com");
         modifyTenantCommand.setPhone("13554353449");
         modifyTenantCommand.setAddress("浙江省杭州市西湖区");
