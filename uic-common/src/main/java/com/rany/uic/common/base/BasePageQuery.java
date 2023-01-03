@@ -9,11 +9,13 @@ package com.rany.uic.common.base;
  * @email 18668485565163.com
  */
 
-public abstract class BasePageQuery extends BaseQuery {
+public class BasePageQuery extends BaseQuery {
 
     private Integer pageNo;
 
     private Integer pageSize = 10;
+
+    private Boolean needTotal = true;
 
     public Integer getPageNo() {
         return pageNo;
@@ -29,5 +31,13 @@ public abstract class BasePageQuery extends BaseQuery {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public Boolean getNeedTotal() {
+        return needTotal;
+    }
+
+    public void setNeedTotal(Boolean needTotal) {
+        this.needTotal = needTotal;
     }
 }

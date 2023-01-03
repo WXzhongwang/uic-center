@@ -1,10 +1,13 @@
 package com.rany.uic.domain.repository;
 
 import com.cake.framework.ddd.repository.Repository;
+import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.pk.TenantId;
+
+import java.util.List;
 
 /**
  * TODO
@@ -41,4 +44,13 @@ public interface TenantRepository extends Repository<Tenant, TenantId> {
      * @return
      */
     Boolean updateTenant(Tenant tenant);
+
+
+    /**
+     * 查询列表
+     *
+     * @param tenant
+     * @return
+     */
+    List<TenantDTO> findTenants(Tenant tenant);
 }

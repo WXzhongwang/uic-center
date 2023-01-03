@@ -72,11 +72,20 @@ public interface TenantDataConvertor extends BaseConvertor<Tenant, TenantPO> {
 
 
     /**
-     * 多对象聚合根转DTO
+     * 转DTO
      *
-     * @param sources
+     * @param tenant
      * @return
      */
-    @InheritConfiguration(name = "sourceToDTO")
-    List<TenantDTO> sourceToDTO(List<Tenant> sources);
+    TenantDTO targetToDTO(TenantPO tenant);
+
+
+    /**
+     * 转DTO
+     *
+     * @param tenantPOS
+     * @return
+     */
+    @InheritConfiguration(name = "targetToDTO")
+    List<TenantDTO> targetToDTO(List<TenantPO> tenantPOS);
 }

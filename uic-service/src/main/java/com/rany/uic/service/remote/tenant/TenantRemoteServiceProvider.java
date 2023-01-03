@@ -152,6 +152,8 @@ public class TenantRemoteServiceProvider implements TenantFacade {
                 throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
             }
         }
+        Tenant tenant = new Tenant();
+        tenantDomainService.pageTenants(tenant);
         return null;
     }
 }

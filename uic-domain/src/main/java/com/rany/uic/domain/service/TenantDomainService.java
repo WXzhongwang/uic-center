@@ -1,5 +1,6 @@
 package com.rany.uic.domain.service;
 
+import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.exception.BusinessException;
@@ -17,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -66,5 +68,9 @@ public class TenantDomainService {
 
     public Boolean update(Tenant tenant) {
         return tenantRepository.updateTenant(tenant);
+    }
+
+    public List<TenantDTO> selectTenants(Tenant tenant) {
+        return tenantRepository.findTenants(tenant);
     }
 }
