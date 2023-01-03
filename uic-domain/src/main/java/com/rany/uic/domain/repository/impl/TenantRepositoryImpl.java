@@ -52,7 +52,7 @@ public class TenantRepositoryImpl implements TenantRepository {
         tenantPO.setGmtModified(DateUtil.date());
         tenantPOMapper.updateByPrimaryKeySelective(tenantPO);
     }
-    
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(@NotNull Tenant tenant) {
@@ -79,7 +79,8 @@ public class TenantRepositoryImpl implements TenantRepository {
 
     @Override
     public List<TenantDTO> findTenants(Tenant tenant) {
-        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<TenantPO>().orderByDesc(TenantPO::getGmtModified);
+        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<TenantPO>().orderByDesc(TenantPO::getGmtModified,
+                TenantPO::getGmtCreate);
         if (tenant.getIsvId() != null) {
             queryWrapper.eq(TenantPO::getIsvId, tenant.getIsvId());
         }
