@@ -26,7 +26,7 @@ import java.lang.reflect.Method;
 @Component
 public class PageAop {
 
-    @Before("@annotation(pageQuery)")
+    @Before("@annotation(pagingQuery)")
     public void pagingQuery(JoinPoint joinPoint, PagingQuery pagingQuery) {
         Object[] args = joinPoint.getArgs();
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();

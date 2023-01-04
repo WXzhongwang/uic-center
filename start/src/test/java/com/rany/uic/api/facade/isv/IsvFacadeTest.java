@@ -1,12 +1,12 @@
 package com.rany.uic.api.facade.isv;
 
 import cn.hutool.core.lang.Assert;
+import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.BaseTests;
 import com.rany.uic.api.command.isv.CreateIsvCommand;
 import com.rany.uic.api.command.isv.DeleteIsvCommand;
 import com.rany.uic.api.command.isv.DisableIsvCommand;
 import com.rany.uic.api.query.isv.IsvBasicQuery;
-import com.rany.uic.common.base.Result;
 import com.rany.uic.common.dto.isv.IsvDTO;
 import org.junit.Test;
 
@@ -35,31 +35,31 @@ public class IsvFacadeTest extends BaseTests {
         createIsvCommand.setCountry("中国");
         createIsvCommand.setRegisterIp("127.0.0.1");
         createIsvCommand.setPhone("18668485565");
-        Result<Boolean> isv = isvFacade.createIsv(createIsvCommand);
-        Assert.isTrue(isv.isSuccess());
+        PojoResult<Boolean> isv = isvFacade.createIsv(createIsvCommand);
+        Assert.isTrue(isv.getSuccess());
     }
 
     @Test
     public void deleteIsv() {
         DeleteIsvCommand deleteIsvCommand = new DeleteIsvCommand();
         deleteIsvCommand.setId(768060752375459840L);
-        Result<Boolean> isv = isvFacade.deleteIsv(deleteIsvCommand);
-        Assert.isTrue(isv.isSuccess());
+        PojoResult<Boolean> isv = isvFacade.deleteIsv(deleteIsvCommand);
+        Assert.isTrue(isv.getSuccess());
     }
 
     @Test
     public void disableIsv() {
         DisableIsvCommand disableIsvCommand = new DisableIsvCommand();
         disableIsvCommand.setId(768060752375459840L);
-        Result<Boolean> isv = isvFacade.disableIsv(disableIsvCommand);
-        Assert.isTrue(isv.isSuccess());
+        PojoResult<Boolean> isv = isvFacade.disableIsv(disableIsvCommand);
+        Assert.isTrue(isv.getSuccess());
     }
 
     @Test
     public void basicQueryIsv() {
         IsvBasicQuery isvBaseQuery = new IsvBasicQuery();
         isvBaseQuery.setIsvId(768060752375459840L);
-        Result<IsvDTO> isv = isvFacade.findIsv(isvBaseQuery);
-        Assert.isTrue(isv.isSuccess());
+        PojoResult<IsvDTO> isv = isvFacade.findIsv(isvBaseQuery);
+        Assert.isTrue(isv.getSuccess());
     }
 }

@@ -1,19 +1,23 @@
 package com.rany.uic.service.remote.tenant;
 
-import cn.hutool.db.PageResult;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.cake.framework.common.response.ListResult;
+import com.cake.framework.common.response.Page;
+import com.cake.framework.common.response.PageResult;
+import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.tenant.*;
 import com.rany.uic.api.facade.tenant.TenantFacade;
 import com.rany.uic.api.query.tenant.TenantBasicQuery;
 import com.rany.uic.api.query.tenant.TenantPageQuery;
 import com.rany.uic.api.query.tenant.TenantQuery;
-import com.rany.uic.common.base.Result;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.exception.BusinessException;
 import com.rany.uic.common.exception.enums.BusinessErrorMessage;
 import com.rany.uic.common.util.SnowflakeIdWorker;
+import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Isv;
 import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.convertor.TenantDataConvertor;
@@ -31,7 +35,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -54,7 +57,7 @@ public class TenantRemoteServiceProvider implements TenantFacade {
 
     @Override
     @IsvValidCheck(expression = "#createTenantCommand.isvId")
-    public Result<Boolean> createTenant(CreateTenantCommand createTenantCommand) {
+    public PojoResult<Boolean> createTenant(CreateTenantCommand createTenantCommand) {
         Tenant tenant = new Tenant(new TenantId(snowflakeIdWorker.nextId()),
                 new IsvId(createTenantCommand.getIsvId()),
                 new TenantName(createTenantCommand.getName(), createTenantCommand.getShortName()),
@@ -67,12 +70,12 @@ public class TenantRemoteServiceProvider implements TenantFacade {
         tenant.setIsDeleted(DeleteStatusEnum.NO.getValue());
         tenant.save(createTenantCommand.getInitialAccount());
         tenantDomainService.save(tenant);
-        return Result.succeed();
+        return PojoResult.succeed();
     }
 
     @Override
     @TenantValidCheck(expression = "#modifyTenantCommand.tenantId")
-    public Result<Boolean> modifyTenant(ModifyTenantCommand modifyTenantCommand) {
+    public PojoResult<Boolean> modifyTenant(ModifyTenantCommand modifyTenantCommand) {
         Tenant tenant = tenantDomainService.findById(new TenantId(modifyTenantCommand.getTenantId()));
         if (Objects.isNull(tenant)) {
             throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);
@@ -85,11 +88,11 @@ public class TenantRemoteServiceProvider implements TenantFacade {
         tenant.setPhone(new Phone(modifyTenantCommand.getPhone()));
         tenant.setAddress(modifyTenantCommand.getAddress());
         tenantDomainService.update(tenant);
-        return Result.succeed();
+        return PojoResult.succeed();
     }
 
     @Override
-    public Result<Boolean> disableTenant(DisableTenantCommand disableTenantCommand) {
+    public PojoResult<Boolean> disableTenant(DisableTenantCommand disableTenantCommand) {
         Tenant tenant = tenantDomainService.findById(new TenantId(disableTenantCommand.getTenantId()));
         if (Objects.isNull(tenant)) {
             throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);
@@ -99,11 +102,11 @@ public class TenantRemoteServiceProvider implements TenantFacade {
         }
         tenant.disabled();
         tenantDomainService.update(tenant);
-        return Result.succeed();
+        return PojoResult.succeed();
     }
 
     @Override
-    public Result<Boolean> enableTenant(EnableTenantCommand enableTenantCommand) {
+    public PojoResult<Boolean> enableTenant(EnableTenantCommand enableTenantCommand) {
         Tenant tenant = tenantDomainService.findById(new TenantId(enableTenantCommand.getTenantId()));
         if (Objects.isNull(tenant)) {
             throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);
@@ -113,22 +116,22 @@ public class TenantRemoteServiceProvider implements TenantFacade {
         }
         tenant.enable();
         tenantDomainService.update(tenant);
-        return Result.succeed();
+        return PojoResult.succeed();
     }
 
     @Override
-    public Result<Boolean> deleteTenant(DeleteTenantCommand deleteTenantCommand) {
+    public PojoResult<Boolean> deleteTenant(DeleteTenantCommand deleteTenantCommand) {
         Tenant tenant = tenantDomainService.findById(new TenantId(deleteTenantCommand.getTenantId()));
         if (Objects.isNull(tenant)) {
             throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);
         }
         tenant.delete();
         tenantDomainService.update(tenant);
-        return Result.succeed();
+        return PojoResult.succeed();
     }
 
     @Override
-    public Result<TenantDTO> findTenant(TenantBasicQuery tenantBasicQuery) {
+    public PojoResult<TenantDTO> findTenant(TenantBasicQuery tenantBasicQuery) {
         Tenant tenant = tenantDomainService.findById(new TenantId(tenantBasicQuery.getTenantId()));
         if (Objects.isNull(tenant)) {
             throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);
@@ -137,11 +140,11 @@ public class TenantRemoteServiceProvider implements TenantFacade {
             throw new BusinessException(BusinessErrorMessage.TENANT_DELETED);
         }
         TenantDTO isvDTO = tenantDataConvertor.sourceToDTO(tenant);
-        return Result.succeed(isvDTO);
+        return PojoResult.succeed(isvDTO);
     }
 
     @Override
-    public Result<List<TenantDTO>> findTenants(TenantQuery tenantQuery) {
+    public ListResult<TenantDTO> findTenants(TenantQuery tenantQuery) {
         if (Objects.nonNull(tenantQuery.getIsvId())) {
             Isv isv = isvDomainService.findById(new IsvId(tenantQuery.getIsvId()));
             if (Objects.isNull(isv)) {
@@ -156,11 +159,11 @@ public class TenantRemoteServiceProvider implements TenantFacade {
         }
         Tenant tenant = new Tenant();
         tenant.setTenantName(new TenantName(tenantQuery.getName(), tenantQuery.getName()));
-        return Result.succeed(tenantDomainService.selectTenants(tenant));
+        return ListResult.succeed(tenantDomainService.selectTenants(tenant));
     }
 
     @Override
-    public Result<PageResult<TenantDTO>> pageTenants(TenantPageQuery tenantPageQuery) {
+    public PageResult<TenantDTO> pageTenants(TenantPageQuery tenantPageQuery) {
         if (Objects.nonNull(tenantPageQuery.getIsvId())) {
             Isv isv = isvDomainService.findById(new IsvId(tenantPageQuery.getIsvId()));
             if (Objects.isNull(isv)) {
@@ -173,6 +176,16 @@ public class TenantRemoteServiceProvider implements TenantFacade {
                 throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
             }
         }
-        return null;
+        IPage<TenantPO> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(tenantPageQuery.getPageNo(), tenantPageQuery.getPageSize());
+        Tenant tenant = new Tenant();
+        tenant.setTenantName(new TenantName(tenantPageQuery.getName(), tenantPageQuery.getName()));
+        if (tenantPageQuery.getExcludeDeleted()) {
+            tenant.setIsDeleted(DeleteStatusEnum.NO.getValue());
+        }
+        if (tenantPageQuery.getExcludeDisabled()) {
+            tenant.setStatus(CommonStatusEnum.ENABLE.getValue());
+        }
+        Page<TenantDTO> tenantDTOPage = tenantDomainService.pageTenants(page, tenant);
+        return PageResult.succeed(tenantDTOPage);
     }
 }

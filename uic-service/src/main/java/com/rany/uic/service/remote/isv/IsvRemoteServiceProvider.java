@@ -1,13 +1,13 @@
 package com.rany.uic.service.remote.isv;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.isv.CreateIsvCommand;
 import com.rany.uic.api.command.isv.DeleteIsvCommand;
 import com.rany.uic.api.command.isv.DisableIsvCommand;
 import com.rany.uic.api.command.isv.EnableIsvCommand;
 import com.rany.uic.api.facade.isv.IsvFacade;
 import com.rany.uic.api.query.isv.IsvBasicQuery;
-import com.rany.uic.common.base.Result;
 import com.rany.uic.common.dto.isv.IsvDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
@@ -48,7 +48,7 @@ public class IsvRemoteServiceProvider implements IsvFacade {
 
     @Override
 
-    public Result<Boolean> createIsv(CreateIsvCommand createIsvCommand) {
+    public PojoResult<Boolean> createIsv(CreateIsvCommand createIsvCommand) {
         Isv isv = new Isv(new IsvId(snowflakeIdWorker.nextId()),
                 new IsvName(createIsvCommand.getName(), createIsvCommand.getShortName()),
                 new EmailAddress(createIsvCommand.getEmail()),
@@ -61,11 +61,11 @@ public class IsvRemoteServiceProvider implements IsvFacade {
         isv.setStatus(CommonStatusEnum.ENABLE.getValue());
         isv.setMaxTenants(DEFAULT_MAX_TENANTS);
         isvDomainService.save(isv);
-        return Result.succeed();
+        return PojoResult.succeed();
     }
 
     @Override
-    public Result<Boolean> deleteIsv(DeleteIsvCommand deleteIsvCommand) {
+    public PojoResult<Boolean> deleteIsv(DeleteIsvCommand deleteIsvCommand) {
         Isv isv = isvDomainService.findById(new IsvId(deleteIsvCommand.getId()));
         if (Objects.isNull(isv)) {
             throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
@@ -78,11 +78,11 @@ public class IsvRemoteServiceProvider implements IsvFacade {
         }
         isv.delete();
         isvDomainService.update(isv);
-        return Result.succeed(true);
+        return PojoResult.succeed(true);
     }
 
     @Override
-    public Result<Boolean> disableIsv(DisableIsvCommand disableIsvCommand) {
+    public PojoResult<Boolean> disableIsv(DisableIsvCommand disableIsvCommand) {
         Isv isv = isvDomainService.findById(new IsvId(disableIsvCommand.getId()));
         if (Objects.isNull(isv)) {
             throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
@@ -92,11 +92,11 @@ public class IsvRemoteServiceProvider implements IsvFacade {
         }
         isv.disable();
         isvDomainService.update(isv);
-        return Result.succeed();
+        return PojoResult.succeed();
     }
 
     @Override
-    public Result<Boolean> enableIsv(EnableIsvCommand enableIsvCommand) {
+    public PojoResult<Boolean> enableIsv(EnableIsvCommand enableIsvCommand) {
         Isv isv = isvDomainService.findById(new IsvId(enableIsvCommand.getId()));
         if (Objects.isNull(isv)) {
             throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
@@ -106,16 +106,16 @@ public class IsvRemoteServiceProvider implements IsvFacade {
         }
         isv.enable();
         isvDomainService.update(isv);
-        return Result.succeed();
+        return PojoResult.succeed();
     }
 
     @Override
-    public Result<IsvDTO> findIsv(IsvBasicQuery isvBaseQuery) {
+    public PojoResult<IsvDTO> findIsv(IsvBasicQuery isvBaseQuery) {
         Isv isv = isvDomainService.findById(new IsvId(isvBaseQuery.getIsvId()));
         if (Objects.isNull(isv)) {
             throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
         }
         IsvDTO isvDTO = isvDataConvertor.sourceToDTO(isv);
-        return Result.succeed(isvDTO);
+        return PojoResult.succeed(isvDTO);
     }
 }

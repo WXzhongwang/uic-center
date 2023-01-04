@@ -1,11 +1,11 @@
 package com.rany.uic.api.facade.isv;
 
+import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.isv.CreateIsvCommand;
 import com.rany.uic.api.command.isv.DeleteIsvCommand;
 import com.rany.uic.api.command.isv.DisableIsvCommand;
 import com.rany.uic.api.command.isv.EnableIsvCommand;
 import com.rany.uic.api.query.isv.IsvBasicQuery;
-import com.rany.uic.common.base.Result;
 import com.rany.uic.common.dto.isv.IsvDTO;
 
 /**
@@ -25,7 +25,7 @@ public interface IsvFacade {
      * @param createIsvCommand
      * @return
      */
-    Result<Boolean> createIsv(CreateIsvCommand createIsvCommand);
+    PojoResult<Boolean> createIsv(CreateIsvCommand createIsvCommand);
 
     /**
      * ISV 删除
@@ -33,7 +33,7 @@ public interface IsvFacade {
      * @param deleteIsvCommand
      * @return
      */
-    Result<Boolean> deleteIsv(DeleteIsvCommand deleteIsvCommand);
+    PojoResult<Boolean> deleteIsv(DeleteIsvCommand deleteIsvCommand);
 
 
     /**
@@ -42,7 +42,7 @@ public interface IsvFacade {
      * @param disableIsvCommand
      * @return
      */
-    Result<Boolean> disableIsv(DisableIsvCommand disableIsvCommand);
+    PojoResult<Boolean> disableIsv(DisableIsvCommand disableIsvCommand);
 
 
     /**
@@ -51,7 +51,7 @@ public interface IsvFacade {
      * @param enableIsvCommand
      * @return
      */
-    Result<Boolean> enableIsv(EnableIsvCommand enableIsvCommand);
+    PojoResult<Boolean> enableIsv(EnableIsvCommand enableIsvCommand);
 
 
     /**
@@ -60,5 +60,5 @@ public interface IsvFacade {
      * @param isvBaseQuery
      * @return
      */
-    Result<IsvDTO> findIsv(IsvBasicQuery isvBaseQuery);
+    PojoResult<IsvDTO> findIsv(IsvBasicQuery isvBaseQuery);
 }

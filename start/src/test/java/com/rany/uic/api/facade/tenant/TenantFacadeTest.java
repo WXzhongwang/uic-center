@@ -1,10 +1,12 @@
 package com.rany.uic.api.facade.tenant;
 
 import cn.hutool.core.util.RandomUtil;
+import com.cake.framework.common.response.ListResult;
+import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.BaseTests;
 import com.rany.uic.api.command.tenant.*;
 import com.rany.uic.api.query.tenant.TenantBasicQuery;
-import com.rany.uic.common.base.Result;
+import com.rany.uic.api.query.tenant.TenantQuery;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import org.junit.Assert;
 import org.junit.Test;
@@ -76,7 +78,16 @@ public class TenantFacadeTest extends BaseTests {
     public void findTenant() {
         TenantBasicQuery tenantBasicQuery = new TenantBasicQuery();
         tenantBasicQuery.setTenantId(768821269968859136L);
-        Result<TenantDTO> tenant = tenantFacade.findTenant(tenantBasicQuery);
-        Assert.assertTrue(tenant.isSuccess());
+        PojoResult<TenantDTO> tenant = tenantFacade.findTenant(tenantBasicQuery);
+        Assert.assertTrue(tenant.getSuccess());
+    }
+
+    @Test
+    public void findTenants() {
+        TenantQuery tenantQuery = new TenantQuery();
+        tenantQuery.setIsvId(768060752375459840L);
+        tenantQuery.setName("杭州锐尼科技有限公司");
+        ListResult<TenantDTO> tenant = tenantFacade.findTenants(tenantQuery);
+        Assert.assertTrue(tenant.getSuccess());
     }
 }

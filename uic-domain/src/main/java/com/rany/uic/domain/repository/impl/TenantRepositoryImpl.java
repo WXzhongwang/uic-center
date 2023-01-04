@@ -2,6 +2,8 @@ package com.rany.uic.domain.repository.impl;
 
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.cake.framework.common.response.Page;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.dao.mapper.TenantPOMapper;
@@ -105,5 +107,42 @@ public class TenantRepositoryImpl implements TenantRepository {
         }
         List<TenantPO> tenantPOS = tenantDao.selectList(queryWrapper);
         return tenantDataConvertor.targetToDTO(tenantPOS);
+    }
+
+    @Override
+    public Page<TenantDTO> pageTenants(IPage<TenantPO> page, Tenant tenant) {
+        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.orderByDesc(TenantPO::getGmtModified, TenantPO::getGmtCreate);
+        if (tenant.getIsvId() != null) {
+            queryWrapper.eq(TenantPO::getIsvId, tenant.getIsvId());
+        }
+        if (tenant.getTenantName() != null) {
+            queryWrapper.like(TenantPO::getName, tenant.getTenantName().getName())
+                    .or().like(TenantPO::getShortName, tenant.getTenantName().getShortName());
+        }
+        if (StringUtils.isNotEmpty(tenant.getIsDeleted())) {
+            queryWrapper.eq(TenantPO::getIsDeleted, tenant.getIsDeleted());
+        }
+        if (StringUtils.isNotEmpty(tenant.getStatus())) {
+            queryWrapper.eq(TenantPO::getStatus, tenant.getStatus());
+        }
+        if (tenant.getEmailAddress() != null && StringUtils.isNotEmpty(tenant.getEmailAddress().getEmail())) {
+            queryWrapper.eq(TenantPO::getEmail, tenant.getEmailAddress().getEmail());
+        }
+        if (tenant.getPhone() != null && StringUtils.isNotEmpty(tenant.getPhone().getPhone())) {
+            queryWrapper.eq(TenantPO::getPhone, tenant.getPhone().getPhone());
+        }
+        if (tenant.getSource() != null && StringUtils.isNotEmpty(tenant.getSource().getSource())) {
+            queryWrapper.eq(TenantPO::getSource, tenant.getSource().getSource());
+        }
+        IPage<TenantPO> content = tenantDao.selectPage(page, queryWrapper);
+        Page<TenantDTO> pageDTO = new Page<>();
+        pageDTO.setPageNo(Long.valueOf(content.getCurrent()).intValue());
+        pageDTO.setPageSize(Long.valueOf(content.getSize()).intValue());
+        pageDTO.setTotalPage(Long.valueOf(content.getPages()).intValue());
+        pageDTO.setTotal(Long.valueOf(content.getTotal()).intValue());
+        List<TenantDTO> tenantDTOS = tenantDataConvertor.targetToDTO(content.getRecords());
+        pageDTO.setItems(tenantDTOS);
+        return pageDTO;
     }
 }

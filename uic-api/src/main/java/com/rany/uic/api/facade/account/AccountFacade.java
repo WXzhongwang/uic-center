@@ -1,7 +1,7 @@
 package com.rany.uic.api.facade.account;
 
+import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.account.*;
-import com.rany.uic.common.base.Result;
 
 /**
  * TODO
@@ -20,7 +20,7 @@ public interface AccountFacade {
      * @param createAccountCommand
      * @return
      */
-    Result<Boolean> createAccount(CreateAccountCommand createAccountCommand);
+    PojoResult<Boolean> createAccount(CreateAccountCommand createAccountCommand);
 
     /**
      * 账号禁用
@@ -28,7 +28,7 @@ public interface AccountFacade {
      * @param disableAccountCommand
      * @return
      */
-    Result<Boolean> disableAccount(DisableAccountCommand disableAccountCommand);
+    PojoResult<Boolean> disableAccount(DisableAccountCommand disableAccountCommand);
 
     /**
      * 更新账号基本信息
@@ -36,7 +36,7 @@ public interface AccountFacade {
      * @param modifyAccountCommand
      * @return
      */
-    Result<Boolean> modifyAccount(ModifyAccountCommand modifyAccountCommand);
+    PojoResult<Boolean> modifyAccount(ModifyAccountCommand modifyAccountCommand);
 
     /**
      * 创建登录策略
@@ -44,7 +44,7 @@ public interface AccountFacade {
      * @param createSafeStrategyCommand
      * @return
      */
-    Result<Boolean> createSafeStrategy(CreateSafeStrategyCommand createSafeStrategyCommand);
+    PojoResult<Boolean> createSafeStrategy(CreateSafeStrategyCommand createSafeStrategyCommand);
 
     /**
      * 更新登录策略
@@ -52,7 +52,7 @@ public interface AccountFacade {
      * @param updateSafeStrategyCommand
      * @return
      */
-    Result<Boolean> updateSafeStrategy(UpdateSafeStrategyCommand updateSafeStrategyCommand);
+    PojoResult<Boolean> updateSafeStrategy(UpdateSafeStrategyCommand updateSafeStrategyCommand);
 
 
 }

@@ -12,7 +12,7 @@ package com.rany.uic.common.base;
 import java.io.Serializable;
 
 /**
- * TODO
+ * 前端统一返回格式
  *
  * @author zhongshengwang
  * @description TODO

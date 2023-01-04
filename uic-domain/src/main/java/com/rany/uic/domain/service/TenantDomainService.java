@@ -1,5 +1,7 @@
 package com.rany.uic.domain.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.cake.framework.common.response.Page;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
@@ -72,5 +74,9 @@ public class TenantDomainService {
 
     public List<TenantDTO> selectTenants(Tenant tenant) {
         return tenantRepository.findTenants(tenant);
+    }
+
+    public Page<TenantDTO> pageTenants(IPage<TenantPO> page, Tenant tenant) {
+        return tenantRepository.pageTenants(page, tenant);
     }
 }

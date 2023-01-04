@@ -1,5 +1,7 @@
 package com.rany.uic.domain.repository;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.cake.framework.common.response.Page;
 import com.cake.framework.ddd.repository.Repository;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.dao.po.TenantPO;
@@ -53,4 +55,14 @@ public interface TenantRepository extends Repository<Tenant, TenantId> {
      * @return
      */
     List<TenantDTO> findTenants(Tenant tenant);
+
+
+    /**
+     * 分页查询租户
+     *
+     * @param page
+     * @param tenant
+     * @return
+     */
+    Page<TenantDTO> pageTenants(IPage<TenantPO> page, Tenant tenant);
 }

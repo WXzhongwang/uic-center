@@ -1,9 +1,9 @@
 package com.rany.uic.service.remote.account;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.account.*;
 import com.rany.uic.api.facade.account.AccountFacade;
-import com.rany.uic.common.base.Result;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.service.AccountDomainService;
 import lombok.AllArgsConstructor;
@@ -27,27 +27,27 @@ public class AccountRemoteServiceProvider implements AccountFacade {
     private final SnowflakeIdWorker snowflakeIdWorker;
 
     @Override
-    public Result<Boolean> createAccount(CreateAccountCommand createAccountCommand) {
+    public PojoResult<Boolean> createAccount(CreateAccountCommand createAccountCommand) {
         return null;
     }
 
     @Override
-    public Result<Boolean> disableAccount(DisableAccountCommand disableAccountCommand) {
+    public PojoResult<Boolean> disableAccount(DisableAccountCommand disableAccountCommand) {
         return null;
     }
 
     @Override
-    public Result<Boolean> modifyAccount(ModifyAccountCommand modifyAccountCommand) {
+    public PojoResult<Boolean> modifyAccount(ModifyAccountCommand modifyAccountCommand) {
         return null;
     }
 
     @Override
-    public Result<Boolean> createSafeStrategy(CreateSafeStrategyCommand createSafeStrategyCommand) {
+    public PojoResult<Boolean> createSafeStrategy(CreateSafeStrategyCommand createSafeStrategyCommand) {
         return null;
     }
 
     @Override
-    public Result<Boolean> updateSafeStrategy(UpdateSafeStrategyCommand updateSafeStrategyCommand) {
+    public PojoResult<Boolean> updateSafeStrategy(UpdateSafeStrategyCommand updateSafeStrategyCommand) {
         return null;
     }
 }
