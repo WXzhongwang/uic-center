@@ -79,13 +79,14 @@ public class TenantRepositoryImpl implements TenantRepository {
 
     @Override
     public List<TenantDTO> findTenants(Tenant tenant) {
-        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<TenantPO>().orderByDesc(TenantPO::getGmtModified,
-                TenantPO::getGmtCreate);
+        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.orderByDesc(TenantPO::getGmtModified, TenantPO::getGmtCreate);
         if (tenant.getIsvId() != null) {
             queryWrapper.eq(TenantPO::getIsvId, tenant.getIsvId());
         }
         if (tenant.getTenantName() != null) {
-            queryWrapper.like(TenantPO::getName, tenant.getTenantName().getName());
+            queryWrapper.like(TenantPO::getName, tenant.getTenantName().getName())
+                    .or().like(TenantPO::getShortName, tenant.getTenantName().getShortName());
         }
         if (StringUtils.isNotEmpty(tenant.getIsDeleted())) {
             queryWrapper.eq(TenantPO::getIsDeleted, tenant.getIsDeleted());

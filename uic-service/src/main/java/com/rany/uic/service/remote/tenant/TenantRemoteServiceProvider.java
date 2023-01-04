@@ -6,6 +6,7 @@ import com.rany.uic.api.command.tenant.*;
 import com.rany.uic.api.facade.tenant.TenantFacade;
 import com.rany.uic.api.query.tenant.TenantBasicQuery;
 import com.rany.uic.api.query.tenant.TenantPageQuery;
+import com.rany.uic.api.query.tenant.TenantQuery;
 import com.rany.uic.common.base.Result;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
@@ -30,6 +31,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -139,6 +141,25 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     }
 
     @Override
+    public Result<List<TenantDTO>> findTenants(TenantQuery tenantQuery) {
+        if (Objects.nonNull(tenantQuery.getIsvId())) {
+            Isv isv = isvDomainService.findById(new IsvId(tenantQuery.getIsvId()));
+            if (Objects.isNull(isv)) {
+                throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
+            }
+            if (StringUtils.equals(isv.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
+                throw new BusinessException(BusinessErrorMessage.ISV_DELETED);
+            }
+            if (StringUtils.equals(isv.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
+                throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
+            }
+        }
+        Tenant tenant = new Tenant();
+        tenant.setTenantName(new TenantName(tenantQuery.getName(), tenantQuery.getName()));
+        return Result.succeed(tenantDomainService.selectTenants(tenant));
+    }
+
+    @Override
     public Result<PageResult<TenantDTO>> pageTenants(TenantPageQuery tenantPageQuery) {
         if (Objects.nonNull(tenantPageQuery.getIsvId())) {
             Isv isv = isvDomainService.findById(new IsvId(tenantPageQuery.getIsvId()));
@@ -152,8 +173,6 @@ public class TenantRemoteServiceProvider implements TenantFacade {
                 throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
             }
         }
-        Tenant tenant = new Tenant();
-        tenantDomainService.pageTenants(tenant);
         return null;
     }
 }

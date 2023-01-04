@@ -4,8 +4,11 @@ import cn.hutool.db.PageResult;
 import com.rany.uic.api.command.tenant.*;
 import com.rany.uic.api.query.tenant.TenantBasicQuery;
 import com.rany.uic.api.query.tenant.TenantPageQuery;
+import com.rany.uic.api.query.tenant.TenantQuery;
 import com.rany.uic.common.base.Result;
 import com.rany.uic.common.dto.tenant.TenantDTO;
+
+import java.util.List;
 
 /**
  * TODO
@@ -60,12 +63,21 @@ public interface TenantFacade {
 
 
     /**
-     * 查询租户信息
+     * 查询单个租户信息
      *
      * @param tenantBasicQuery
      * @return
      */
     Result<TenantDTO> findTenant(TenantBasicQuery tenantBasicQuery);
+
+
+    /**
+     * 查询指定isv全部租户信息
+     *
+     * @param tenantQuery
+     * @return
+     */
+    Result<List<TenantDTO>> findTenants(TenantQuery tenantQuery);
 
     /**
      * 分页查询租户信息
