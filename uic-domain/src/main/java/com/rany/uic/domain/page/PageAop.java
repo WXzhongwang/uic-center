@@ -1,9 +1,9 @@
-package com.rany.uic.dao.page;
+package com.rany.uic.domain.page;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.rany.uic.common.base.BasePageQuery;
-import com.rany.uic.dao.page.annotation.PagingQuery;
+import com.rany.uic.domain.page.annotation.PagingQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

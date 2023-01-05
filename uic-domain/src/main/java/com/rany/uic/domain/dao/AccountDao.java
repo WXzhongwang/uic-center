@@ -1,7 +1,7 @@
 package com.rany.uic.domain.dao;
 
-import com.rany.uic.dao.po.AccountPO;
 import com.rany.uic.domain.aggregate.Account;
+import com.rany.uic.domain.po.AccountPO;
 
 /**
  * TODO

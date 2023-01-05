@@ -1,6 +1,6 @@
 package com.rany.uic.domain.convertor;
 
-import com.rany.uic.dao.po.AccountPO;
+import com.rany.uic.domain.po.AccountPO;
 import com.rany.uic.domain.aggregate.Account;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

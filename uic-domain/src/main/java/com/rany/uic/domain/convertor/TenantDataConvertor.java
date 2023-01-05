@@ -1,8 +1,8 @@
 package com.rany.uic.domain.convertor;
 
 import com.rany.uic.common.dto.tenant.TenantDTO;
-import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Tenant;
+import com.rany.uic.domain.po.TenantPO;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

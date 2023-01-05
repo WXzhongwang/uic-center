@@ -1,6 +1,7 @@
 package com.rany.uic.domain.base;
 
 import com.rany.uic.common.util.SnowflakeIdWorker;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,6 +16,7 @@ import java.util.Random;
  * @email 18668485565163.com
  */
 @Configuration
+@MapperScan("com.rany.uic.domain.dao")
 public class Config {
 
     @Bean

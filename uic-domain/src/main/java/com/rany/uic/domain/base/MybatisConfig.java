@@ -1,4 +1,4 @@
-package com.rany.uic.dao.config;
+package com.rany.uic.domain.base;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +12,6 @@ import org.springframework.context.annotation.Configuration;
  * @email 18668485565163.com
  */
 @Configuration
-@MapperScan("com.rany.uic.dao.mapper")
+@MapperScan("com.rany.uic.domain.dao")
 public class MybatisConfig {
 }

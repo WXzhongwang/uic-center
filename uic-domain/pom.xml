@@ -19,6 +19,24 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
@@ -38,12 +56,6 @@
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.rany.uic</groupId>
-            <artifactId>uic-dao</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -66,6 +78,24 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>1.5.3.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.rany</groupId>
+            <artifactId>cake-framework-ddd</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.2</version>
+            <type>jar</type>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -91,6 +121,17 @@
                             <version>${mapstruct.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <!-- mybatis generator 自动生成代码插件 ，这里输入自己创建的mybatis-generator-config.xml地址-->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <configuration>
+                    <configurationFile>../uic-domain/src/main/resources/mybatis-generator-config.xml</configurationFile>
+                    <overwrite>true</overwrite>
+                    <verbose>true</verbose>
                 </configuration>
             </plugin>
         </plugins>

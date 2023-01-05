@@ -5,10 +5,10 @@ import com.cake.framework.ddd.repository.Repository;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.params.TenantPageSearchParam;
 import com.rany.uic.common.params.TenantSearchParam;
-import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.pk.TenantId;
+import com.rany.uic.domain.po.TenantPO;
 
 import java.util.List;
 

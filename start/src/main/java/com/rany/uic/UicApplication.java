@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {ParamLimitInterceptor.class})
-@MapperScan({"com.rany.uic.dao.mapper", "com.rany.uic.domain.dao"})
+@MapperScan({"com.rany.uic.domain.dao"})
 public class UicApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

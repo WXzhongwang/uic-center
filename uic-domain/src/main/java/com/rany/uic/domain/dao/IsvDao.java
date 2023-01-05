@@ -1,6 +1,6 @@
 package com.rany.uic.domain.dao;
 
-import com.rany.uic.dao.po.IsvPO;
+import com.rany.uic.domain.po.IsvPO;
 import com.rany.uic.domain.aggregate.Isv;
 
 /**

@@ -1,4 +1,4 @@
-package com.rany.uic.dao.page.annotation;
+package com.rany.uic.domain.page.annotation;
 
 import java.lang.annotation.*;
 
