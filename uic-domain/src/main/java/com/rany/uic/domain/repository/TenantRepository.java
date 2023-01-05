@@ -1,9 +1,10 @@
 package com.rany.uic.domain.repository;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cake.framework.common.response.Page;
 import com.cake.framework.ddd.repository.Repository;
 import com.rany.uic.common.dto.tenant.TenantDTO;
+import com.rany.uic.common.params.TenantPageSearchParam;
+import com.rany.uic.common.params.TenantSearchParam;
 import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.pk.IsvId;
@@ -54,15 +55,14 @@ public interface TenantRepository extends Repository<Tenant, TenantId> {
      * @param tenant
      * @return
      */
-    List<TenantDTO> findTenants(Tenant tenant);
+    List<TenantDTO> findTenants(TenantSearchParam tenant);
 
 
     /**
      * 分页查询租户
      *
-     * @param page
      * @param tenant
      * @return
      */
-    Page<TenantDTO> pageTenants(IPage<TenantPO> page, Tenant tenant);
+    Page<TenantDTO> pageTenants(TenantPageSearchParam tenant);
 }

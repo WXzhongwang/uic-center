@@ -1,12 +1,14 @@
 package com.rany.uic.domain.repository.impl;
 
 import cn.hutool.core.date.DateUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cake.framework.common.response.Page;
+import com.github.pagehelper.PageInfo;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.DeleteStatusEnum;
+import com.rany.uic.common.params.TenantPageSearchParam;
+import com.rany.uic.common.params.TenantSearchParam;
 import com.rany.uic.dao.mapper.TenantPOMapper;
+import com.rany.uic.dao.page.annotation.PagingQuery;
 import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.convertor.TenantDataConvertor;
@@ -16,7 +18,6 @@ import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.repository.TenantRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,69 +81,23 @@ public class TenantRepositoryImpl implements TenantRepository {
     }
 
     @Override
-    public List<TenantDTO> findTenants(Tenant tenant) {
-        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.orderByDesc(TenantPO::getGmtModified, TenantPO::getGmtCreate);
-        if (tenant.getIsvId() != null) {
-            queryWrapper.eq(TenantPO::getIsvId, tenant.getIsvId());
-        }
-        if (tenant.getTenantName() != null) {
-            queryWrapper.like(TenantPO::getName, tenant.getTenantName().getName())
-                    .or().like(TenantPO::getShortName, tenant.getTenantName().getShortName());
-        }
-        if (StringUtils.isNotEmpty(tenant.getIsDeleted())) {
-            queryWrapper.eq(TenantPO::getIsDeleted, tenant.getIsDeleted());
-        }
-        if (StringUtils.isNotEmpty(tenant.getStatus())) {
-            queryWrapper.eq(TenantPO::getStatus, tenant.getStatus());
-        }
-        if (tenant.getEmailAddress() != null && StringUtils.isNotEmpty(tenant.getEmailAddress().getEmail())) {
-            queryWrapper.eq(TenantPO::getEmail, tenant.getEmailAddress().getEmail());
-        }
-        if (tenant.getPhone() != null && StringUtils.isNotEmpty(tenant.getPhone().getPhone())) {
-            queryWrapper.eq(TenantPO::getPhone, tenant.getPhone().getPhone());
-        }
-        if (tenant.getSource() != null && StringUtils.isNotEmpty(tenant.getSource().getSource())) {
-            queryWrapper.eq(TenantPO::getSource, tenant.getSource().getSource());
-        }
-        List<TenantPO> tenantPOS = tenantDao.selectList(queryWrapper);
+    public List<TenantDTO> findTenants(TenantSearchParam tenant) {
+        List<TenantPO> tenantPOS = tenantDao.selectList(tenant);
         return tenantDataConvertor.targetToDTO(tenantPOS);
     }
 
     @Override
-    public Page<TenantDTO> pageTenants(IPage<TenantPO> page, Tenant tenant) {
-        LambdaQueryWrapper<TenantPO> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.orderByDesc(TenantPO::getGmtModified, TenantPO::getGmtCreate);
-        if (tenant.getIsvId() != null) {
-            queryWrapper.eq(TenantPO::getIsvId, tenant.getIsvId());
-        }
-        if (tenant.getTenantName() != null) {
-            queryWrapper.like(TenantPO::getName, tenant.getTenantName().getName())
-                    .or().like(TenantPO::getShortName, tenant.getTenantName().getShortName());
-        }
-        if (StringUtils.isNotEmpty(tenant.getIsDeleted())) {
-            queryWrapper.eq(TenantPO::getIsDeleted, tenant.getIsDeleted());
-        }
-        if (StringUtils.isNotEmpty(tenant.getStatus())) {
-            queryWrapper.eq(TenantPO::getStatus, tenant.getStatus());
-        }
-        if (tenant.getEmailAddress() != null && StringUtils.isNotEmpty(tenant.getEmailAddress().getEmail())) {
-            queryWrapper.eq(TenantPO::getEmail, tenant.getEmailAddress().getEmail());
-        }
-        if (tenant.getPhone() != null && StringUtils.isNotEmpty(tenant.getPhone().getPhone())) {
-            queryWrapper.eq(TenantPO::getPhone, tenant.getPhone().getPhone());
-        }
-        if (tenant.getSource() != null && StringUtils.isNotEmpty(tenant.getSource().getSource())) {
-            queryWrapper.eq(TenantPO::getSource, tenant.getSource().getSource());
-        }
-        IPage<TenantPO> content = tenantDao.selectPage(page, queryWrapper);
+    @PagingQuery
+    public Page<TenantDTO> pageTenants(TenantPageSearchParam tenantPageSearchParam) {
+        List<TenantPO> content = tenantDao.selectPage(tenantPageSearchParam);
+        PageInfo<TenantPO> pageInfo = new PageInfo<>(content);
         Page<TenantDTO> pageDTO = new Page<>();
-        pageDTO.setPageNo(Long.valueOf(content.getCurrent()).intValue());
-        pageDTO.setPageSize(Long.valueOf(content.getSize()).intValue());
-        pageDTO.setTotalPage(Long.valueOf(content.getPages()).intValue());
-        pageDTO.setTotal(Long.valueOf(content.getTotal()).intValue());
-        List<TenantDTO> tenantDTOS = tenantDataConvertor.targetToDTO(content.getRecords());
-        pageDTO.setItems(tenantDTOS);
+        pageDTO.setPageNo(pageInfo.getPageNum());
+        pageDTO.setPageSize(pageDTO.getPageSize());
+        pageDTO.setTotalPage(pageDTO.getTotalPage());
+        pageDTO.setTotal(Long.valueOf(pageInfo.getTotal()).intValue());
+        List<TenantDTO> values = tenantDataConvertor.targetToDTO(pageInfo.getList());
+        pageDTO.setItems(values);
         return pageDTO;
     }
 }

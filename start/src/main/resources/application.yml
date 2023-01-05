@@ -24,15 +24,12 @@ dubbo:
   scan:
     basePackages: com.rany.uic
 
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.rany.uic.dao
-
 spring:
   application:
     name: rany-uic-service
   profiles:
-    active: @activatedProperties@
+    #active: @activatedProperties@
+    active: dev
   datasource:
     druid:
       type: com.alibaba.druid.pool.DruidDataSource
@@ -71,3 +68,7 @@ enable:
 warn:
   sql:
     time: 300
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.rany.uic.dao, com.rany.uic.domain

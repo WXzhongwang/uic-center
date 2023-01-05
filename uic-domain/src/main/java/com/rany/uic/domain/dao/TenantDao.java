@@ -1,9 +1,12 @@
 package com.rany.uic.domain.dao;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.rany.uic.common.params.TenantPageSearchParam;
+import com.rany.uic.common.params.TenantSearchParam;
 import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Tenant;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * TODO
@@ -22,6 +25,23 @@ public interface TenantDao extends BaseMapper<TenantPO> {
      * @return
      */
     int save(Tenant tenant);
+
+
+    /**
+     * 查询列表
+     *
+     * @param tenant
+     * @return
+     */
+    List<TenantPO> selectList(TenantSearchParam tenant);
+
+    /**
+     * 分页查询
+     *
+     * @param searchParam
+     * @return
+     */
+    List<TenantPO> selectPage(TenantPageSearchParam searchParam);
 
     /**
      * 根据简称查询租户

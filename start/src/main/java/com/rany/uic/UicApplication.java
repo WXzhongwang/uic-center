@@ -2,6 +2,7 @@ package com.rany.uic;
 
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import com.cake.framework.mybatis.ParamLimitInterceptor;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {ParamLimitInterceptor.class})
+@MapperScan({"com.rany.uic.dao.mapper", "com.rany.uic.domain.dao"})
 public class UicApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

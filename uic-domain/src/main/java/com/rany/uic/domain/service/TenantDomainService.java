@@ -1,12 +1,13 @@
 package com.rany.uic.domain.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cake.framework.common.response.Page;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.exception.BusinessException;
 import com.rany.uic.common.exception.enums.BusinessErrorMessage;
+import com.rany.uic.common.params.TenantPageSearchParam;
+import com.rany.uic.common.params.TenantSearchParam;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Isv;
@@ -72,11 +73,11 @@ public class TenantDomainService {
         return tenantRepository.updateTenant(tenant);
     }
 
-    public List<TenantDTO> selectTenants(Tenant tenant) {
-        return tenantRepository.findTenants(tenant);
+    public List<TenantDTO> selectTenants(TenantSearchParam searchParam) {
+        return tenantRepository.findTenants(searchParam);
     }
 
-    public Page<TenantDTO> pageTenants(IPage<TenantPO> page, Tenant tenant) {
-        return tenantRepository.pageTenants(page, tenant);
+    public Page<TenantDTO> pageTenants(TenantPageSearchParam pageSearchParam) {
+        return tenantRepository.pageTenants(pageSearchParam);
     }
 }

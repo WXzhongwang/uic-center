@@ -1,7 +1,7 @@
 package com.rany.uic.service.remote.tenant;
 
+import cn.hutool.core.util.BooleanUtil;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cake.framework.common.response.ListResult;
 import com.cake.framework.common.response.Page;
 import com.cake.framework.common.response.PageResult;
@@ -16,8 +16,9 @@ import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.exception.BusinessException;
 import com.rany.uic.common.exception.enums.BusinessErrorMessage;
+import com.rany.uic.common.params.TenantPageSearchParam;
+import com.rany.uic.common.params.TenantSearchParam;
 import com.rany.uic.common.util.SnowflakeIdWorker;
-import com.rany.uic.dao.po.TenantPO;
 import com.rany.uic.domain.aggregate.Isv;
 import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.convertor.TenantDataConvertor;
@@ -145,6 +146,7 @@ public class TenantRemoteServiceProvider implements TenantFacade {
 
     @Override
     public ListResult<TenantDTO> findTenants(TenantQuery tenantQuery) {
+        TenantSearchParam searchParam = new TenantSearchParam();
         if (Objects.nonNull(tenantQuery.getIsvId())) {
             Isv isv = isvDomainService.findById(new IsvId(tenantQuery.getIsvId()));
             if (Objects.isNull(isv)) {
@@ -156,14 +158,25 @@ public class TenantRemoteServiceProvider implements TenantFacade {
             if (StringUtils.equals(isv.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
                 throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
             }
+            searchParam.setIsvId(tenantQuery.getIsvId());
         }
-        Tenant tenant = new Tenant();
-        tenant.setTenantName(new TenantName(tenantQuery.getName(), tenantQuery.getName()));
-        return ListResult.succeed(tenantDomainService.selectTenants(tenant));
+        if (StringUtils.isNotEmpty(searchParam.getName())) {
+            searchParam.setName(searchParam.getName());
+        }
+        if (BooleanUtil.isTrue(tenantQuery.getExcludeDeleted())) {
+            searchParam.setIsDeleted(DeleteStatusEnum.NO.getValue());
+        }
+        if (BooleanUtil.isTrue(tenantQuery.getExcludeDisabled())) {
+            searchParam.setStatus(CommonStatusEnum.ENABLE.getValue());
+        }
+        return ListResult.succeed(tenantDomainService.selectTenants(searchParam));
     }
 
     @Override
     public PageResult<TenantDTO> pageTenants(TenantPageQuery tenantPageQuery) {
+        TenantPageSearchParam pageSearchParam = new TenantPageSearchParam();
+        pageSearchParam.setPageNo(tenantPageQuery.getPageNo());
+        pageSearchParam.setPageSize(tenantPageQuery.getPageSize());
         if (Objects.nonNull(tenantPageQuery.getIsvId())) {
             Isv isv = isvDomainService.findById(new IsvId(tenantPageQuery.getIsvId()));
             if (Objects.isNull(isv)) {
@@ -175,17 +188,18 @@ public class TenantRemoteServiceProvider implements TenantFacade {
             if (StringUtils.equals(isv.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
                 throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
             }
+            pageSearchParam.setIsvId(tenantPageQuery.getIsvId());
         }
-        IPage<TenantPO> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(tenantPageQuery.getPageNo(), tenantPageQuery.getPageSize());
-        Tenant tenant = new Tenant();
-        tenant.setTenantName(new TenantName(tenantPageQuery.getName(), tenantPageQuery.getName()));
-        if (tenantPageQuery.getExcludeDeleted()) {
-            tenant.setIsDeleted(DeleteStatusEnum.NO.getValue());
+        if (StringUtils.isNotEmpty(tenantPageQuery.getName())) {
+            pageSearchParam.setName(tenantPageQuery.getName());
         }
-        if (tenantPageQuery.getExcludeDisabled()) {
-            tenant.setStatus(CommonStatusEnum.ENABLE.getValue());
+        if (BooleanUtil.isTrue(tenantPageQuery.getExcludeDeleted())) {
+            pageSearchParam.setIsDeleted(DeleteStatusEnum.NO.getValue());
         }
-        Page<TenantDTO> tenantDTOPage = tenantDomainService.pageTenants(page, tenant);
-        return PageResult.succeed(tenantDTOPage);
+        if (BooleanUtil.isTrue(tenantPageQuery.getExcludeDisabled())) {
+            pageSearchParam.setStatus(CommonStatusEnum.ENABLE.getValue());
+        }
+        Page<TenantDTO> page = tenantDomainService.pageTenants(pageSearchParam);
+        return PageResult.succeed(page);
     }
 }

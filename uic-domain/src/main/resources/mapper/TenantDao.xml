@@ -51,4 +51,48 @@
     <select id="selectTenantCountByIsvId" parameterType="java.lang.Long" resultType="java.lang.Integer">
         select count(1) from tenant where isv_id = #{isvId}
     </select>
+
+    <select id="selectList" resultType="com.rany.uic.dao.po.TenantPO"
+            parameterType="com.rany.uic.common.params.TenantSearchParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tenant
+        <where>
+            <if test="isvId != null">
+                isv_id = #{isvId}
+            </if>
+            <if test="name != null">
+                name like concat('%', #{name}, '%')
+            </if>
+            <if test="isDeleted != null and isDeleted != ''">
+                is_deleted = #{isDeleted}
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status}
+            </if>
+        </where>
+        order by gmt_modified, gmt_create desc
+    </select>
+
+    <select id="selectPage" resultType="com.rany.uic.dao.po.TenantPO"
+            parameterType="com.rany.uic.common.params.TenantPageSearchParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tenant
+        <where>
+            <if test="isvId != null">
+                isv_id = #{isvId}
+            </if>
+            <if test="name != null">
+                name like concat('%', #{name}, '%')
+            </if>
+            <if test="isDeleted != null and isDeleted != ''">
+                is_deleted = #{isDeleted}
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status}
+            </if>
+        </where>
+        order by gmt_modified, gmt_create desc
+    </select>
 </mapper>

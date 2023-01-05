@@ -126,16 +126,18 @@
     <build>
         <finalName>${project.parent.artifactId}</finalName>
         <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>application*.yml</exclude>
-                </excludes>
-            </resource>
+            <!--            <resource>-->
+            <!--                <directory>src/main/resources</directory>-->
+            <!--                <excludes>-->
+            <!--                    <exclude>application*.yml</exclude>-->
+            <!--                </excludes>-->
+            <!--            </resource>-->
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
                     <include>application.yml</include>
                     <include>application-${activatedProperties}.yml</include>
                 </includes>
@@ -165,13 +167,13 @@
                 <version>2.4</version>
                 <configuration>
                     <!--设置该module达成war包后的名字,与应用最终打包名称一致-->
-                    <warName>emsp</warName>
+                    <warName>uic-center</warName>
                     <!--如果想在没有web.xml文件的情况下构建WAR，请设置为false。-->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <archiveClasses>true</archiveClasses>
                     <attachClasses>true</attachClasses>
                     <!--设置该module打成jar包后的名字,版本号同pom中设定的版本号-->
-                    <classesClassifier>uic-web</classesClassifier>
+                    <classesClassifier>uic-center</classesClassifier>
                     <webResources>
                         <resource>
                             <directory>target/classes</directory>

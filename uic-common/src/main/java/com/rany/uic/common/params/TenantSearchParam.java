@@ -1,4 +1,4 @@
-package com.rany.uic.api.query.tenant;
+package com.rany.uic.common.params;
 
 import com.rany.uic.common.base.BaseQuery;
 import lombok.Data;
@@ -8,17 +8,17 @@ import lombok.Data;
  *
  * @author zhongshengwang
  * @description TODO
- * @date 2022/12/31 16:47
+ * @date 2023/1/5 20:50
  * @email 18668485565163.com
  */
 @Data
-public class TenantQuery extends BaseQuery {
+public class TenantSearchParam extends BaseQuery {
 
     private Long isvId;
 
     private String name;
 
-    private Boolean excludeDeleted = true;
+    private String isDeleted;
 
-    private Boolean excludeDisabled = false;
+    private String status;
 }

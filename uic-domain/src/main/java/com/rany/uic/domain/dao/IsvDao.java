@@ -1,6 +1,5 @@
 package com.rany.uic.domain.dao;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.rany.uic.dao.po.IsvPO;
 import com.rany.uic.domain.aggregate.Isv;
 
