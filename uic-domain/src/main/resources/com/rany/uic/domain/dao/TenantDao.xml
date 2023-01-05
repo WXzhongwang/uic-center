@@ -59,16 +59,16 @@
         from tenant
         <where>
             <if test="isvId != null">
-                isv_id = #{isvId}
+                and isv_id = #{isvId}
             </if>
             <if test="name != null">
-                name like concat('%', #{name}, '%')
+                and name like concat('%', #{name}, '%')
             </if>
             <if test="isDeleted != null and isDeleted != ''">
-                is_deleted = #{isDeleted}
+                and is_deleted = #{isDeleted}
             </if>
             <if test="status != null and status != ''">
-                status = #{status}
+                and status = #{status}
             </if>
         </where>
         order by gmt_modified, gmt_create desc
@@ -81,16 +81,16 @@
         from tenant
         <where>
             <if test="isvId != null">
-                isv_id = #{isvId}
+                and isv_id = #{isvId}
             </if>
             <if test="name != null">
-                name like concat('%', #{name}, '%')
+                and name like concat('%', #{name}, '%')
             </if>
             <if test="isDeleted != null and isDeleted != ''">
-                is_deleted = #{isDeleted}
+                and is_deleted = #{isDeleted}
             </if>
             <if test="status != null and status != ''">
-                status = #{status}
+                and status = #{status}
             </if>
         </where>
         order by gmt_modified, gmt_create desc
