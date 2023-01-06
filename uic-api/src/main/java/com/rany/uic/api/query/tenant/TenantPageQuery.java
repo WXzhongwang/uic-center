@@ -18,8 +18,6 @@ public class TenantPageQuery extends BasePageQuery {
 
     private String name;
 
-    private Boolean fuzzy;
-
     private Boolean excludeDeleted = true;
 
     private Boolean excludeDisabled = false;
