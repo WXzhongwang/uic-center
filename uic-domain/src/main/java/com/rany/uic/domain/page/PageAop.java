@@ -44,7 +44,7 @@ public class PageAop {
         BasePageQuery basePageQuery = (BasePageQuery) arg;
         try {
             Integer pageNo = basePageQuery.getPageNo();
-            Integer pageSize = basePageQuery.getPageNo();
+            Integer pageSize = basePageQuery.getPageSize();
             log.info("{}分页执行参数 pageNo:{}, pageSize:{}", methodName, pageNo, pageSize);
             if (pageNo != null && pageNo > 0 && pageSize != null && pageSize > 0) {
                 PageHelper.startPage(pageNo, pageSize, true);

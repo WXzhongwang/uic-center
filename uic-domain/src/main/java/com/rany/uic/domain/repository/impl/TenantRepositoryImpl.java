@@ -93,8 +93,8 @@ public class TenantRepositoryImpl implements TenantRepository {
         PageInfo<TenantPO> pageInfo = new PageInfo<>(content);
         Page<TenantDTO> pageDTO = new Page<>();
         pageDTO.setPageNo(pageInfo.getPageNum());
-        pageDTO.setPageSize(pageDTO.getPageSize());
-        pageDTO.setTotalPage(pageDTO.getTotalPage());
+        pageDTO.setPageSize(pageInfo.getPageSize());
+        pageDTO.setTotalPage(pageInfo.getPages());
         pageDTO.setTotal(Long.valueOf(pageInfo.getTotal()).intValue());
         List<TenantDTO> values = tenantDataConvertor.targetToDTO(pageInfo.getList());
         pageDTO.setItems(values);

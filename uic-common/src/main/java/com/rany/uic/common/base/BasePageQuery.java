@@ -11,7 +11,7 @@ package com.rany.uic.common.base;
 
 public class BasePageQuery extends BaseQuery {
 
-    private Integer pageNo;
+    private Integer pageNo = 0;
 
     private Integer pageSize = 10;
 
