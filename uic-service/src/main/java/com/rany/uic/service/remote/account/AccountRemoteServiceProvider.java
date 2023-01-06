@@ -6,6 +6,8 @@ import com.rany.uic.api.command.account.*;
 import com.rany.uic.api.facade.account.AccountFacade;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.service.AccountDomainService;
+import com.rany.uic.domain.service.TenantDomainService;
+import com.rany.uic.service.aop.annotation.TenantValidCheck;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,9 +26,11 @@ import lombok.extern.slf4j.Slf4j;
 public class AccountRemoteServiceProvider implements AccountFacade {
 
     private final AccountDomainService accountDomainService;
+    private final TenantDomainService tenantDomainService;
     private final SnowflakeIdWorker snowflakeIdWorker;
 
     @Override
+    @TenantValidCheck(expression = "#createAccountCommand.tenantId")
     public PojoResult<Boolean> createAccount(CreateAccountCommand createAccountCommand) {
         return null;
     }
