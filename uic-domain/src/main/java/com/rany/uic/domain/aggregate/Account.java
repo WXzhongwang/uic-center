@@ -3,8 +3,11 @@ package com.rany.uic.domain.aggregate;
 import cn.hutool.core.date.DateUtil;
 import com.cake.framework.common.base.BaseAggregateRoot;
 import com.cake.framework.common.base.IAggregate;
+import com.rany.uic.common.enums.CommonStatusEnum;
+import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.domain.dp.AccountName;
 import com.rany.uic.domain.dp.EmailAddress;
+import com.rany.uic.domain.dp.HeadImage;
 import com.rany.uic.domain.dp.Phone;
 import com.rany.uic.domain.event.AccountCreatedEvent;
 import com.rany.uic.domain.pk.AccountId;
@@ -14,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -84,7 +88,11 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
     private String lastLoginIp;
     private Date lastLoginTime;
     private String feature;
-    private String headImage;
+
+    /**
+     * 头像
+     */
+    private HeadImage headImage;
 
 
     public Account(AccountId id, TenantId tenantId, AccountName accountName, List<SafeStrategy> safeStrategies) {
@@ -100,6 +108,10 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
      * @return
      */
     public Boolean save() {
+        this.gmtCreate = DateUtil.date();
+        this.gmtModified = DateUtil.date();
+        this.isDeleted = DeleteStatusEnum.NO.getValue();
+        this.status = CommonStatusEnum.ENABLE.getValue();
         this.registerEvent(new AccountCreatedEvent(this, DateUtil.date()));
         return Boolean.TRUE;
     }

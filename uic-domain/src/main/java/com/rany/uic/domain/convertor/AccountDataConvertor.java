@@ -28,6 +28,7 @@ public interface AccountDataConvertor extends BaseConvertor<Account, AccountPO> 
     @Mapping(source = "tenantId.id", target = "tenantId")
     @Mapping(source = "emailAddress.email", target = "email")
     @Mapping(source = "phone.phone", target = "phone")
+    @Mapping(source = "headImage.img", target = "headImage")
     @Override
     AccountPO sourceToTarget(Account account);
 
@@ -43,6 +44,7 @@ public interface AccountDataConvertor extends BaseConvertor<Account, AccountPO> 
     @Mapping(target = "tenantId.id", source = "tenantId")
     @Mapping(target = "emailAddress.email", source = "email")
     @Mapping(target = "phone.phone", source = "phone")
+    @Mapping(target = "headImage.img", source = "headImage")
     @Override
     Account targetToSource(AccountPO accountPO);
 }

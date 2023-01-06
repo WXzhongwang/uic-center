@@ -15,4 +15,12 @@ import com.rany.uic.domain.pk.AccountId;
 
 public interface AccountRepository extends Repository<Account, AccountId> {
 
+    /**
+     * 根据登录账号查找用户
+     *
+     * @param loginName
+     * @return
+     */
+    Account findAccountByLoginName(String loginName);
+
 }

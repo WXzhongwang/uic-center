@@ -2,8 +2,8 @@ package com.rany.uic.service.listener;
 
 import cn.hutool.core.date.DateUtil;
 import com.google.common.collect.Lists;
-import com.rany.uic.api.enums.AccountTypeEnum;
-import com.rany.uic.api.enums.LoginSafeStrategyEnum;
+import com.rany.uic.common.enums.AccountTypeEnum;
+import com.rany.uic.common.enums.LoginSafeStrategyEnum;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.util.AccountUtil;

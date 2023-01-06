@@ -2,6 +2,7 @@ package com.rany.uic.common.util;
 
 import cn.hutool.core.util.RandomUtil;
 import com.rany.uic.common.Constants;
+import org.apache.commons.lang3.StringUtils;
 
 import java.security.MessageDigest;
 
@@ -37,9 +38,11 @@ public final class AccountUtil {
         return sb.toString();
     }
 
-    public static String buildRandomAccountLoginName(String shortName) {
-        String accountName = RandomUtil.randomString(8);
-        return String.format(accountName, shortName);
+    public static String buildAccountLoginName(String name, String tenantShortName) {
+        if (StringUtils.endsWith(name, tenantShortName)) {
+            return name;
+        }
+        return String.format("%s@%s", name, tenantShortName);
     }
 
     public static String buildRandomAccountLoginPwd() {

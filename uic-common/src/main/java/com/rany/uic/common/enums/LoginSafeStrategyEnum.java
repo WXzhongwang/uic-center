@@ -1,4 +1,4 @@
-package com.rany.uic.api.enums;
+package com.rany.uic.common.enums;
 
 /**
  * TODO

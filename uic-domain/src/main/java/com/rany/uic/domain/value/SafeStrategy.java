@@ -3,6 +3,7 @@ package com.rany.uic.domain.value;
 import cn.hutool.core.date.DateUtil;
 import com.cake.framework.common.base.BaseValueObject;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import java.util.Date;
  * @email 18668485565163.com
  */
 @Data
+@NoArgsConstructor
 public class SafeStrategy extends BaseValueObject<Long> {
 
     private Long accountId;
@@ -41,5 +43,12 @@ public class SafeStrategy extends BaseValueObject<Long> {
     public Boolean isExpired() {
         return this.expiredAt != null
                 && DateUtil.date().before(expiredAt);
+    }
+
+    public SafeStrategy(Long accountId, String loginStrategy, String authCode, String authValue) {
+        this.accountId = accountId;
+        this.loginStrategy = loginStrategy;
+        this.authCode = authCode;
+        this.authValue = authValue;
     }
 }

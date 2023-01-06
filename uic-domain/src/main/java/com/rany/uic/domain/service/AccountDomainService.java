@@ -29,4 +29,8 @@ public class AccountDomainService {
         accountRepository.save(account);
         return Boolean.TRUE;
     }
+
+    public Account findAccountByLoginName(String loginName) {
+        return accountRepository.findAccountByLoginName(loginName);
+    }
 }

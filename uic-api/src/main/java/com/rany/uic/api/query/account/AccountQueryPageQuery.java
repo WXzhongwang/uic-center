@@ -1,6 +1,6 @@
 package com.rany.uic.api.query.account;
 
-import com.rany.uic.api.enums.AccountTypeEnum;
+import com.rany.uic.common.enums.AccountTypeEnum;
 import com.rany.uic.common.base.BasePageQuery;
 import lombok.Data;
 

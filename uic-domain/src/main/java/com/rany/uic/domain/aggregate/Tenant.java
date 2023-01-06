@@ -69,6 +69,8 @@ public class Tenant extends BaseAggregateRoot implements IAggregate<TenantId> {
     private String status;
 
     public Boolean save(Boolean initialFirstAccount) {
+        this.gmtCreate = DateUtil.date();
+        this.gmtModified = DateUtil.date();
         if (BooleanUtil.isTrue(initialFirstAccount)) {
             registerEvent(new CreateTenantAdminAccountEvent(this, DateUtil.date()));
         }
@@ -76,14 +78,17 @@ public class Tenant extends BaseAggregateRoot implements IAggregate<TenantId> {
     }
 
     public void disabled() {
+        this.gmtModified = DateUtil.date();
         this.status = CommonStatusEnum.DISABLED.getValue();
     }
 
     public void enable() {
+        this.gmtModified = DateUtil.date();
         this.status = CommonStatusEnum.ENABLE.getValue();
     }
 
     public void delete() {
+        this.gmtModified = DateUtil.date();
         this.isDeleted = DeleteStatusEnum.YES.getValue();
     }
 }

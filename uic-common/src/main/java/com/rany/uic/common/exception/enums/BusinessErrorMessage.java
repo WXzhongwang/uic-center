@@ -25,6 +25,8 @@ public enum BusinessErrorMessage {
     TENANT_CHECK_NOT_PASS("3504", "isv校验不通过"),
     TENANT_SHORT_NAME_EXISTED("3505", "租户简称已存在，换个试试"),
     TENANT_OVER_MAX_SIZE("3506", "租户个数已超过限制"),
+
+    ACCOUNT_NAME_DUPLICATED("4500", "账号名已重复"),
     ;
 
     private final String code;

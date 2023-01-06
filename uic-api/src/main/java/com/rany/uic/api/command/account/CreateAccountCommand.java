@@ -30,14 +30,9 @@ public class CreateAccountCommand extends DTO {
     private String accountType;
 
     /**
-     * 来源
-     */
-    private String source;
-
-    /**
      * 手机号
      */
-    private String mobile;
+    private String phone;
 
     /**
      * 邮箱
