@@ -83,6 +83,8 @@ public class AccountFacadeTest extends BaseTests {
         ModifyAccountCommand modifyAccountCommand = new ModifyAccountCommand();
         modifyAccountCommand.setTenantId(TENANT_ID);
         modifyAccountCommand.setAccountId(ACCOUNT_ID);
+        modifyAccountCommand.setQq("108719251");
+        modifyAccountCommand.setWechat("WxZhongWang");
         PojoResult<Boolean> account = accountFacade.modifyAccount(modifyAccountCommand);
         Assert.assertTrue(account.getContent());
     }

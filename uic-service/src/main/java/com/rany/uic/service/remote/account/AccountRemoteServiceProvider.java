@@ -149,7 +149,40 @@ public class AccountRemoteServiceProvider implements AccountFacade {
     @Override
     @TenantValidCheck(expression = "#modifyAccountCommand.tenantId")
     public PojoResult<Boolean> modifyAccount(ModifyAccountCommand modifyAccountCommand) {
-        return null;
+        Account account = accountDomainService.findById(new AccountId(modifyAccountCommand.getAccountId()));
+        if (Objects.isNull(account)) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_NOT_FOUND);
+        }
+        if (StringUtils.isNotEmpty(modifyAccountCommand.getEmail())) {
+            account.setEmailAddress(new EmailAddress(modifyAccountCommand.getEmail()));
+        }
+        if (StringUtils.isNotEmpty(modifyAccountCommand.getPhone())) {
+            account.setPhone(new Phone(modifyAccountCommand.getPhone()));
+        }
+        if (StringUtils.isNotEmpty(modifyAccountCommand.getHeadImage())) {
+            account.setHeadImage(new HeadImage(modifyAccountCommand.getHeadImage()));
+        }
+        if (StringUtils.isNotEmpty(modifyAccountCommand.getQq())) {
+            account.setQq(modifyAccountCommand.getQq());
+        }
+        if (StringUtils.isNotEmpty(modifyAccountCommand.getWechat())) {
+            account.setWechat(modifyAccountCommand.getWechat());
+        }
+        if (StringUtils.isNotEmpty(modifyAccountCommand.getDingding())) {
+            account.setDingding(modifyAccountCommand.getDingding());
+        }
+        if (StringUtils.isNotEmpty(modifyAccountCommand.getFeature())) {
+            account.setFeature(modifyAccountCommand.getFeature());
+        }
+        if (StringUtils.isNotEmpty(modifyAccountCommand.getTags())) {
+            account.setTags(modifyAccountCommand.getTags());
+        }
+        if (Objects.nonNull(modifyAccountCommand.getBirthday())) {
+            account.setBirthday(modifyAccountCommand.getBirthday());
+        }
+        account.modify();
+        accountDomainService.update(account);
+        return PojoResult.succeed(Boolean.TRUE);
     }
 
     @Override

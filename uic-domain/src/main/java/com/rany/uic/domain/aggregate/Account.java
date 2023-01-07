@@ -9,10 +9,7 @@ import com.rany.uic.domain.dp.AccountName;
 import com.rany.uic.domain.dp.EmailAddress;
 import com.rany.uic.domain.dp.HeadImage;
 import com.rany.uic.domain.dp.Phone;
-import com.rany.uic.domain.event.AccountCreatedEvent;
-import com.rany.uic.domain.event.AccountDeletedEvent;
-import com.rany.uic.domain.event.AccountDisabledEvent;
-import com.rany.uic.domain.event.AccountEnabledEvent;
+import com.rany.uic.domain.event.*;
 import com.rany.uic.domain.pk.AccountId;
 import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.value.SafeStrategy;
@@ -141,6 +138,12 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
         this.gmtModified = DateUtil.date();
         this.isDeleted = DeleteStatusEnum.YES.getValue();
         this.registerEvent(new AccountDeletedEvent(this, this.gmtModified));
+        return Boolean.TRUE;
+    }
+
+    public Boolean modify() {
+        this.gmtModified = DateUtil.date();
+        this.registerEvent(new AccountModifiedEvent(this, this.gmtModified));
         return Boolean.TRUE;
     }
 }

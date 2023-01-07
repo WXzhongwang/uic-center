@@ -27,7 +27,7 @@ public class ModifyAccountCommand extends DTO {
     /**
      * 手机号
      */
-    private String mobile;
+    private String phone;
 
     /**
      * 邮箱
@@ -64,4 +64,9 @@ public class ModifyAccountCommand extends DTO {
      * tags
      */
     private String tags;
+
+    /**
+     * feature
+     */
+    private String feature;
 }
