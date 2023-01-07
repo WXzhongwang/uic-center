@@ -147,7 +147,7 @@ public class AccountRemoteServiceProvider implements AccountFacade {
     }
 
     @Override
-    @TenantValidCheck(expression = "#disableAccountCommand.tenantId")
+    @TenantValidCheck(expression = "#modifyAccountCommand.tenantId")
     public PojoResult<Boolean> modifyAccount(ModifyAccountCommand modifyAccountCommand) {
         return null;
     }

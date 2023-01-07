@@ -2,10 +2,7 @@ package com.rany.uic.api.facade.account;
 
 import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.BaseTests;
-import com.rany.uic.api.command.account.CreateAccountCommand;
-import com.rany.uic.api.command.account.DeleteAccountCommand;
-import com.rany.uic.api.command.account.DisableAccountCommand;
-import com.rany.uic.api.command.account.EnableAccountCommand;
+import com.rany.uic.api.command.account.*;
 import com.rany.uic.api.query.account.AccountBasicQuery;
 import com.rany.uic.common.dto.account.AccountDTO;
 import com.rany.uic.common.enums.AccountTypeEnum;
@@ -83,6 +80,11 @@ public class AccountFacadeTest extends BaseTests {
 
     @Test
     public void modifyAccount() {
+        ModifyAccountCommand modifyAccountCommand = new ModifyAccountCommand();
+        modifyAccountCommand.setTenantId(TENANT_ID);
+        modifyAccountCommand.setAccountId(ACCOUNT_ID);
+        PojoResult<Boolean> account = accountFacade.modifyAccount(modifyAccountCommand);
+        Assert.assertTrue(account.getContent());
     }
 
     @Test
