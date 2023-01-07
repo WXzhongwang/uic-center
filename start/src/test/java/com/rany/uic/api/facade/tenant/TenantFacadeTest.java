@@ -80,7 +80,7 @@ public class TenantFacadeTest extends BaseTests {
     public void findTenant() {
         TenantBasicQuery tenantBasicQuery = new TenantBasicQuery();
         tenantBasicQuery.setTenantId(768821269968859136L);
-        PojoResult<TenantDTO> tenant = tenantFacade.findTenant(tenantBasicQuery);
+        PojoResult<TenantDTO> tenant = tenantFacade.getTenant(tenantBasicQuery);
         Assert.assertTrue(tenant.getSuccess());
     }
 

@@ -10,6 +10,9 @@ import com.rany.uic.domain.dp.EmailAddress;
 import com.rany.uic.domain.dp.HeadImage;
 import com.rany.uic.domain.dp.Phone;
 import com.rany.uic.domain.event.AccountCreatedEvent;
+import com.rany.uic.domain.event.AccountDeletedEvent;
+import com.rany.uic.domain.event.AccountDisabledEvent;
+import com.rany.uic.domain.event.AccountEnabledEvent;
 import com.rany.uic.domain.pk.AccountId;
 import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.value.SafeStrategy;
@@ -17,7 +20,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -88,6 +90,11 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
     private String lastLoginIp;
     private Date lastLoginTime;
     private String feature;
+    private String dingding;
+    private String qq;
+    private String wechat;
+    private String tags;
+    private Date birthday;
 
     /**
      * 头像
@@ -112,7 +119,28 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
         this.gmtModified = DateUtil.date();
         this.isDeleted = DeleteStatusEnum.NO.getValue();
         this.status = CommonStatusEnum.ENABLE.getValue();
-        this.registerEvent(new AccountCreatedEvent(this, DateUtil.date()));
+        this.registerEvent(new AccountCreatedEvent(this, this.gmtCreate));
+        return Boolean.TRUE;
+    }
+
+    public Boolean disable() {
+        this.gmtModified = DateUtil.date();
+        this.status = CommonStatusEnum.DISABLED.getValue();
+        this.registerEvent(new AccountDisabledEvent(this, this.gmtModified));
+        return Boolean.TRUE;
+    }
+
+    public Boolean enable() {
+        this.gmtModified = DateUtil.date();
+        this.status = CommonStatusEnum.ENABLE.getValue();
+        this.registerEvent(new AccountEnabledEvent(this, this.gmtModified));
+        return Boolean.TRUE;
+    }
+
+    public Boolean delete() {
+        this.gmtModified = DateUtil.date();
+        this.isDeleted = DeleteStatusEnum.YES.getValue();
+        this.registerEvent(new AccountDeletedEvent(this, this.gmtModified));
         return Boolean.TRUE;
     }
 }

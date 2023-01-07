@@ -132,7 +132,7 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     }
 
     @Override
-    public PojoResult<TenantDTO> findTenant(TenantBasicQuery tenantBasicQuery) {
+    public PojoResult<TenantDTO> getTenant(TenantBasicQuery tenantBasicQuery) {
         Tenant tenant = tenantDomainService.findById(new TenantId(tenantBasicQuery.getTenantId()));
         if (Objects.isNull(tenant)) {
             throw new BusinessException(BusinessErrorMessage.TENANT_NOT_FOUND);

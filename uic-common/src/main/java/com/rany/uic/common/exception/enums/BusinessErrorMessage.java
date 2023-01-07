@@ -27,6 +27,7 @@ public enum BusinessErrorMessage {
     TENANT_OVER_MAX_SIZE("3506", "租户个数已超过限制"),
 
     ACCOUNT_NAME_DUPLICATED("4500", "账号名已重复"),
+    ACCOUNT_NOT_FOUND("4501", "账号未找到"),
     ;
 
     private final String code;

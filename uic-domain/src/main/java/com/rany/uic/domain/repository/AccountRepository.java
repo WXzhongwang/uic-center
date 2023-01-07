@@ -23,4 +23,11 @@ public interface AccountRepository extends Repository<Account, AccountId> {
      */
     Account findAccountByLoginName(String loginName);
 
+    /**
+     * 账号更新
+     * @param account
+     * @return
+     */
+    int update(Account account);
+
 }

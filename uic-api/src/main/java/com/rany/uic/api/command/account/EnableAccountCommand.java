@@ -12,7 +12,7 @@ import lombok.Data;
  * @email 18668485565163.com
  */
 @Data
-public class DisableAccountCommand extends DTO {
+public class EnableAccountCommand extends DTO {
     /**
      * 账号Id
      */

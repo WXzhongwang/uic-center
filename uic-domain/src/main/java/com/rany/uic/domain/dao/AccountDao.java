@@ -14,4 +14,6 @@ import com.rany.uic.domain.po.AccountPO;
 public interface AccountDao extends BaseMapper<AccountPO> {
 
     int save(Account acocount);
+
+    int update(Account acocount);
 }

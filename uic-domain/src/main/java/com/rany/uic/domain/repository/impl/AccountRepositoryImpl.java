@@ -82,4 +82,9 @@ public class AccountRepositoryImpl implements AccountRepository {
         Long accountId = safeStrategyPO.getAccountId();
         return find(new AccountId(accountId));
     }
+
+    @Override
+    public int update(Account account) {
+        return accountDao.update(account);
+    }
 }

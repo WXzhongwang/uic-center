@@ -3,6 +3,8 @@ package com.rany.uic.service.remote.account;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.account.*;
+import com.rany.uic.api.query.account.AccountBasicQuery;
+import com.rany.uic.common.dto.account.AccountDTO;
 import com.rany.uic.common.enums.AccountTypeEnum;
 import com.rany.uic.common.enums.LoginSafeStrategyEnum;
 import com.rany.uic.api.facade.account.AccountFacade;
@@ -13,6 +15,7 @@ import com.rany.uic.common.util.AccountUtil;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Account;
 import com.rany.uic.domain.aggregate.Tenant;
+import com.rany.uic.domain.convertor.AccountDataConvertor;
 import com.rany.uic.domain.dp.AccountName;
 import com.rany.uic.domain.dp.EmailAddress;
 import com.rany.uic.domain.dp.HeadImage;
@@ -49,11 +52,12 @@ public class AccountRemoteServiceProvider implements AccountFacade {
 
     private final AccountDomainService accountDomainService;
     private final TenantDomainService tenantDomainService;
+    private final AccountDataConvertor accountDataConvertor;
     private final SnowflakeIdWorker snowflakeIdWorker;
 
     @Override
     @TenantValidCheck(expression = "#createAccountCommand.tenantId")
-    public PojoResult<Boolean> createAccount(CreateAccountCommand createAccountCommand) {
+    public PojoResult<Long> createAccount(CreateAccountCommand createAccountCommand) {
         List<SafeStrategy> strategyList = new ArrayList<>();
         Account account = new Account(new AccountId(snowflakeIdWorker.nextId()),
                 new TenantId(createAccountCommand.getTenantId()),
@@ -92,15 +96,58 @@ public class AccountRemoteServiceProvider implements AccountFacade {
         account.setIsAdmin(BooleanUtils.isTrue(createAccountCommand.getIsAdmin()));
         account.save();
         accountDomainService.save(account);
-        return PojoResult.succeed();
+        return PojoResult.succeed(account.getId().getId());
     }
 
     @Override
+    @TenantValidCheck(expression = "#accountBasicQuery.tenantId")
+    public PojoResult<AccountDTO> getAccount(AccountBasicQuery accountBasicQuery) {
+        Account account = accountDomainService.findById(new AccountId(accountBasicQuery.getAccountId()));
+        if (Objects.isNull(account)) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_NOT_FOUND);
+        }
+        AccountDTO accountDTO = accountDataConvertor.sourceToDTO(account);
+        return PojoResult.succeed(accountDTO);
+    }
+
+    @Override
+    @TenantValidCheck(expression = "#disableAccountCommand.tenantId")
     public PojoResult<Boolean> disableAccount(DisableAccountCommand disableAccountCommand) {
-        return null;
+        Account account = accountDomainService.findById(new AccountId(disableAccountCommand.getAccountId()));
+        if (Objects.isNull(account)) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_NOT_FOUND);
+        }
+        account.disable();
+        accountDomainService.update(account);
+        return PojoResult.succeed(Boolean.TRUE);
     }
 
     @Override
+    @TenantValidCheck(expression = "#enableAccountCommand.tenantId")
+    public PojoResult<Boolean> enableAccount(EnableAccountCommand enableAccountCommand) {
+        Account account = accountDomainService.findById(new AccountId(enableAccountCommand.getAccountId()));
+        if (Objects.isNull(account)) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_NOT_FOUND);
+        }
+        account.enable();
+        accountDomainService.update(account);
+        return PojoResult.succeed(Boolean.TRUE);
+    }
+
+    @Override
+    @TenantValidCheck(expression = "#deleteAccountCommand.tenantId")
+    public PojoResult<Boolean> deleteAccount(DeleteAccountCommand deleteAccountCommand) {
+        Account account = accountDomainService.findById(new AccountId(deleteAccountCommand.getAccountId()));
+        if (Objects.isNull(account)) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_NOT_FOUND);
+        }
+        account.delete();
+        accountDomainService.update(account);
+        return PojoResult.succeed(Boolean.TRUE);
+    }
+
+    @Override
+    @TenantValidCheck(expression = "#disableAccountCommand.tenantId")
     public PojoResult<Boolean> modifyAccount(ModifyAccountCommand modifyAccountCommand) {
         return null;
     }

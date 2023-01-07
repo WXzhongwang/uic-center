@@ -16,6 +16,11 @@ import java.util.Date;
 @Data
 public class ModifyAccountCommand extends DTO {
     /**
+     * tenantId
+     */
+    private Long tenantId;
+
+    /**
      * accountId
      */
     private Long accountId;

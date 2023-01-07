@@ -113,4 +113,68 @@
             </if>
         </trim>
     </insert>
+
+    <update id="update" parameterType="com.rany.uic.domain.aggregate.Account" >
+        update account
+        <set >
+            <if test="accountName != null" >
+                account_name = #{accountName.name,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="emailAddress != null" >
+                email = #{emailAddress.email,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null" >
+                tenant_id = #{tenantId.id,jdbcType=BIGINT},
+            </if>
+            <if test="isAdmin != null" >
+                is_admin = #{isAdmin,jdbcType=CHAR},
+            </if>
+            <if test="accountType != null" >
+                account_type = #{accountType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="isDeleted != null" >
+                is_deleted = #{isDeleted,jdbcType=CHAR},
+            </if>
+            <if test="lastLoginIp != null" >
+                last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginTime != null" >
+                last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="feature != null" >
+                feature = #{feature,jdbcType=VARCHAR},
+            </if>
+            <if test="gmtCreate != null" >
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null" >
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="headImage != null" >
+                head_image = #{headImage.img,jdbcType=VARCHAR},
+            </if>
+            <if test="dingding != null" >
+                dingding = #{dingding,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null" >
+                qq = #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat != null" >
+                wechat = #{wechat,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="tags != null" >
+                tags = #{tags,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id.id,jdbcType=BIGINT}
+    </update>
 </mapper>

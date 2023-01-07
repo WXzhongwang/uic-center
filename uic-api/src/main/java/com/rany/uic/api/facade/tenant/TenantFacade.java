@@ -67,7 +67,7 @@ public interface TenantFacade {
      * @param tenantBasicQuery
      * @return
      */
-    PojoResult<TenantDTO> findTenant(TenantBasicQuery tenantBasicQuery);
+    PojoResult<TenantDTO> getTenant(TenantBasicQuery tenantBasicQuery);
 
 
     /**

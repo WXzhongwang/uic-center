@@ -2,6 +2,8 @@ package com.rany.uic.api.facade.account;
 
 import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.account.*;
+import com.rany.uic.api.query.account.AccountBasicQuery;
+import com.rany.uic.common.dto.account.AccountDTO;
 
 /**
  * TODO
@@ -20,7 +22,14 @@ public interface AccountFacade {
      * @param createAccountCommand
      * @return
      */
-    PojoResult<Boolean> createAccount(CreateAccountCommand createAccountCommand);
+    PojoResult<Long> createAccount(CreateAccountCommand createAccountCommand);
+
+    /**
+     * 获取账号信息
+     * @param accountBasicQuery
+     * @return
+     */
+    PojoResult<AccountDTO> getAccount(AccountBasicQuery accountBasicQuery);
 
     /**
      * 账号禁用
@@ -29,6 +38,20 @@ public interface AccountFacade {
      * @return
      */
     PojoResult<Boolean> disableAccount(DisableAccountCommand disableAccountCommand);
+
+    /**
+     * 启用账号
+     * @param enableAccountCommand
+     * @return
+     */
+    PojoResult<Boolean> enableAccount(EnableAccountCommand enableAccountCommand);
+
+    /**
+     * 删除账户
+     * @param deleteAccountCommand
+     * @return
+     */
+    PojoResult<Boolean> deleteAccount(DeleteAccountCommand deleteAccountCommand);
 
     /**
      * 更新账号基本信息

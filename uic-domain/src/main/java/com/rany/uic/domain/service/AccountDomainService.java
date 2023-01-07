@@ -2,6 +2,7 @@ package com.rany.uic.domain.service;
 
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Account;
+import com.rany.uic.domain.pk.AccountId;
 import com.rany.uic.domain.repository.AccountRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,15 @@ public class AccountDomainService {
     public Boolean save(Account account) {
         accountRepository.save(account);
         return Boolean.TRUE;
+    }
+
+    public Boolean update(Account account) {
+        accountRepository.update(account);
+        return Boolean.TRUE;
+    }
+
+    public Account findById(AccountId accountId) {
+        return accountRepository.find(accountId);
     }
 
     public Account findAccountByLoginName(String loginName) {

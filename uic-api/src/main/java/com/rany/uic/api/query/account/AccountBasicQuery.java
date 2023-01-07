@@ -15,4 +15,6 @@ import lombok.Data;
 public class AccountBasicQuery extends BaseQuery {
 
     private Long accountId;
+
+    private Long tenantId;
 }
