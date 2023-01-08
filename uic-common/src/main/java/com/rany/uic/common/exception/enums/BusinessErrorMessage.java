@@ -30,6 +30,8 @@ public enum BusinessErrorMessage {
     ACCOUNT_NOT_FOUND("4501", "账号未找到"),
     ACCOUNT_DELETED("4502", "账号已删除"),
     ACCOUNT_DISABLED("4503", "账号已禁用"),
+
+    ACCOUNT_STRATEGY_NOT_FOUND("5500", "账号登录方式未找到"),
     ;
 
     private final String code;

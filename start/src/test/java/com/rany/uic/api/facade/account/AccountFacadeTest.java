@@ -107,6 +107,16 @@ public class AccountFacadeTest extends BaseTests {
     }
 
     @Test
-    public void updateSafeStrategy() {
+    public void updateSafeStrategy() throws ParseException {
+        UpdateSafeStrategyCommand updateSafeStrategyCommand = new UpdateSafeStrategyCommand();
+        updateSafeStrategyCommand.setTenantId(TENANT_ID);
+        updateSafeStrategyCommand.setAccountId(ACCOUNT_ID);
+        updateSafeStrategyCommand.setAuthCode("1528683821@qq.com");
+        updateSafeStrategyCommand.setAuthValue("test123123");
+        updateSafeStrategyCommand.setStrategy(LoginSafeStrategyEnum.LDAP);
+        updateSafeStrategyCommand.setBlockAt(DateUtils.parseDate("2023-01-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
+        updateSafeStrategyCommand.setExpiredAt(DateUtils.parseDate("2023-01-10 00:00:00", "yyyy-MM-dd HH:mm:ss"));
+        PojoResult<Boolean> account = accountFacade.updateSafeStrategy(updateSafeStrategyCommand);
+        Assert.assertTrue(account.getContent());
     }
 }

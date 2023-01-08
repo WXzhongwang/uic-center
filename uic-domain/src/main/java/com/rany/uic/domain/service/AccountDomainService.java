@@ -47,4 +47,8 @@ public class AccountDomainService {
     public Boolean saveSafeStrategy(Account account) {
         return accountRepository.saveSafeStrategy(account);
     }
+
+    public Boolean updateSafeStrategy(Account account) {
+        return accountRepository.updateSafeStrategy(account);
+    }
 }

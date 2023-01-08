@@ -23,7 +23,7 @@ public class CreateSafeStrategyCommand extends DTO {
     private Long accountId;
 
     /**
-     * 账号Id
+     * 租户Id
      */
     private Long tenantId;
 

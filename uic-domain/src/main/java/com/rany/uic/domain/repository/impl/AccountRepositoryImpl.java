@@ -48,7 +48,11 @@ public class AccountRepositoryImpl implements AccountRepository {
     @Override
     public Account find(@NotNull AccountId accountId) {
         AccountPO accountPO = accountMapper.selectByPrimaryKey(accountId.getId());
-        return accountDataConvertor.targetToSource(accountPO);
+        Account account = accountDataConvertor.targetToSource(accountPO);
+        List<SafeStrategyPO> safeStrategyPOS = safeStrategyDao.selectStrategiesByAccountId(accountId.getId());
+        List<SafeStrategy> safeStrategies = safeStrategyConvertor.targetToSource(safeStrategyPOS);
+        account.setSafeStrategies(safeStrategies);
+        return account;
     }
 
     @Override
@@ -100,6 +104,19 @@ public class AccountRepositoryImpl implements AccountRepository {
                 safeStrategy.setGmtModified(DateUtil.date());
                 SafeStrategyPO strategy = safeStrategyConvertor.sourceToTarget(safeStrategy);
                 safeStrategyPOMapper.insertSelective(strategy);
+            }
+        }
+        return Boolean.TRUE;
+    }
+
+
+    @Override
+    public Boolean updateSafeStrategy(Account account) {
+        List<SafeStrategy> safeStrategies = account.getSafeStrategies();
+        if (CollectionUtils.isNotEmpty(safeStrategies)) {
+            for (SafeStrategy safeStrategy : safeStrategies) {
+                SafeStrategyPO strategy = safeStrategyConvertor.sourceToTarget(safeStrategy);
+                safeStrategyPOMapper.updateByPrimaryKey(strategy);
             }
         }
         return Boolean.TRUE;

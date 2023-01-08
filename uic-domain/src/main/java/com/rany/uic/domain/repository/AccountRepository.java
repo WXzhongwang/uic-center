@@ -31,6 +31,18 @@ public interface AccountRepository extends Repository<Account, AccountId> {
     int update(Account account);
 
 
+    /**
+     * 保存登录方式
+     * @param account
+     * @return
+     */
     Boolean saveSafeStrategy(Account account);
+
+    /**
+     * 保存登录方式
+     * @param account
+     * @return
+     */
+    Boolean updateSafeStrategy(Account account);
 
 }

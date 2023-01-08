@@ -32,4 +32,12 @@
     and login_strategy = #{loginStrategy}
     and is_deleted = '0'
   </select>
+
+  <select id="selectStrategiesByAccountId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from safe_strategy
+    where account_id = #{accountId,jdbcType=BIGINT}
+    and is_deleted = '0'
+  </select>
 </mapper>

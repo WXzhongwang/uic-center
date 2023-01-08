@@ -218,7 +218,30 @@ public class AccountRemoteServiceProvider implements AccountFacade {
     }
 
     @Override
+    @TenantValidCheck(expression = "#updateSafeStrategyCommand.tenantId")
     public PojoResult<Boolean> updateSafeStrategy(UpdateSafeStrategyCommand updateSafeStrategyCommand) {
-        return null;
+        Account account = accountDomainService.findById(new AccountId(updateSafeStrategyCommand.getAccountId()));
+        if (Objects.isNull(account)) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_NOT_FOUND);
+        }
+        if (StringUtils.equals(account.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_DELETED);
+        }
+        if (StringUtils.equals(account.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_DISABLED);
+        }
+
+        for (SafeStrategy safeStrategy : account.getSafeStrategies()) {
+            if (StringUtils.equals(safeStrategy.getAuthCode(), updateSafeStrategyCommand.getAuthCode())
+                && StringUtils.equals(safeStrategy.getLoginStrategy(), updateSafeStrategyCommand.getStrategy().name())) {
+                safeStrategy.setAuthValue(updateSafeStrategyCommand.getAuthValue());
+                safeStrategy.setBlockAt(updateSafeStrategyCommand.getBlockAt());
+                safeStrategy.setExpiredAt(updateSafeStrategyCommand.getExpiredAt());
+                continue;
+            }
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_STRATEGY_NOT_FOUND);
+        }
+        accountDomainService.updateSafeStrategy(account);
+        return PojoResult.succeed(Boolean.TRUE);
     }
 }

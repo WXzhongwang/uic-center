@@ -1,6 +1,7 @@
 package com.rany.uic.api.command.account;
 
 import com.rany.uic.common.base.DTO;
+import com.rany.uic.common.enums.LoginSafeStrategyEnum;
 import lombok.Data;
 
 import java.util.Date;
@@ -15,11 +16,21 @@ import java.util.Date;
  */
 @Data
 public class UpdateSafeStrategyCommand extends DTO {
-
     /**
-     * accountId
+     * 账号Id
      */
     private Long accountId;
+
+
+    /**
+     * 租户Id
+     */
+    private Long tenantId;
+
+    /**
+     * 登录策略
+     */
+    private LoginSafeStrategyEnum strategy;
 
     /**
      * 登录账号名
