@@ -114,67 +114,136 @@
         </trim>
     </insert>
 
-    <update id="update" parameterType="com.rany.uic.domain.aggregate.Account" >
+    <update id="update" parameterType="com.rany.uic.domain.aggregate.Account">
         update account
-        <set >
-            <if test="accountName != null" >
+        <set>
+            <if test="accountName != null">
                 account_name = #{accountName.name,jdbcType=VARCHAR},
             </if>
-            <if test="phone != null" >
+            <if test="phone != null">
                 phone = #{phone.phone,jdbcType=VARCHAR},
             </if>
-            <if test="emailAddress != null" >
+            <if test="emailAddress != null">
                 email = #{emailAddress.email,jdbcType=VARCHAR},
             </if>
-            <if test="tenantId != null" >
+            <if test="tenantId != null">
                 tenant_id = #{tenantId.id,jdbcType=BIGINT},
             </if>
-            <if test="isAdmin != null" >
+            <if test="isAdmin != null">
                 is_admin = #{isAdmin,jdbcType=CHAR},
             </if>
-            <if test="accountType != null" >
+            <if test="accountType != null">
                 account_type = #{accountType,jdbcType=VARCHAR},
             </if>
-            <if test="status != null" >
+            <if test="status != null">
                 status = #{status,jdbcType=CHAR},
             </if>
-            <if test="isDeleted != null" >
+            <if test="isDeleted != null">
                 is_deleted = #{isDeleted,jdbcType=CHAR},
             </if>
-            <if test="lastLoginIp != null" >
+            <if test="lastLoginIp != null">
                 last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
             </if>
-            <if test="lastLoginTime != null" >
+            <if test="lastLoginTime != null">
                 last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="feature != null" >
+            <if test="feature != null">
                 feature = #{feature,jdbcType=VARCHAR},
             </if>
-            <if test="gmtCreate != null" >
+            <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="gmtModified != null" >
+            <if test="gmtModified != null">
                 gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
             </if>
-            <if test="headImage != null" >
+            <if test="headImage != null">
                 head_image = #{headImage.img,jdbcType=VARCHAR},
             </if>
-            <if test="dingding != null" >
+            <if test="dingding != null">
                 dingding = #{dingding,jdbcType=VARCHAR},
             </if>
-            <if test="qq != null" >
+            <if test="qq != null">
                 qq = #{qq,jdbcType=VARCHAR},
             </if>
-            <if test="wechat != null" >
+            <if test="wechat != null">
                 wechat = #{wechat,jdbcType=VARCHAR},
             </if>
-            <if test="birthday != null" >
+            <if test="birthday != null">
                 birthday = #{birthday,jdbcType=DATE},
             </if>
-            <if test="tags != null" >
+            <if test="tags != null">
                 tags = #{tags,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id.id,jdbcType=BIGINT}
     </update>
+
+
+    <select id="selectList" resultType="com.rany.uic.domain.po.AccountPO"
+            parameterType="com.rany.uic.common.params.AccountSearchParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from account
+        <where>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="accountName != null and accountName != ''">
+                and account_name like concat('%', #{accountName}, '%')
+            </if>
+            <if test="isDeleted != null and isDeleted != ''">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="isAdmin != null">
+                and is_admin = #{isAdmin}
+            </if>
+            <if test="accountType != null and accountType != ''">
+                and account_type = #{accountType}
+            </if>
+        </where>
+        order by gmt_modified, gmt_create desc
+    </select>
+
+    <select id="selectPage" resultType="com.rany.uic.domain.po.AccountPO"
+            parameterType="com.rany.uic.common.params.AccountPageSearchParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from account
+        <where>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="accountName != null and accountName != ''">
+                and account_name like concat('%', #{accountName}, '%')
+            </if>
+            <if test="isDeleted != null and isDeleted != ''">
+                and is_deleted = #{isDeleted}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="isAdmin != null">
+                and is_admin = #{isAdmin}
+            </if>
+            <if test="accountType != null and accountType != ''">
+                and account_type = #{accountType}
+            </if>
+        </where>
+        order by gmt_modified, gmt_create desc
+    </select>
 </mapper>

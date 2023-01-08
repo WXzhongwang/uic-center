@@ -1,18 +1,26 @@
 package com.rany.uic.service.remote.account;
 
+import cn.hutool.core.util.BooleanUtil;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.cake.framework.common.response.ListResult;
+import com.cake.framework.common.response.Page;
+import com.cake.framework.common.response.PageResult;
 import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.account.*;
+import com.rany.uic.api.facade.account.AccountFacade;
 import com.rany.uic.api.query.account.AccountBasicQuery;
+import com.rany.uic.api.query.account.AccountPageQuery;
+import com.rany.uic.api.query.account.AccountQuery;
 import com.rany.uic.common.dto.account.AccountDTO;
 import com.rany.uic.common.enums.AccountTypeEnum;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.enums.LoginSafeStrategyEnum;
-import com.rany.uic.api.facade.account.AccountFacade;
 import com.rany.uic.common.exception.BusinessException;
 import com.rany.uic.common.exception.enums.BusinessErrorMessage;
 import com.rany.uic.common.exception.enums.CommonReturnCode;
+import com.rany.uic.common.params.AccountPageSearchParam;
+import com.rany.uic.common.params.AccountSearchParam;
 import com.rany.uic.common.util.AccountUtil;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Account;
@@ -33,7 +41,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -205,7 +212,7 @@ public class AccountRemoteServiceProvider implements AccountFacade {
         SafeStrategy safeStrategy = new SafeStrategy(account.getId().getId(), createSafeStrategyCommand.getStrategy().name(),
                 createSafeStrategyCommand.getAuthCode(),
                 createSafeStrategyCommand.getAuthValue()
-                );
+        );
         if (Objects.nonNull(createSafeStrategyCommand.getBlockAt())) {
             safeStrategy.setBlockAt(createSafeStrategyCommand.getBlockAt());
         }
@@ -233,7 +240,7 @@ public class AccountRemoteServiceProvider implements AccountFacade {
 
         for (SafeStrategy safeStrategy : account.getSafeStrategies()) {
             if (StringUtils.equals(safeStrategy.getAuthCode(), updateSafeStrategyCommand.getAuthCode())
-                && StringUtils.equals(safeStrategy.getLoginStrategy(), updateSafeStrategyCommand.getStrategy().name())) {
+                    && StringUtils.equals(safeStrategy.getLoginStrategy(), updateSafeStrategyCommand.getStrategy().name())) {
                 safeStrategy.setAuthValue(updateSafeStrategyCommand.getAuthValue());
                 safeStrategy.setBlockAt(updateSafeStrategyCommand.getBlockAt());
                 safeStrategy.setExpiredAt(updateSafeStrategyCommand.getExpiredAt());
@@ -243,5 +250,70 @@ public class AccountRemoteServiceProvider implements AccountFacade {
         }
         accountDomainService.updateSafeStrategy(account);
         return PojoResult.succeed(Boolean.TRUE);
+    }
+
+    @Override
+    @TenantValidCheck(expression = "#accountQuery.tenantId")
+    public ListResult<AccountDTO> findAccounts(AccountQuery accountQuery) {
+        AccountSearchParam searchParam = new AccountSearchParam();
+        if (Objects.nonNull(accountQuery.getTenantId())) {
+            searchParam.setTenantId(accountQuery.getTenantId());
+        }
+        if (StringUtils.isNotEmpty(accountQuery.getAccountName())) {
+            searchParam.setAccountName(accountQuery.getAccountName());
+        }
+        if (BooleanUtil.isTrue(accountQuery.getExcludeDeleted())) {
+            searchParam.setIsDeleted(DeleteStatusEnum.NO.getValue());
+        }
+        if (BooleanUtil.isTrue(accountQuery.getExcludeDisabled())) {
+            searchParam.setStatus(CommonStatusEnum.ENABLE.getValue());
+        }
+        if (Objects.nonNull(accountQuery.getAccountType())) {
+            searchParam.setAccountType(accountQuery.getAccountType().name());
+        }
+        if (BooleanUtil.isFalse(accountQuery.getContainsAdmin())) {
+            searchParam.setIsAdmin("1");
+        }
+        if (BooleanUtil.isTrue(accountQuery.getExcludeDeleted())) {
+            searchParam.setIsDeleted(DeleteStatusEnum.NO.getValue());
+        }
+        if (BooleanUtil.isTrue(accountQuery.getExcludeDisabled())) {
+            searchParam.setStatus(CommonStatusEnum.ENABLE.getValue());
+        }
+        return ListResult.succeed(accountDomainService.selectAccounts(searchParam));
+    }
+
+    @Override
+    @TenantValidCheck(expression = "#accountPageQuery.tenantId")
+    public PageResult<AccountDTO> pageAccounts(AccountPageQuery accountPageQuery) {
+        AccountPageSearchParam searchParam = new AccountPageSearchParam();
+        searchParam.setPageNo(accountPageQuery.getPageNo());
+        searchParam.setPageSize(accountPageQuery.getPageSize());
+        if (Objects.nonNull(accountPageQuery.getTenantId())) {
+            searchParam.setTenantId(accountPageQuery.getTenantId());
+        }
+        if (StringUtils.isNotEmpty(accountPageQuery.getAccountName())) {
+            searchParam.setAccountName(accountPageQuery.getAccountName());
+        }
+        if (BooleanUtil.isTrue(accountPageQuery.getExcludeDeleted())) {
+            searchParam.setIsDeleted(DeleteStatusEnum.NO.getValue());
+        }
+        if (BooleanUtil.isTrue(accountPageQuery.getExcludeDisabled())) {
+            searchParam.setStatus(CommonStatusEnum.ENABLE.getValue());
+        }
+        if (Objects.nonNull(accountPageQuery.getAccountType())) {
+            searchParam.setAccountType(accountPageQuery.getAccountType().name());
+        }
+        if (BooleanUtil.isTrue(accountPageQuery.getContainsAdmin())) {
+            searchParam.setIsAdmin("1");
+        }
+        if (BooleanUtil.isTrue(accountPageQuery.getExcludeDeleted())) {
+            searchParam.setIsDeleted(DeleteStatusEnum.NO.getValue());
+        }
+        if (BooleanUtil.isTrue(accountPageQuery.getExcludeDisabled())) {
+            searchParam.setStatus(CommonStatusEnum.ENABLE.getValue());
+        }
+        Page<AccountDTO> page = accountDomainService.pageAccounts(searchParam);
+        return PageResult.succeed(page);
     }
 }

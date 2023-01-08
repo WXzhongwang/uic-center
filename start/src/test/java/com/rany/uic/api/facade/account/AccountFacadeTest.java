@@ -1,9 +1,13 @@
 package com.rany.uic.api.facade.account;
 
+import com.cake.framework.common.response.ListResult;
+import com.cake.framework.common.response.PageResult;
 import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.BaseTests;
 import com.rany.uic.api.command.account.*;
 import com.rany.uic.api.query.account.AccountBasicQuery;
+import com.rany.uic.api.query.account.AccountPageQuery;
+import com.rany.uic.api.query.account.AccountQuery;
 import com.rany.uic.common.dto.account.AccountDTO;
 import com.rany.uic.common.enums.AccountTypeEnum;
 import com.rany.uic.common.enums.LoginSafeStrategyEnum;
@@ -27,8 +31,8 @@ public class AccountFacadeTest extends BaseTests {
 
     @Resource
     private AccountFacade accountFacade;
-    private static final Long TENANT_ID =  771342305205563392L;
-    private static final Long ACCOUNT_ID =  771358516215689216L;
+    private static final Long TENANT_ID = 771342305205563392L;
+    private static final Long ACCOUNT_ID = 771358516215689216L;
 
     @Test
     public void createAccount() {
@@ -118,5 +122,23 @@ public class AccountFacadeTest extends BaseTests {
         updateSafeStrategyCommand.setExpiredAt(DateUtils.parseDate("2023-01-10 00:00:00", "yyyy-MM-dd HH:mm:ss"));
         PojoResult<Boolean> account = accountFacade.updateSafeStrategy(updateSafeStrategyCommand);
         Assert.assertTrue(account.getContent());
+    }
+
+
+    @Test
+    public void findAccounts() {
+        AccountQuery accountQuery = new AccountQuery();
+        accountQuery.setTenantId(TENANT_ID);
+        accountQuery.setContainsAdmin(false);
+        ListResult<AccountDTO> accounts = accountFacade.findAccounts(accountQuery);
+        Assert.assertTrue(accounts.getSuccess());
+    }
+
+    @Test
+    public void pageTenants() {
+        AccountPageQuery accountPageQuery = new AccountPageQuery();
+        accountPageQuery.setTenantId(TENANT_ID);
+        PageResult<AccountDTO> accounts = accountFacade.pageAccounts(accountPageQuery);
+        Assert.assertTrue(accounts.getSuccess());
     }
 }

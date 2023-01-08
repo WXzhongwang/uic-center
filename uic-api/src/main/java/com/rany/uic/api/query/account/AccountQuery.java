@@ -1,7 +1,8 @@
 package com.rany.uic.api.query.account;
 
-import com.rany.uic.common.enums.AccountTypeEnum;
 import com.rany.uic.common.base.BasePageQuery;
+import com.rany.uic.common.base.BaseQuery;
+import com.rany.uic.common.enums.AccountTypeEnum;
 import lombok.Data;
 
 /**
@@ -13,7 +14,7 @@ import lombok.Data;
  * @email 18668485565163.com
  */
 @Data
-public class AccountQueryPageQuery extends BasePageQuery {
+public class AccountQuery extends BaseQuery {
 
     private Long tenantId;
 
@@ -24,8 +25,6 @@ public class AccountQueryPageQuery extends BasePageQuery {
     private String phone;
 
     private AccountTypeEnum accountType;
-
-    private Boolean fuzzy;
 
     private Boolean containsAdmin = Boolean.TRUE;
 

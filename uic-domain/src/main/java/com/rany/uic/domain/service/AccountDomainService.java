@@ -1,5 +1,9 @@
 package com.rany.uic.domain.service;
 
+import com.cake.framework.common.response.Page;
+import com.rany.uic.common.dto.account.AccountDTO;
+import com.rany.uic.common.params.AccountPageSearchParam;
+import com.rany.uic.common.params.AccountSearchParam;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Account;
 import com.rany.uic.domain.pk.AccountId;
@@ -8,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * TODO
@@ -50,5 +55,14 @@ public class AccountDomainService {
 
     public Boolean updateSafeStrategy(Account account) {
         return accountRepository.updateSafeStrategy(account);
+    }
+
+
+    public List<AccountDTO> selectAccounts(AccountSearchParam searchParam) {
+        return accountRepository.findAccounts(searchParam);
+    }
+
+    public Page<AccountDTO> pageAccounts(AccountPageSearchParam searchParam) {
+        return accountRepository.pageAccounts(searchParam);
     }
 }

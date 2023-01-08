@@ -1,11 +1,13 @@
 package com.rany.uic.domain.convertor;
 
-import cn.hutool.core.util.BooleanUtil;
 import com.rany.uic.common.dto.account.AccountDTO;
-import com.rany.uic.domain.po.AccountPO;
 import com.rany.uic.domain.aggregate.Account;
+import com.rany.uic.domain.po.AccountPO;
+import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
+import java.util.List;
 
 /**
  * TODO
@@ -53,9 +55,9 @@ public interface AccountDataConvertor extends BaseConvertor<Account, AccountPO> 
     Account targetToSource(AccountPO accountPO);
 
 
-
     /**
      * source转DTO
+     *
      * @param account
      * @return
      */
@@ -66,4 +68,22 @@ public interface AccountDataConvertor extends BaseConvertor<Account, AccountPO> 
     @Mapping(source = "phone.phone", target = "phone")
     @Mapping(source = "headImage.img", target = "headImage")
     AccountDTO sourceToDTO(Account account);
+
+
+    /**
+     * PO转DTO
+     *
+     * @param accountPO
+     * @return
+     */
+    AccountDTO targetToDTO(AccountPO accountPO);
+
+    /**
+     * PO转DTO
+     *
+     * @param accountPO
+     * @return
+     */
+    @InheritConfiguration(name = "targetToDTO")
+    List<AccountDTO> targetToDTO(List<AccountPO> accountPO);
 }

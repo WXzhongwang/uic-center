@@ -19,7 +19,6 @@ import com.rany.uic.common.exception.enums.BusinessErrorMessage;
 import com.rany.uic.common.params.TenantPageSearchParam;
 import com.rany.uic.common.params.TenantSearchParam;
 import com.rany.uic.common.util.SnowflakeIdWorker;
-import com.rany.uic.domain.aggregate.Isv;
 import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.convertor.TenantDataConvertor;
 import com.rany.uic.domain.dp.EmailAddress;
@@ -145,22 +144,13 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     }
 
     @Override
+    @IsvValidCheck(expression = "tenantQuery.isvId")
     public ListResult<TenantDTO> findTenants(TenantQuery tenantQuery) {
         TenantSearchParam searchParam = new TenantSearchParam();
         if (Objects.nonNull(tenantQuery.getIsvId())) {
-            Isv isv = isvDomainService.findById(new IsvId(tenantQuery.getIsvId()));
-            if (Objects.isNull(isv)) {
-                throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
-            }
-            if (StringUtils.equals(isv.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
-                throw new BusinessException(BusinessErrorMessage.ISV_DELETED);
-            }
-            if (StringUtils.equals(isv.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
-                throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
-            }
             searchParam.setIsvId(tenantQuery.getIsvId());
         }
-        if (StringUtils.isNotEmpty(searchParam.getName())) {
+        if (StringUtils.isNotEmpty(tenantQuery.getName())) {
             searchParam.setName(searchParam.getName());
         }
         if (BooleanUtil.isTrue(tenantQuery.getExcludeDeleted())) {
@@ -173,21 +163,12 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     }
 
     @Override
+    @IsvValidCheck(expression = "tenantPageQuery.isvId")
     public PageResult<TenantDTO> pageTenants(TenantPageQuery tenantPageQuery) {
         TenantPageSearchParam pageSearchParam = new TenantPageSearchParam();
         pageSearchParam.setPageNo(tenantPageQuery.getPageNo());
         pageSearchParam.setPageSize(tenantPageQuery.getPageSize());
         if (Objects.nonNull(tenantPageQuery.getIsvId())) {
-            Isv isv = isvDomainService.findById(new IsvId(tenantPageQuery.getIsvId()));
-            if (Objects.isNull(isv)) {
-                throw new BusinessException(BusinessErrorMessage.ISV_NOT_FOUND);
-            }
-            if (StringUtils.equals(isv.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
-                throw new BusinessException(BusinessErrorMessage.ISV_DELETED);
-            }
-            if (StringUtils.equals(isv.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
-                throw new BusinessException(BusinessErrorMessage.ISV_DISABLED);
-            }
             pageSearchParam.setIsvId(tenantPageQuery.getIsvId());
         }
         if (StringUtils.isNotEmpty(tenantPageQuery.getName())) {

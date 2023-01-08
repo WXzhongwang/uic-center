@@ -1,8 +1,13 @@
 package com.rany.uic.domain.repository.impl;
 
 import cn.hutool.core.date.DateUtil;
+import com.cake.framework.common.response.Page;
+import com.github.pagehelper.PageInfo;
+import com.rany.uic.common.dto.account.AccountDTO;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.enums.LoginSafeStrategyEnum;
+import com.rany.uic.common.params.AccountPageSearchParam;
+import com.rany.uic.common.params.AccountSearchParam;
 import com.rany.uic.domain.aggregate.Account;
 import com.rany.uic.domain.convertor.AccountDataConvertor;
 import com.rany.uic.domain.convertor.SafeStrategyConvertor;
@@ -10,6 +15,7 @@ import com.rany.uic.domain.dao.AccountDao;
 import com.rany.uic.domain.dao.SafeStrategyDao;
 import com.rany.uic.domain.dao.mapper.AccountPOMapper;
 import com.rany.uic.domain.dao.mapper.SafeStrategyPOMapper;
+import com.rany.uic.domain.page.annotation.PagingQuery;
 import com.rany.uic.domain.pk.AccountId;
 import com.rany.uic.domain.po.AccountPO;
 import com.rany.uic.domain.po.SafeStrategyPO;
@@ -120,5 +126,26 @@ public class AccountRepositoryImpl implements AccountRepository {
             }
         }
         return Boolean.TRUE;
+    }
+
+    @Override
+    public List<AccountDTO> findAccounts(AccountSearchParam accountSearchParam) {
+        List<AccountPO> accountPOS = accountDao.selectList(accountSearchParam);
+        return accountDataConvertor.targetToDTO(accountPOS);
+    }
+
+    @Override
+    @PagingQuery
+    public Page<AccountDTO> pageAccounts(AccountPageSearchParam accountPageSearchParam) {
+        List<AccountPO> content = accountDao.selectPage(accountPageSearchParam);
+        PageInfo<AccountPO> pageInfo = new PageInfo<>(content);
+        Page<AccountDTO> pageDTO = new Page<>();
+        pageDTO.setPageNo(pageInfo.getPageNum());
+        pageDTO.setPageSize(pageInfo.getPageSize());
+        pageDTO.setTotalPage(pageInfo.getPages());
+        pageDTO.setTotal(Long.valueOf(pageInfo.getTotal()).intValue());
+        List<AccountDTO> values = accountDataConvertor.targetToDTO(pageInfo.getList());
+        pageDTO.setItems(values);
+        return pageDTO;
     }
 }

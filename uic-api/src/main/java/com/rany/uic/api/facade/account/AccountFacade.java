@@ -1,8 +1,12 @@
 package com.rany.uic.api.facade.account;
 
+import com.cake.framework.common.response.ListResult;
+import com.cake.framework.common.response.PageResult;
 import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.account.*;
 import com.rany.uic.api.query.account.AccountBasicQuery;
+import com.rany.uic.api.query.account.AccountPageQuery;
+import com.rany.uic.api.query.account.AccountQuery;
 import com.rany.uic.common.dto.account.AccountDTO;
 
 /**
@@ -26,6 +30,7 @@ public interface AccountFacade {
 
     /**
      * 获取账号信息
+     *
      * @param accountBasicQuery
      * @return
      */
@@ -41,6 +46,7 @@ public interface AccountFacade {
 
     /**
      * 启用账号
+     *
      * @param enableAccountCommand
      * @return
      */
@@ -48,6 +54,7 @@ public interface AccountFacade {
 
     /**
      * 删除账户
+     *
      * @param deleteAccountCommand
      * @return
      */
@@ -77,5 +84,21 @@ public interface AccountFacade {
      */
     PojoResult<Boolean> updateSafeStrategy(UpdateSafeStrategyCommand updateSafeStrategyCommand);
 
+
+    /**
+     * 分页查询账号
+     *
+     * @param accountQuery
+     * @return
+     */
+    ListResult<AccountDTO> findAccounts(AccountQuery accountQuery);
+
+    /**
+     * 查询账号
+     *
+     * @param accountPageQuery
+     * @return
+     */
+    PageResult<AccountDTO> pageAccounts(AccountPageQuery accountPageQuery);
 
 }
