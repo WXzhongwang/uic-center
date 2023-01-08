@@ -30,4 +30,7 @@ public interface AccountRepository extends Repository<Account, AccountId> {
      */
     int update(Account account);
 
+
+    Boolean saveSafeStrategy(Account account);
+
 }

@@ -28,6 +28,8 @@ public enum BusinessErrorMessage {
 
     ACCOUNT_NAME_DUPLICATED("4500", "账号名已重复"),
     ACCOUNT_NOT_FOUND("4501", "账号未找到"),
+    ACCOUNT_DELETED("4502", "账号已删除"),
+    ACCOUNT_DISABLED("4503", "账号已禁用"),
     ;
 
     private final String code;

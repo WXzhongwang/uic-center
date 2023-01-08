@@ -43,4 +43,8 @@ public class AccountDomainService {
     public Account findAccountByLoginName(String loginName) {
         return accountRepository.findAccountByLoginName(loginName);
     }
+
+    public Boolean saveSafeStrategy(Account account) {
+        return accountRepository.saveSafeStrategy(account);
+    }
 }

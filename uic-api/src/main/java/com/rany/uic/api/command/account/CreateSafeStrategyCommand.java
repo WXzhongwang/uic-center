@@ -23,6 +23,11 @@ public class CreateSafeStrategyCommand extends DTO {
     private Long accountId;
 
     /**
+     * 账号Id
+     */
+    private Long tenantId;
+
+    /**
      * 登录策略
      */
     private LoginSafeStrategyEnum strategy;

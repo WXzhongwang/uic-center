@@ -87,4 +87,21 @@ public class AccountRepositoryImpl implements AccountRepository {
     public int update(Account account) {
         return accountDao.update(account);
     }
+
+    @Override
+    public Boolean saveSafeStrategy(Account account) {
+        Long accountId = account.getId().getId();
+        List<SafeStrategy> safeStrategies = account.getSafeStrategies();
+        if (CollectionUtils.isNotEmpty(safeStrategies)) {
+            for (SafeStrategy safeStrategy : safeStrategies) {
+                safeStrategy.setAccountId(accountId);
+                safeStrategy.setIsDeleted(DeleteStatusEnum.NO.getValue());
+                safeStrategy.setGmtCreate(DateUtil.date());
+                safeStrategy.setGmtModified(DateUtil.date());
+                SafeStrategyPO strategy = safeStrategyConvertor.sourceToTarget(safeStrategy);
+                safeStrategyPOMapper.insertSelective(strategy);
+            }
+        }
+        return Boolean.TRUE;
+    }
 }

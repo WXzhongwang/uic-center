@@ -6,10 +6,13 @@ import com.rany.uic.api.command.account.*;
 import com.rany.uic.api.query.account.AccountBasicQuery;
 import com.rany.uic.common.dto.account.AccountDTO;
 import com.rany.uic.common.enums.AccountTypeEnum;
+import com.rany.uic.common.enums.LoginSafeStrategyEnum;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
 
 /**
  * TODO
@@ -90,7 +93,17 @@ public class AccountFacadeTest extends BaseTests {
     }
 
     @Test
-    public void createSafeStrategy() {
+    public void createSafeStrategy() throws ParseException {
+        CreateSafeStrategyCommand createSafeStrategyCommand = new CreateSafeStrategyCommand();
+        createSafeStrategyCommand.setTenantId(TENANT_ID);
+        createSafeStrategyCommand.setAccountId(ACCOUNT_ID);
+        createSafeStrategyCommand.setAuthCode("1528683821@qq.com");
+        createSafeStrategyCommand.setAuthValue("test123");
+        createSafeStrategyCommand.setStrategy(LoginSafeStrategyEnum.LDAP);
+        createSafeStrategyCommand.setBlockAt(DateUtils.parseDate("2023-01-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
+        createSafeStrategyCommand.setExpiredAt(DateUtils.parseDate("2023-01-10 00:00:00", "yyyy-MM-dd HH:mm:ss"));
+        PojoResult<Boolean> account = accountFacade.createSafeStrategy(createSafeStrategyCommand);
+        Assert.assertTrue(account.getContent());
     }
 
     @Test

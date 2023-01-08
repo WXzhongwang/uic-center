@@ -6,6 +6,8 @@ import com.rany.uic.api.command.account.*;
 import com.rany.uic.api.query.account.AccountBasicQuery;
 import com.rany.uic.common.dto.account.AccountDTO;
 import com.rany.uic.common.enums.AccountTypeEnum;
+import com.rany.uic.common.enums.CommonStatusEnum;
+import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.enums.LoginSafeStrategyEnum;
 import com.rany.uic.api.facade.account.AccountFacade;
 import com.rany.uic.common.exception.BusinessException;
@@ -31,8 +33,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -186,8 +190,31 @@ public class AccountRemoteServiceProvider implements AccountFacade {
     }
 
     @Override
+    @TenantValidCheck(expression = "#createSafeStrategyCommand.tenantId")
     public PojoResult<Boolean> createSafeStrategy(CreateSafeStrategyCommand createSafeStrategyCommand) {
-        return null;
+        Account account = accountDomainService.findById(new AccountId(createSafeStrategyCommand.getAccountId()));
+        if (Objects.isNull(account)) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_NOT_FOUND);
+        }
+        if (StringUtils.equals(account.getIsDeleted(), DeleteStatusEnum.YES.getValue())) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_DELETED);
+        }
+        if (StringUtils.equals(account.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_DISABLED);
+        }
+        SafeStrategy safeStrategy = new SafeStrategy(account.getId().getId(), createSafeStrategyCommand.getStrategy().name(),
+                createSafeStrategyCommand.getAuthCode(),
+                createSafeStrategyCommand.getAuthValue()
+                );
+        if (Objects.nonNull(createSafeStrategyCommand.getBlockAt())) {
+            safeStrategy.setBlockAt(createSafeStrategyCommand.getBlockAt());
+        }
+        if (Objects.nonNull(createSafeStrategyCommand.getExpiredAt())) {
+            safeStrategy.setExpiredAt(createSafeStrategyCommand.getExpiredAt());
+        }
+        account.setSafeStrategies(Collections.singletonList(safeStrategy));
+        accountDomainService.saveSafeStrategy(account);
+        return PojoResult.succeed(Boolean.TRUE);
     }
 
     @Override
