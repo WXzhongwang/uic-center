@@ -1,7 +1,7 @@
 package com.rany.uic.domain.convertor;
 
+import com.rany.uic.domain.entity.SafeStrategy;
 import com.rany.uic.domain.po.SafeStrategyPO;
-import com.rany.uic.domain.value.SafeStrategy;
 import org.mapstruct.Mapper;
 
 /**

@@ -1,7 +1,7 @@
-package com.rany.uic.domain.value;
+package com.rany.uic.domain.entity;
 
 import cn.hutool.core.date.DateUtil;
-import com.cake.framework.common.base.BaseValueObject;
+import com.cake.framework.common.base.BaseEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @NoArgsConstructor
-public class SafeStrategy extends BaseValueObject<Long> {
+public class SafeStrategy extends BaseEntity<Long> {
 
     private Long accountId;
     /**
@@ -34,7 +34,7 @@ public class SafeStrategy extends BaseValueObject<Long> {
     private String authValue;
     private Date blockAt;
     private Date expiredAt;
-    
+
     public Boolean isBlocked() {
         return this.blockAt != null
                 && DateUtil.date().before(blockAt);

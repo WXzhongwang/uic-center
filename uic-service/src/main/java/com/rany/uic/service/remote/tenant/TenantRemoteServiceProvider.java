@@ -144,7 +144,7 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     }
 
     @Override
-    @IsvValidCheck(expression = "tenantQuery.isvId")
+    @IsvValidCheck(expression = "#tenantQuery.isvId")
     public ListResult<TenantDTO> findTenants(TenantQuery tenantQuery) {
         TenantSearchParam searchParam = new TenantSearchParam();
         if (Objects.nonNull(tenantQuery.getIsvId())) {
@@ -163,7 +163,7 @@ public class TenantRemoteServiceProvider implements TenantFacade {
     }
 
     @Override
-    @IsvValidCheck(expression = "tenantPageQuery.isvId")
+    @IsvValidCheck(expression = "#tenantPageQuery.isvId")
     public PageResult<TenantDTO> pageTenants(TenantPageQuery tenantPageQuery) {
         TenantPageSearchParam pageSearchParam = new TenantPageSearchParam();
         pageSearchParam.setPageNo(tenantPageQuery.getPageNo());
