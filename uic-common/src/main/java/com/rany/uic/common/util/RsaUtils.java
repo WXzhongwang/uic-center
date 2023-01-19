@@ -12,6 +12,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 
 /**
  * @Description
@@ -32,7 +33,8 @@ public class RsaUtils {
      * @throws Exception
      */
     public static RSAPublicKey getRSAPublicKeyByBase64(String base64s) throws Exception {
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec((new sun.misc.BASE64Decoder()).decodeBuffer(base64s));
+        byte[] value = Base64.getDecoder().decode(base64s);
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(value);
         RSAPublicKey publicKey = null;
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         try {
@@ -51,7 +53,8 @@ public class RsaUtils {
      * @throws Exception
      */
     public static RSAPrivateKey getRSAPrivateKeyByBase64(String base64s) throws Exception {
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec((new sun.misc.BASE64Decoder()).decodeBuffer(base64s));
+        byte[] value = Base64.getDecoder().decode(base64s);
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(value);
         RSAPrivateKey privateKey = null;
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         try {
