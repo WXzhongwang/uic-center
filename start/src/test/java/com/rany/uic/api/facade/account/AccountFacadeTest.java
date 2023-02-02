@@ -12,6 +12,7 @@ import com.rany.uic.common.dto.account.AccountDTO;
 import com.rany.uic.common.enums.AccountTypeEnum;
 import com.rany.uic.common.enums.LoginSafeStrategyEnum;
 import org.apache.commons.lang3.time.DateUtils;
+import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -130,6 +131,7 @@ public class AccountFacadeTest extends BaseTests {
         AccountQuery accountQuery = new AccountQuery();
         accountQuery.setTenantId(TENANT_ID);
         accountQuery.setContainsAdmin(false);
+        accountQuery.setAccountIds(Lists.newArrayList(771342305708879872L));
         ListResult<AccountDTO> accounts = accountFacade.findAccounts(accountQuery);
         Assert.assertTrue(accounts.getSuccess());
     }

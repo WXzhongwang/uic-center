@@ -1,9 +1,10 @@
 package com.rany.uic.api.query.account;
 
-import com.rany.uic.common.base.BasePageQuery;
 import com.rany.uic.common.base.BaseQuery;
 import com.rany.uic.common.enums.AccountTypeEnum;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * TODO
@@ -17,6 +18,7 @@ import lombok.Data;
 public class AccountQuery extends BaseQuery {
 
     private Long tenantId;
+    private List<Long> accountIds;
 
     private String accountName;
 

@@ -38,6 +38,7 @@ import com.rany.uic.domain.service.TenantDomainService;
 import com.rany.uic.service.aop.annotation.TenantValidCheck;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -272,13 +273,16 @@ public class AccountRemoteServiceProvider implements AccountFacade {
             searchParam.setAccountType(accountQuery.getAccountType().name());
         }
         if (BooleanUtil.isFalse(accountQuery.getContainsAdmin())) {
-            searchParam.setIsAdmin("1");
+            searchParam.setIsAdmin("0");
         }
         if (BooleanUtil.isTrue(accountQuery.getExcludeDeleted())) {
             searchParam.setIsDeleted(DeleteStatusEnum.NO.getValue());
         }
         if (BooleanUtil.isTrue(accountQuery.getExcludeDisabled())) {
             searchParam.setStatus(CommonStatusEnum.ENABLE.getValue());
+        }
+        if (CollectionUtils.isNotEmpty(accountQuery.getAccountIds())) {
+            searchParam.setAccountIds(accountQuery.getAccountIds());
         }
         return ListResult.succeed(accountDomainService.selectAccounts(searchParam));
     }
@@ -304,8 +308,8 @@ public class AccountRemoteServiceProvider implements AccountFacade {
         if (Objects.nonNull(accountPageQuery.getAccountType())) {
             searchParam.setAccountType(accountPageQuery.getAccountType().name());
         }
-        if (BooleanUtil.isTrue(accountPageQuery.getContainsAdmin())) {
-            searchParam.setIsAdmin("1");
+        if (BooleanUtil.isFalse(accountPageQuery.getContainsAdmin())) {
+            searchParam.setIsAdmin("0");
         }
         if (BooleanUtil.isTrue(accountPageQuery.getExcludeDeleted())) {
             searchParam.setIsDeleted(DeleteStatusEnum.NO.getValue());

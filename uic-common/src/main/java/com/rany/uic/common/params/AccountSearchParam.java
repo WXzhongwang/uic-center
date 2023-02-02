@@ -3,6 +3,8 @@ package com.rany.uic.common.params;
 import com.rany.uic.common.base.BaseQuery;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * TODO
  *
@@ -16,6 +18,8 @@ public class AccountSearchParam extends BaseQuery {
 
     private Long tenantId;
 
+    private List<Long> accountIds;
+
     private String accountName;
 
     private String email;
@@ -23,7 +27,7 @@ public class AccountSearchParam extends BaseQuery {
     private String phone;
 
     private String accountType;
-    
+
     private String isAdmin;
 
     private String isDeleted;

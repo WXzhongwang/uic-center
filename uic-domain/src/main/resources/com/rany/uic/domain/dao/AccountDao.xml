@@ -209,6 +209,12 @@
             <if test="accountType != null and accountType != ''">
                 and account_type = #{accountType}
             </if>
+            <if test="accountIds != null and accountIds.size > 0">
+                and id in
+                <foreach collection="accountIds" index="index" item="accountId" open="(" separator="," close=")">
+                    #{accountId}
+                </foreach>
+            </if>
         </where>
         order by gmt_modified, gmt_create desc
     </select>
