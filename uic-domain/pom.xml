@@ -70,11 +70,6 @@
             <artifactId>uic-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.rany.uic</groupId>
-            <artifactId>uic-common</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>1.5.3.Final</version>
@@ -91,11 +86,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.mybatis.generator</groupId>
-            <artifactId>mybatis-generator-core</artifactId>
-            <version>1.3.2</version>
-            <type>jar</type>
-            <scope>provided</scope>
+            <groupId>com.rany.uic</groupId>
+            <artifactId>uic-infrastructure</artifactId>
         </dependency>
     </dependencies>
 
@@ -121,17 +113,6 @@
                             <version>${mapstruct.version}</version>
                         </path>
                     </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-            <!-- mybatis generator 自动生成代码插件 ，这里输入自己创建的mybatis-generator-config.xml地址-->
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.2</version>
-                <configuration>
-                    <configurationFile>../uic-domain/src/main/resources/mybatis-generator-config.xml</configurationFile>
-                    <overwrite>true</overwrite>
-                    <verbose>true</verbose>
                 </configuration>
             </plugin>
         </plugins>

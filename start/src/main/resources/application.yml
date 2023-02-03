@@ -70,5 +70,5 @@ warn:
     time: 300
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.rany.uic.dao, com.rany.uic.domain
+  mapper-locations: classpath:com/rany/uic/domain/dao/*.xml, classpath:com/rany/uic/infra/mapper/*.xml
+  type-aliases-package: com.rany.uic.infra

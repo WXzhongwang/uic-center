@@ -1,7 +1,7 @@
 package com.rany.uic.domain.dao;
 
-import com.rany.uic.domain.po.AccountPO;
-import com.rany.uic.domain.po.SafeStrategyPO;
+import com.rany.uic.infra.po.AccountPO;
+import com.rany.uic.infra.po.SafeStrategyPO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,6 +28,7 @@ public interface SafeStrategyDao extends BaseMapper<AccountPO> {
 
     /**
      * 根据账号获取登录策略
+     *
      * @param accountId
      * @return
      */

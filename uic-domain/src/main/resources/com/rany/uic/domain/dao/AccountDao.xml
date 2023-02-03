@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rany.uic.domain.dao.AccountDao">
-    <resultMap id="BaseResultMap" type="com.rany.uic.domain.po.AccountPO">
+    <resultMap id="BaseResultMap" type="com.rany.uic.infra.po.AccountPO">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="account_type" property="accountType" jdbcType="VARCHAR"/>
         <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
@@ -179,7 +179,7 @@
     </update>
 
 
-    <select id="selectList" resultType="com.rany.uic.domain.po.AccountPO"
+    <select id="selectList" resultType="com.rany.uic.infra.po.AccountPO"
             parameterType="com.rany.uic.common.params.AccountSearchParam" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -219,7 +219,7 @@
         order by gmt_modified, gmt_create desc
     </select>
 
-    <select id="selectPage" resultType="com.rany.uic.domain.po.AccountPO"
+    <select id="selectPage" resultType="com.rany.uic.infra.po.AccountPO"
             parameterType="com.rany.uic.common.params.AccountPageSearchParam" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

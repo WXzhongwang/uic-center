@@ -1,8 +1,8 @@
 package com.rany.uic.domain.convertor;
 
 import com.rany.uic.common.dto.isv.IsvDTO;
-import com.rany.uic.domain.po.IsvPO;
 import com.rany.uic.domain.aggregate.Isv;
+import com.rany.uic.infra.po.IsvPO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

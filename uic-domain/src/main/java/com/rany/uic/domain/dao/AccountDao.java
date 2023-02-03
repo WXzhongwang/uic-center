@@ -3,7 +3,7 @@ package com.rany.uic.domain.dao;
 import com.rany.uic.common.params.AccountPageSearchParam;
 import com.rany.uic.common.params.AccountSearchParam;
 import com.rany.uic.domain.aggregate.Account;
-import com.rany.uic.domain.po.AccountPO;
+import com.rany.uic.infra.po.AccountPO;
 
 import java.util.List;
 
@@ -17,9 +17,21 @@ import java.util.List;
  */
 public interface AccountDao extends BaseMapper<AccountPO> {
 
+    /**
+     * 保存
+     *
+     * @param acocount
+     * @return
+     */
     int save(Account acocount);
 
-    int update(Account acocount);
+    /**
+     * 更新
+     *
+     * @param account
+     * @return
+     */
+    int update(Account account);
 
 
     /**

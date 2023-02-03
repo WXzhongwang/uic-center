@@ -3,7 +3,7 @@ package com.rany.uic.domain.dao;
 import com.rany.uic.common.params.TenantPageSearchParam;
 import com.rany.uic.common.params.TenantSearchParam;
 import com.rany.uic.domain.aggregate.Tenant;
-import com.rany.uic.domain.po.TenantPO;
+import com.rany.uic.infra.po.TenantPO;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package com.rany.uic.domain.convertor;
 
 import com.rany.uic.common.dto.account.AccountDTO;
 import com.rany.uic.domain.aggregate.Account;
-import com.rany.uic.domain.po.AccountPO;
+import com.rany.uic.infra.po.AccountPO;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

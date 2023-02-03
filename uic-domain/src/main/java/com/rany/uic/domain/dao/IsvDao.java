@@ -1,7 +1,7 @@
 package com.rany.uic.domain.dao;
 
-import com.rany.uic.domain.po.IsvPO;
 import com.rany.uic.domain.aggregate.Isv;
+import com.rany.uic.infra.po.IsvPO;
 
 /**
  * TODO
@@ -13,5 +13,11 @@ import com.rany.uic.domain.aggregate.Isv;
  */
 public interface IsvDao extends BaseMapper<IsvPO> {
 
+    /**
+     * isv 保存
+     *
+     * @param isv
+     * @return
+     */
     int save(Isv isv);
 }

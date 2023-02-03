@@ -15,6 +15,7 @@
         <module>uic-service</module>
         <module>uic-web</module>
         <module>uic-common</module>
+        <module>uic-infrastructure</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -183,6 +184,11 @@
             <dependency>
                 <groupId>com.rany.uic</groupId>
                 <artifactId>uic-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rany.uic</groupId>
+                <artifactId>uic-infrastructure</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
