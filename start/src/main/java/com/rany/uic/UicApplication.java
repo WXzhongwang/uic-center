@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {ParamLimitInterceptor.class})
 @MapperScan(basePackages = {"com.rany.uic.domain.dao", "com.rany.uic.infra.mapper"})
-@ComponentScan({"com.rany.uic.domain", "com.rany.uic.infra", "com.rany.uic.service"})
+@ComponentScan({"com.rany.uic.domain", "com.rany.uic.infra", "com.rany.uic.service", "com.rany.uic.web"})
 public class UicApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
