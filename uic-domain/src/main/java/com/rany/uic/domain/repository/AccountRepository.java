@@ -30,6 +30,14 @@ public interface AccountRepository extends Repository<Account, AccountId> {
     Account findAccountByLoginName(String loginName);
 
     /**
+     * 根据dingUnionId查找用户
+     *
+     * @param dingUnionId
+     * @return
+     */
+    Account findAccountByDingUnionId(Long tenantId, String dingUnionId);
+
+    /**
      * 账号更新
      *
      * @param account

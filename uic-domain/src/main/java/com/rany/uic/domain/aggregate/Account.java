@@ -40,6 +40,7 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
      */
     private AccountId id;
 
+
     /**
      * 租户Id
      */
@@ -92,6 +93,9 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
     private String wechat;
     private String tags;
     private Date birthday;
+    private String dingUnionId;
+    private String dingUserId;
+    private String workNo;
 
     /**
      * 头像

@@ -9,6 +9,7 @@ import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.account.*;
 import com.rany.uic.api.facade.account.AccountFacade;
 import com.rany.uic.api.query.account.AccountBasicQuery;
+import com.rany.uic.api.query.account.AccountDingIdQuery;
 import com.rany.uic.api.query.account.AccountPageQuery;
 import com.rany.uic.api.query.account.AccountQuery;
 import com.rany.uic.common.dto.account.AccountDTO;
@@ -115,6 +116,17 @@ public class AccountRemoteServiceProvider implements AccountFacade {
     @TenantValidCheck(expression = "#accountBasicQuery.tenantId")
     public PojoResult<AccountDTO> getAccount(AccountBasicQuery accountBasicQuery) {
         Account account = accountDomainService.findById(new AccountId(accountBasicQuery.getAccountId()));
+        if (Objects.isNull(account)) {
+            throw new BusinessException(BusinessErrorMessage.ACCOUNT_NOT_FOUND);
+        }
+        AccountDTO accountDTO = accountDataConvertor.sourceToDTO(account);
+        return PojoResult.succeed(accountDTO);
+    }
+
+    @Override
+    @TenantValidCheck(expression = "#accountBasicQuery.tenantId")
+    public PojoResult<AccountDTO> getAccountByDingId(AccountDingIdQuery accountBasicQuery) {
+        Account account = accountDomainService.findAccountByDingUnionId(accountBasicQuery.getTenantId(), accountBasicQuery.getDingUnionId());
         if (Objects.isNull(account)) {
             throw new BusinessException(BusinessErrorMessage.ACCOUNT_NOT_FOUND);
         }

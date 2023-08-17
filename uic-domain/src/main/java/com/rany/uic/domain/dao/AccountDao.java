@@ -4,6 +4,7 @@ import com.rany.uic.common.params.AccountPageSearchParam;
 import com.rany.uic.common.params.AccountSearchParam;
 import com.rany.uic.domain.aggregate.Account;
 import com.rany.uic.infra.po.AccountPO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,10 +21,10 @@ public interface AccountDao extends BaseMapper<AccountPO> {
     /**
      * 保存
      *
-     * @param acocount
+     * @param account
      * @return
      */
-    int save(Account acocount);
+    int save(Account account);
 
     /**
      * 更新
@@ -49,4 +50,13 @@ public interface AccountDao extends BaseMapper<AccountPO> {
      * @return
      */
     List<AccountPO> selectPage(AccountPageSearchParam searchParam);
+
+
+    /**
+     * 根据dingUserId查用户
+     *
+     * @param dingUnionId
+     * @return
+     */
+    AccountPO getAccountByUnionId(@Param("dingUnionId") String dingUnionId, @Param("tenantId") Long tenantId);
 }

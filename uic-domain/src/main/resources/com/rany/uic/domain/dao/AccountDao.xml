@@ -16,10 +16,13 @@
         <result column="feature" property="feature" jdbcType="VARCHAR"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+        <result column="ding_union_id" jdbcType="VARCHAR" property="dingUnionId"/>
+        <result column="ding_user_id" jdbcType="VARCHAR" property="dingUserId"/>
+        <result column="work_no" jdbcType="VARCHAR" property="workNo"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, account_name, phone, email, tenant_id, is_admin, account_type, status, is_deleted,
-        last_login_ip, last_login_time, feature, gmt_create, gmt_modified
+        last_login_ip, last_login_time, feature, gmt_create, gmt_modified, ding_union_id, ding_user_id, work_no
     </sql>
 
     <insert id="save" parameterType="com.rany.uic.domain.aggregate.Account">
@@ -251,5 +254,21 @@
             </if>
         </where>
         order by gmt_modified, gmt_create desc
+    </select>
+
+
+    <select id="getAccountByUnionId">
+        select
+        <include refid="Base_Column_List"/>
+        from account
+        <where>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="dingUnionId != null and dingUnionId != ''">
+                and ding_union_id = #{dingUnionId}
+            </if>
+        </where>
+        limit 1
     </select>
 </mapper>

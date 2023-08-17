@@ -45,6 +45,11 @@ public class AccountDomainService {
         return accountRepository.find(accountId);
     }
 
+
+    public Account findAccountByDingUnionId(Long tenantId, String dingUnionId) {
+        return accountRepository.findAccountByDingUnionId(tenantId, dingUnionId);
+    }
+
     public Account findAccountByLoginName(String loginName) {
         return accountRepository.findAccountByLoginName(loginName);
     }

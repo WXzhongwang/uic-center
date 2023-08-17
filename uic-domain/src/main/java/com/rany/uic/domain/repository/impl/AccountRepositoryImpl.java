@@ -94,6 +94,12 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
+    public Account findAccountByDingUnionId(Long tenantId, String dingUnionId) {
+        AccountPO accountPO = accountDao.getAccountByUnionId(dingUnionId, tenantId);
+        return accountDataConvertor.targetToSource(accountPO);
+    }
+
+    @Override
     public int update(Account account) {
         return accountDao.update(account);
     }

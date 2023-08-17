@@ -5,6 +5,7 @@ import com.cake.framework.common.response.PageResult;
 import com.cake.framework.common.response.PojoResult;
 import com.rany.uic.api.command.account.*;
 import com.rany.uic.api.query.account.AccountBasicQuery;
+import com.rany.uic.api.query.account.AccountDingIdQuery;
 import com.rany.uic.api.query.account.AccountPageQuery;
 import com.rany.uic.api.query.account.AccountQuery;
 import com.rany.uic.common.dto.account.AccountDTO;
@@ -35,6 +36,15 @@ public interface AccountFacade {
      * @return
      */
     PojoResult<AccountDTO> getAccount(AccountBasicQuery accountBasicQuery);
+
+
+    /**
+     * 获取账号信息
+     *
+     * @param accountBasicQuery
+     * @return
+     */
+    PojoResult<AccountDTO> getAccountByDingId(AccountDingIdQuery accountBasicQuery);
 
     /**
      * 账号禁用
