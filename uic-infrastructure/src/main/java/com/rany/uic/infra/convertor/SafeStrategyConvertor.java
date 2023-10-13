@@ -1,4 +1,4 @@
-package com.rany.uic.domain.convertor;
+package com.rany.uic.infra.convertor;
 
 import com.rany.uic.domain.entity.SafeStrategy;
 import com.rany.uic.infra.po.SafeStrategyPO;

@@ -15,7 +15,7 @@ import com.rany.uic.common.exception.BusinessException;
 import com.rany.uic.common.exception.enums.BusinessErrorMessage;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Isv;
-import com.rany.uic.domain.convertor.IsvDataConvertor;
+import com.rany.uic.infra.convertor.IsvDataConvertor;
 import com.rany.uic.domain.dp.EmailAddress;
 import com.rany.uic.domain.dp.IsvName;
 import com.rany.uic.domain.dp.Phone;

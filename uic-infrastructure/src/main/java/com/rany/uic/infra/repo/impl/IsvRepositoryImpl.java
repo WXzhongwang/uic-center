@@ -1,11 +1,11 @@
-package com.rany.uic.domain.repository.impl;
+package com.rany.uic.infra.repo.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.BooleanUtil;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.domain.aggregate.Isv;
-import com.rany.uic.domain.convertor.IsvDataConvertor;
-import com.rany.uic.domain.dao.IsvDao;
+import com.rany.uic.infra.convertor.IsvDataConvertor;
+import com.rany.uic.infra.dao.IsvDao;
 import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.repository.IsvRepository;
 import com.rany.uic.infra.mapper.IsvPOMapper;

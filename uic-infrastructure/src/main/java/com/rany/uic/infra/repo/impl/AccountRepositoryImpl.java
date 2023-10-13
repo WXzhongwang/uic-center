@@ -1,4 +1,4 @@
-package com.rany.uic.domain.repository.impl;
+package com.rany.uic.infra.repo.impl;
 
 import cn.hutool.core.date.DateUtil;
 import com.cake.framework.common.response.Page;
@@ -9,10 +9,10 @@ import com.rany.uic.common.enums.LoginSafeStrategyEnum;
 import com.rany.uic.common.params.AccountPageSearchParam;
 import com.rany.uic.common.params.AccountSearchParam;
 import com.rany.uic.domain.aggregate.Account;
-import com.rany.uic.domain.convertor.AccountDataConvertor;
-import com.rany.uic.domain.convertor.SafeStrategyConvertor;
-import com.rany.uic.domain.dao.AccountDao;
-import com.rany.uic.domain.dao.SafeStrategyDao;
+import com.rany.uic.infra.convertor.AccountDataConvertor;
+import com.rany.uic.infra.convertor.SafeStrategyConvertor;
+import com.rany.uic.infra.dao.AccountDao;
+import com.rany.uic.infra.dao.SafeStrategyDao;
 import com.rany.uic.domain.entity.SafeStrategy;
 import com.rany.uic.domain.page.annotation.PagingQuery;
 import com.rany.uic.domain.pk.AccountId;

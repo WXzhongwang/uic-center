@@ -1,4 +1,4 @@
-package com.rany.uic.domain.convertor;
+package com.rany.uic.infra.convertor;
 
 import com.rany.uic.common.dto.isv.IsvDTO;
 import com.rany.uic.domain.aggregate.Isv;

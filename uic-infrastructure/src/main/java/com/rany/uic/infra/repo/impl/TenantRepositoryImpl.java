@@ -1,4 +1,4 @@
-package com.rany.uic.domain.repository.impl;
+package com.rany.uic.infra.repo.impl;
 
 import cn.hutool.core.date.DateUtil;
 import com.cake.framework.common.response.Page;
@@ -8,8 +8,8 @@ import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.params.TenantPageSearchParam;
 import com.rany.uic.common.params.TenantSearchParam;
 import com.rany.uic.domain.aggregate.Tenant;
-import com.rany.uic.domain.convertor.TenantDataConvertor;
-import com.rany.uic.domain.dao.TenantDao;
+import com.rany.uic.infra.convertor.TenantDataConvertor;
+import com.rany.uic.infra.dao.TenantDao;
 import com.rany.uic.domain.page.annotation.PagingQuery;
 import com.rany.uic.domain.pk.IsvId;
 import com.rany.uic.domain.pk.TenantId;
@@ -63,8 +63,9 @@ public class TenantRepositoryImpl implements TenantRepository {
     }
 
     @Override
-    public TenantPO selectByShortName(String shortName) {
-        return tenantDao.selectByShortName(shortName);
+    public Tenant selectByShortName(String shortName) {
+        TenantPO tenantPO = tenantDao.selectByShortName(shortName);
+        return tenantDataConvertor.targetToSource(tenantPO);
     }
 
     @Override

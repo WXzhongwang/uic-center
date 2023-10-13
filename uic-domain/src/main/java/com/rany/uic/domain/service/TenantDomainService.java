@@ -15,7 +15,6 @@ import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.repository.AccountRepository;
 import com.rany.uic.domain.repository.IsvRepository;
 import com.rany.uic.domain.repository.TenantRepository;
-import com.rany.uic.infra.po.TenantPO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -53,7 +52,7 @@ public class TenantDomainService {
                 || StringUtils.equals(isv.getStatus(), CommonStatusEnum.DISABLED.getValue())) {
             throw new BusinessException(BusinessErrorMessage.ISV_INVALID);
         }
-        TenantPO tenantPO = tenantRepository.selectByShortName(tenant.getTenantName().getShortName());
+        Tenant tenantPO = tenantRepository.selectByShortName(tenant.getTenantName().getShortName());
         if (Objects.nonNull(tenantPO)) {
             throw new BusinessException(BusinessErrorMessage.TENANT_SHORT_NAME_EXISTED);
         }

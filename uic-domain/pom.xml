@@ -85,10 +85,10 @@
             <artifactId>aspectjweaver</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.rany.uic</groupId>
-            <artifactId>uic-infrastructure</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.rany.uic</groupId>-->
+<!--            <artifactId>uic-infrastructure</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

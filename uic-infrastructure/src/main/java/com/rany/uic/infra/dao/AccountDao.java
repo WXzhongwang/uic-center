@@ -1,4 +1,4 @@
-package com.rany.uic.domain.dao;
+package com.rany.uic.infra.dao;
 
 import com.rany.uic.common.params.AccountPageSearchParam;
 import com.rany.uic.common.params.AccountSearchParam;

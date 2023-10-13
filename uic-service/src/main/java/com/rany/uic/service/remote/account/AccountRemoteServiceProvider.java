@@ -26,7 +26,7 @@ import com.rany.uic.common.util.AccountUtil;
 import com.rany.uic.common.util.SnowflakeIdWorker;
 import com.rany.uic.domain.aggregate.Account;
 import com.rany.uic.domain.aggregate.Tenant;
-import com.rany.uic.domain.convertor.AccountDataConvertor;
+import com.rany.uic.infra.convertor.AccountDataConvertor;
 import com.rany.uic.domain.dp.AccountName;
 import com.rany.uic.domain.dp.EmailAddress;
 import com.rany.uic.domain.dp.HeadImage;

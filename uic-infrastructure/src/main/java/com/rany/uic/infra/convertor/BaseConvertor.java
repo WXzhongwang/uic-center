@@ -1,4 +1,4 @@
-package com.rany.uic.domain.convertor;
+package com.rany.uic.infra.convertor;
 
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;
