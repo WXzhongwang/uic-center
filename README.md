@@ -9,6 +9,11 @@ springboot 2.2.6.RELEASE
 ** 自定义错误处理 ** : 支持自定义错误处理
 ** 支持isv,租户**：支持ISV, 租户, 账号多级管理
 
+
+参考：
+![RBAC模型](https://github.com/WXzhongwang/uic-center/blob/main/WX20231015-225622@2x.png)
+
+
 ## GAV
 ```xml
  <dependency>
