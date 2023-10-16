@@ -257,7 +257,8 @@
     </select>
 
 
-    <select id="getAccountByUnionId">
+    <select id="getAccountByUnionId" resultType="com.rany.uic.infra.po.AccountPO"
+            resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from account
