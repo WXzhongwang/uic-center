@@ -3,11 +3,12 @@
 cake-acl 是一个基于 SpringBoot + UIC 的服务端应用, 统一用户中心。
 
 springboot 2.2.6.RELEASE
+
 特性:
 
-** springboot ** : 接入快速，支持tomcat+webflux快速接入
-** 自定义错误处理 ** : 支持自定义错误处理
-** 支持isv,租户**：支持ISV, 租户, 账号多级管理
+- [x] **Java**  : 支持二开，设计简单，支持快速集成
+- [x] **SpringBoot**: 接入快速，支持mvc+webflux快速接入
+- [x] **统一认证中心**: 支持ISV, 租户, 账号多级管理
 
 
 参考：
