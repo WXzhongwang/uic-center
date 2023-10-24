@@ -8,7 +8,9 @@ springboot 2.2.6.RELEASE
 
 - [x] **Java**  : 支持二开，设计简单，支持快速集成
 - [x] **SpringBoot**: 接入快速，支持mvc+webflux快速接入
-- [x] **统一认证中心**: 支持ISV, 租户, 账号多级管理
+- [x] **多应用多租户**: 支持多应用多租户模式
+- [x] **服务化**: zookeeper+dubbo
+
 
 
 参考：
