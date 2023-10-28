@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @date 2021/11/3 10:40 下午
  * @email 18668485565@163.com
  */
-@EnableDubbo
+// @EnableDubbo
 @EnableTransactionManagement
 @SpringBootApplication(exclude = {ParamLimitInterceptor.class})
 @MapperScan(basePackages = {"com.rany.uic.infra.dao", "com.rany.uic.infra.mapper"})
@@ -29,8 +29,8 @@ public class UicApplication extends SpringBootServletInitializer {
         SpringApplication.run(UicApplication.class, args);
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(UicApplication.class);
-    }
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//        return builder.sources(UicApplication.class);
+//    }
 }

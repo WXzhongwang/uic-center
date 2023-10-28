@@ -1,3 +1,11 @@
-FROM registry.cn-hangzhou.aliyuncs.com/cake-devops/tomcat8:0.0.1
-COPY start/target/uic-center.war /usr/local/apache-tomcat-8.5.85/webapps/ROOT.war
-EXPOSE 8080
+#jdk版本
+FROM openjdk:8-jdk-alpine
+
+#挂载目录
+VOLUME /tmp
+
+#将jar包添加到容器中并更名为demosw.jar
+ADD /start/target/uic-center-service.jar uic-center-service.jar
+
+#docker运行命令
+ENTRYPOINT ["java","-Dspring.profiles.active=test","-jar","/uic-center-service.jar"]

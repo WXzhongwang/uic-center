@@ -1,0 +1,13 @@
+dubbo:
+  registry:
+    address: zookeeper://zookeeper:2181
+  metadata-report:
+    address: zookeeper://zookeeper:2181
+
+
+spring:
+  profiles:
+    active: test
+  datasource:
+    druid:
+      url: jdbc:mysql://host.docker.internal:3306/rany_uic?allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false

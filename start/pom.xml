@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>start</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -77,11 +77,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>dubbo</artifactId>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -139,7 +134,7 @@
     </profiles>
 
     <build>
-        <finalName>${project.parent.artifactId}</finalName>
+        <finalName>uic-center-service</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -177,27 +172,27 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <!--设置该module达成war包后的名字,与应用最终打包名称一致-->
-                    <warName>uic-center</warName>
-                    <!--如果想在没有web.xml文件的情况下构建WAR，请设置为false。-->
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <archiveClasses>true</archiveClasses>
-                    <attachClasses>true</attachClasses>
-                    <!--设置该module打成jar包后的名字,版本号同pom中设定的版本号-->
-                    <classesClassifier>uic-center</classesClassifier>
-                    <webResources>
-                        <resource>
-                            <directory>target/classes</directory>
-                            <targetPath>WEB-INF/classes</targetPath>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-war-plugin</artifactId>-->
+<!--                <version>2.4</version>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash;设置该module达成war包后的名字,与应用最终打包名称一致&ndash;&gt;-->
+<!--                    <warName>uic-center-service</warName>-->
+<!--                    &lt;!&ndash;如果想在没有web.xml文件的情况下构建WAR，请设置为false。&ndash;&gt;-->
+<!--                    <failOnMissingWebXml>false</failOnMissingWebXml>-->
+<!--                    <archiveClasses>true</archiveClasses>-->
+<!--                    <attachClasses>true</attachClasses>-->
+<!--                    &lt;!&ndash;设置该module打成jar包后的名字,版本号同pom中设定的版本号&ndash;&gt;-->
+<!--                    <classesClassifier>uic-center-service</classesClassifier>-->
+<!--                    <webResources>-->
+<!--                        <resource>-->
+<!--                            <directory>target/classes</directory>-->
+<!--                            <targetPath>WEB-INF/classes</targetPath>-->
+<!--                        </resource>-->
+<!--                    </webResources>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 </project>

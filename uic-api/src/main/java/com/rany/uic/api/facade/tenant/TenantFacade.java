@@ -10,10 +10,10 @@ import com.rany.uic.api.query.tenant.TenantQuery;
 import com.rany.uic.common.dto.tenant.TenantDTO;
 
 /**
- * TODO
+ * 租户管理
  *
  * @author zhongshengwang
- * @description TODO
+ * @description 租户管理
  * @date 2022/11/15 22:21
  * @email 18668485565163.com
  */
