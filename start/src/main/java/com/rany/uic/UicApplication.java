@@ -2,6 +2,7 @@ package com.rany.uic;
 
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import com.cake.framework.mybatis.ParamLimitInterceptor;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @date 2021/11/3 10:40 下午
  * @email 18668485565@163.com
  */
-// @EnableDubbo
+@EnableDubboConfig
 @EnableTransactionManagement
 @SpringBootApplication(exclude = {ParamLimitInterceptor.class})
 @MapperScan(basePackages = {"com.rany.uic.infra.dao", "com.rany.uic.infra.mapper"})
