@@ -43,6 +43,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shenyu.client.apache.dubbo.annotation.ShenyuService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,6 +61,7 @@ import java.util.Objects;
 
 @Slf4j
 @Service
+@ShenyuService("/account/**")
 @AllArgsConstructor
 public class AccountRemoteServiceProvider implements AccountFacade {
 

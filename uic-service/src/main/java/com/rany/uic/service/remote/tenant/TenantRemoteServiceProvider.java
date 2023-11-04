@@ -34,6 +34,7 @@ import com.rany.uic.service.aop.annotation.TenantValidCheck;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shenyu.client.apache.dubbo.annotation.ShenyuService;
 
 import java.util.Objects;
 
@@ -47,6 +48,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Service
+@ShenyuService("/tenant/**")
 @AllArgsConstructor
 public class TenantRemoteServiceProvider implements TenantFacade {
 

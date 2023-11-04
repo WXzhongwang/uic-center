@@ -1,5 +1,4 @@
-server:
-  port: 6321
+
 
 
 logging:
@@ -11,8 +10,8 @@ logging:
 
 dubbo:
   application:
-    id: rany-uic-service
-    name: rany-uic-service
+    id: uic-center-service
+    name: uic-center-service
   protocol:
     name: dubbo
     port: -1
@@ -71,3 +70,17 @@ warn:
 mybatis:
   mapper-locations: classpath:com/rany/uic/domain/dao/*.xml, classpath:com/rany/uic/infra/mapper/*.xml
   type-aliases-package: com.rany.uic.infra
+
+
+shenyu:
+  register:
+    registerType: http #zookeeper #etcd #nacos #consul
+    serverLists: http://localhost:9095 #localhost:2181 #http://localhost:2379 #localhost:8848
+    props:
+      username: admin
+      password: Shenyu123456???
+  client:
+    dubbo:
+      props:
+        contextPath: /uic
+        appName: uic-center-service

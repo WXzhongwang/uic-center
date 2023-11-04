@@ -15,9 +15,17 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <shenyu.version>2.6.0</shenyu.version>
     </properties>
 
     <dependencies>
+        <!-- apache shenyu apache dubbo plugin start-->
+        <dependency>
+            <groupId>org.apache.shenyu</groupId>
+            <artifactId>shenyu-spring-boot-starter-client-apache-dubbo</artifactId>
+            <version>${shenyu.version}</version>
+        </dependency>
+        <!-- apache shenyu apache dubbo plugin end-->
         <dependency>
             <groupId>com.rany.uic</groupId>
             <artifactId>uic-api</artifactId>

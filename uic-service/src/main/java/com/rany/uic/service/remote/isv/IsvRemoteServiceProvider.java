@@ -24,21 +24,24 @@ import com.rany.uic.domain.service.IsvDomainService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shenyu.client.apache.dubbo.annotation.ShenyuService;
+import org.apache.shenyu.client.dubbo.common.annotation.ShenyuDubboClient;
 
 import java.util.Objects;
 
 import static com.rany.uic.common.Constants.DEFAULT_MAX_TENANTS;
 
 /**
- * TODO
+ * ISV服务
  *
  * @author zhongshengwang
- * @description TODO
+ * @description ISV服务
  * @date 2022/11/15 22:29
  * @email 18668485565163.com
  */
 @Slf4j
 @Service
+@ShenyuService("/isv/**")
 @AllArgsConstructor
 public class IsvRemoteServiceProvider implements IsvFacade {
 
@@ -47,7 +50,6 @@ public class IsvRemoteServiceProvider implements IsvFacade {
     private final SnowflakeIdWorker snowflakeIdWorker;
 
     @Override
-
     public PojoResult<Boolean> createIsv(CreateIsvCommand createIsvCommand) {
         Isv isv = new Isv(new IsvId(snowflakeIdWorker.nextId()),
                 new IsvName(createIsvCommand.getName(), createIsvCommand.getShortName()),
