@@ -17,6 +17,7 @@ springboot 2.2.6.RELEASE
 参考：
 ![RBAC模型](https://github.com/WXzhongwang/uic-center/blob/main/WX20231015-225622@2x.png)
 
+## shenyu接入
 ![shenyu](https://github.com/WXzhongwang/uic-center/blob/main/images/shenyu.png)
 
 ![接口](https://github.com/WXzhongwang/uic-center/blob/main/images/shenyu-uic.png)
@@ -30,7 +31,6 @@ springboot 2.2.6.RELEASE
 </dependency>
 ```
 
-## shenyu接入
 
 
 ## 接口
