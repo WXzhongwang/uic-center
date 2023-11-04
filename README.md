@@ -10,12 +10,16 @@ springboot 2.2.6.RELEASE
 - [x] **SpringBoot**: 接入快速，支持mvc+webflux快速接入
 - [x] **多应用多租户**: 支持多应用多租户模式
 - [x] **服务化**: zookeeper+dubbo
+- [x] **shenyu**: 接入apache shenyu
 
 
 
 参考：
 ![RBAC模型](https://github.com/WXzhongwang/uic-center/blob/main/WX20231015-225622@2x.png)
 
+![shenyu](https://github.com/WXzhongwang/uic-center/blob/main/images/shenyu.png)
+
+![接口](https://github.com/WXzhongwang/uic-center/blob/main/images/shenyu-uic.png)
 
 ## GAV
 ```xml
@@ -25,6 +29,9 @@ springboot 2.2.6.RELEASE
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
+
+## shenyu接入
+
 
 ## 接口
 ### 账号管理
