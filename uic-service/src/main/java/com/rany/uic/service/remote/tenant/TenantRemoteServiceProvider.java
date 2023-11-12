@@ -1,7 +1,6 @@
 package com.rany.uic.service.remote.tenant;
 
 import cn.hutool.core.util.BooleanUtil;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.cake.framework.common.response.ListResult;
 import com.cake.framework.common.response.Page;
 import com.cake.framework.common.response.PageResult;
@@ -15,7 +14,7 @@ import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.exception.BusinessException;
-import com.rany.uic.common.exception.enums.BusinessErrorMessage;
+import com.rany.uic.common.exception.BusinessErrorMessage;
 import com.rany.uic.common.params.TenantPageSearchParam;
 import com.rany.uic.common.params.TenantSearchParam;
 import com.rany.uic.common.util.SnowflakeIdWorker;
@@ -34,6 +33,7 @@ import com.rany.uic.service.aop.annotation.TenantValidCheck;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.Service;
 import org.apache.shenyu.client.apache.dubbo.annotation.ShenyuService;
 
 import java.util.Objects;

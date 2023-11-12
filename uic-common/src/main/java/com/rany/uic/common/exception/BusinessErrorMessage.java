@@ -1,6 +1,7 @@
-package com.rany.uic.common.exception.enums;
+package com.rany.uic.common.exception;
 
 import cn.hutool.core.util.StrUtil;
+import com.cake.framework.common.exception.ErrorCodeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

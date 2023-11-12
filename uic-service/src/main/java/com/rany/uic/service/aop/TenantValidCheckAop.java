@@ -3,7 +3,7 @@ package com.rany.uic.service.aop;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.exception.BusinessException;
-import com.rany.uic.common.exception.enums.BusinessErrorMessage;
+import com.rany.uic.common.exception.BusinessErrorMessage;
 import com.rany.uic.domain.aggregate.Tenant;
 import com.rany.uic.domain.pk.TenantId;
 import com.rany.uic.domain.service.TenantDomainService;

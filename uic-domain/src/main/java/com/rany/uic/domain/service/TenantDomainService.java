@@ -5,7 +5,7 @@ import com.rany.uic.common.dto.tenant.TenantDTO;
 import com.rany.uic.common.enums.CommonStatusEnum;
 import com.rany.uic.common.enums.DeleteStatusEnum;
 import com.rany.uic.common.exception.BusinessException;
-import com.rany.uic.common.exception.enums.BusinessErrorMessage;
+import com.rany.uic.common.exception.BusinessErrorMessage;
 import com.rany.uic.common.params.TenantPageSearchParam;
 import com.rany.uic.common.params.TenantSearchParam;
 import com.rany.uic.common.util.SnowflakeIdWorker;

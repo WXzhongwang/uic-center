@@ -1,7 +1,7 @@
 package com.rany.uic.common.exception;
 
-import com.rany.uic.common.exception.enums.BusinessErrorMessage;
-import com.rany.uic.common.exception.enums.CommonReturnCode;
+import com.cake.framework.common.exception.CommonReturnCode;
+import lombok.Getter;
 
 /**
  * BusinessException
@@ -9,18 +9,15 @@ import com.rany.uic.common.exception.enums.CommonReturnCode;
  * @author zhongshengwang
  * @description BusinessException
  * @date 2022/3/24 1:55 下午
- * @email zhongshengwang@shuwen.com
+ * @email 18668485565@163.com
  */
 
 public class BusinessException extends RuntimeException {
 
+    @Getter
     private String code;
 
     private String message;
-
-    public String getCode() {
-        return code;
-    }
 
     public void setCode(String code) {
         this.code = code;
