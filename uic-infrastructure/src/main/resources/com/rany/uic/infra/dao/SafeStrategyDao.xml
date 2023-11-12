@@ -10,14 +10,14 @@
         <result column="block_at" property="blockAt" jdbcType="TIMESTAMP"/>
         <result column="expired_at" property="expiredAt" jdbcType="TIMESTAMP"/>
         <result column="is_deleted" property="isDeleted" jdbcType="CHAR"/>
-        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
-        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="update_by" property="modifier" jdbcType="VARCHAR"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, account_id, login_strategy, auth_code, auth_value, block_at, expired_at, is_deleted,
-        create_by, update_by, gmt_create, gmt_modified
+        creator, modifier, gmt_create, gmt_modified
     </sql>
     <select id="findAccountByAuthCode" resultMap="BaseResultMap">
         select

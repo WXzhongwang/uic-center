@@ -10,15 +10,15 @@
         <result column="source" property="source" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="is_deleted" property="isDeleted" jdbcType="CHAR"/>
-        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
-        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="modifier" property="modifier" jdbcType="VARCHAR"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
         <result column="status" property="status" jdbcType="CHAR"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, isv_id, name, short_name, email, source, phone, is_deleted, create_by, update_by, gmt_create,
+        id, isv_id, name, short_name, email, source, phone, is_deleted, creator, modifier, gmt_create,
         gmt_modified, status, address
     </sql>
 

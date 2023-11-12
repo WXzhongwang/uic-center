@@ -12,15 +12,15 @@
         <result column="register_ip" jdbcType="VARCHAR" property="registerIp"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
-        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
-        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="modifier" jdbcType="VARCHAR" property="modifier"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
         <result column="max_tenants" jdbcType="INTEGER" property="maxTenants"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, name, url, short_name, country, status, is_deleted, register_ip, phone, email, create_by,
-        update_by, gmt_create, gmt_modified, max_tenants
+        id, name, url, short_name, country, status, is_deleted, register_ip, phone, email, creator,
+        modifier, gmt_create, gmt_modified, max_tenants
     </sql>
 
     <insert id="save" parameterType="com.rany.uic.domain.aggregate.Isv">
