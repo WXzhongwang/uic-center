@@ -96,4 +96,9 @@ public class Isv extends BaseAggregateRoot implements IAggregate<IsvId> {
     public void delete() {
         this.isDeleted = DeleteStatusEnum.YES.getValue();
     }
+
+    @Override
+    public IsvId getBizID() {
+        return id;
+    }
 }

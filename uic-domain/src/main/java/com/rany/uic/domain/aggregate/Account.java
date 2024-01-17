@@ -150,4 +150,9 @@ public class Account extends BaseAggregateRoot implements IAggregate<AccountId> 
         this.registerEvent(new AccountModifiedEvent(this, this.gmtModified));
         return Boolean.TRUE;
     }
+
+    @Override
+    public AccountId getBizID() {
+        return id;
+    }
 }

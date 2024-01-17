@@ -91,4 +91,9 @@ public class Tenant extends BaseAggregateRoot implements IAggregate<TenantId> {
         this.gmtModified = DateUtil.date();
         this.isDeleted = DeleteStatusEnum.YES.getValue();
     }
+
+    @Override
+    public TenantId getBizID() {
+        return id;
+    }
 }
