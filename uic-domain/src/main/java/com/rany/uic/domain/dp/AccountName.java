@@ -21,8 +21,8 @@ public class AccountName {
     String name;
 
     public AccountName(String name) {
-        if (name == null || name.length() < 8) {
-            throw new IllegalArgumentException();
+        if (name == null) {
+            throw new IllegalArgumentException("账号不能为空");
         }
         this.name = name;
     }

@@ -58,4 +58,14 @@ public class CreateAccountCommand extends DTO {
      * 初始密码
      */
     private String loginPwd;
+
+    /**
+     * 用户在当前开放应用所属企业的唯一标识。
+     */
+    private String dingUnionId;
+
+    /**
+     * 用户在当前开放应用内的唯一标识。
+     */
+    private String openId;
 }

@@ -70,6 +70,33 @@
             <if test="gmtModified != null">
                 gmt_modified,
             </if>
+            <if test="headImage != null">
+                head_image,
+            </if>
+            <if test="dingding != null">
+                dingding,
+            </if>
+            <if test="qq != null">
+                qq,
+            </if>
+            <if test="wechat != null">
+                wechat,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="tags != null">
+                tags,
+            </if>
+            <if test="dingUnionId != null">
+                ding_union_id,
+            </if>
+            <if test="dingUserId != null">
+                ding_user_id,
+            </if>
+            <if test="workNo != null">
+                work_no,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -113,6 +140,33 @@
             </if>
             <if test="gmtModified != null">
                 #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="headImage != null">
+                #{headImage,jdbcType=VARCHAR},
+            </if>
+            <if test="dingding != null">
+                #{dingding,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat != null">
+                #{wechat,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="tags != null">
+                #{tags,jdbcType=VARCHAR},
+            </if>
+            <if test="dingUnionId != null">
+                #{dingUnionId,jdbcType=VARCHAR},
+            </if>
+            <if test="dingUserId != null">
+                #{dingUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="workNo != null">
+                #{workNo,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>

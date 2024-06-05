@@ -108,7 +108,14 @@ public class AccountRemoteServiceProvider implements AccountFacade {
                     AccountUtil.md5(createAccountCommand.getLoginPwd()));
             strategyList.add(safeStrategy);
         }
+
         account.setIsAdmin(BooleanUtils.isTrue(createAccountCommand.getIsAdmin()));
+        if (StringUtils.isNotEmpty(createAccountCommand.getDingUnionId())) {
+            account.setDingUnionId(createAccountCommand.getDingUnionId());
+        }
+        if (StringUtils.isNotEmpty(createAccountCommand.getOpenId())) {
+            account.setDingUserId(createAccountCommand.getOpenId());
+        }
         account.save();
         accountDomainService.save(account);
         return PojoResult.succeed(account.getId().getId());
